@@ -1,22 +1,22 @@
 'use client'
 import { useTool } from "@/context/ToolContext";
-import Notepad from "@/components/tools/notepad";
-import Vault from "@/components/tools/vault";
-import Music from "@/components/tools/visualiser";
-import Tasks from "@/components/tools/todo";
+import NotepadPage from "@/app/tools/notepad/page";
+import VaultPage from "@/app/tools/vault/page";
+import VisualierPage from "@/app/tools/visualiser/page";
+import TodoPage from "@/app/tools/todo/page";
 
 export default function ToolTray() {
   const { tool } = useTool();
 
   switch (tool) {
     case "notepad":
-      return <Notepad />;
+      return <NotepadPage />;
     case "vault":
-      return <Vault />;
+      return <VaultPage />;
     case "music":
-      return <Music />;
+      return <VisualierPage />;
     case "tasks":
-      return <Tasks />;
+      return <TodoPage />;
     default:
       return <div>Select a tool</div>;
   }

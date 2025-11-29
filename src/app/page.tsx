@@ -1,4 +1,4 @@
-import { Navbar } from "@/components/layout/navbar";
+import { Navbar } from "@/components/layout/Navbar";
 import ToolTray from "@/components/ToolTray";
 
 const Home: React.FC = () => {

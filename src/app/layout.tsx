@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 
 
 export const metadata: Metadata = {
-  title: "DriveX - Powered by Nextjs",
+  title: "DevKit - Powered by Nextjs",
   description: "Drive kitten cars free",
 };
 

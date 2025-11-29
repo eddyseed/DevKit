@@ -1,6 +1,5 @@
 'use client';
-
-import styles from '@/styles/components/Navbar.module.css';
+import styles from '@/styles/layout/Navbar.module.css';
 import { Button } from "@/components/ui/button"
 import { Mail, Pen, Vault, Music, Check, MenuIcon } from 'lucide-react';
 import { useTool } from '@/context/ToolContext';

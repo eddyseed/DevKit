@@ -1,5 +1,5 @@
 import { db } from "@/firebase/firestore";
-import useFileStore from "@/lib/fileStore";
+import useFileStore from "@/features/notepad/lib/fileStore";
 import { doc, getDoc, updateDoc, setDoc } from "firebase/firestore";
 
 export const handleFileSave = async (currentText: string): Promise<void> => {

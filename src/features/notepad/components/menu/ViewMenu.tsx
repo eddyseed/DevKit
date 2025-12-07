@@ -11,12 +11,13 @@ import {
     MenubarCheckboxItem,
     MenubarShortcut,
 } from "@/components/ui/menubar";
-import { ExpandIcon } from "lucide-react";
-import useFileStore from "@/lib/fileStore";
+import { CheckIcon, ExpandIcon } from "lucide-react";
+import useFileStore from "@/features/notepad/lib/fileStore";
 import { SYSTEM_FONTS } from "../../../../utils/constants";
 import { GOOGLE_FONTS, loadGoogleFont } from "@/utils/googleFonts";
 
 const ViewMenu: React.FC = () => {
+    const setTheme = useFileStore((s) => s.setTheme);
     const currentFont = useFileStore((s) => s.fontFamily);
     const setFontFamily = useFileStore((s) => s.setFontFamily);
 
@@ -42,7 +43,7 @@ const ViewMenu: React.FC = () => {
                     <MenubarSubContent>
                         {SYSTEM_FONTS.map((f) => (
                             <MenubarItem key={f} onSelect={() => applyFont(f)}>
-                                {f} {currentFont === f ? "✓" : null}
+                                {f} {currentFont === f ? <CheckIcon /> : null}
                             </MenubarItem>
                         ))}
 
@@ -50,7 +51,7 @@ const ViewMenu: React.FC = () => {
 
                         {["Inter", "Poppins", "Fira Code", "JetBrains Mono"].map((f) => (
                             <MenubarItem key={f} onSelect={() => applyFont(f)}>
-                                {f} {currentFont === f ? "✓" : null}
+                                {f} {currentFont === f ? <CheckIcon /> : null}
                             </MenubarItem>
                         ))}
 
@@ -58,7 +59,7 @@ const ViewMenu: React.FC = () => {
                         <div style={{ maxHeight: 220, overflow: "auto" }}>
                             {GOOGLE_FONTS.map((f) => (
                                 <MenubarItem key={f} onSelect={() => applyFont(f)}>
-                                    {f} {currentFont === f ? "✓" : null}
+                                    {f} {currentFont === f ? <CheckIcon /> : null}
                                 </MenubarItem>
                             ))}
                         </div>
@@ -68,9 +69,9 @@ const ViewMenu: React.FC = () => {
                 <MenubarSub>
                     <MenubarSubTrigger>Select Theme</MenubarSubTrigger>
                     <MenubarSubContent>
-                        <MenubarItem>System Default</MenubarItem>
-                        <MenubarItem>Light</MenubarItem>
-                        <MenubarItem>Dark</MenubarItem>
+                        <MenubarItem onClick={() => setTheme("system")}>System Default</MenubarItem>
+                        <MenubarItem onClick={() => { console.log('ViewMenu: setTheme -> light'); setTheme("light"); }}>Light</MenubarItem>
+                        <MenubarItem onClick={() => setTheme("dark")}>Dark</MenubarItem>
                     </MenubarSubContent>
                 </MenubarSub>
 

@@ -9,7 +9,7 @@ import { handleFileOpen } from "@/features/notepad/handlers/fileOpen";
 import { handleFileSave } from "@/features/notepad/handlers/save";
 import { handleFileSaveAs } from "@/features/notepad/handlers/saveAs";
 import { handleNewFile } from "@/features/notepad/handlers/newFile";
-import useFileStore from "@/lib/fileStore";
+import useFileStore from "@/features/notepad/lib/fileStore";
 
 const FileMenu: React.FC = () => {
     const fileText = useFileStore((s) => s.fileText);

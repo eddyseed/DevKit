@@ -1,12 +1,12 @@
 'use client'
 import React, { useEffect } from "react";
 import styles from "@/styles/tools/notepad.module.css";
-import useFileStore from '@/lib/fileStore';
 import { Textarea } from "@/components/ui/textarea";
 import Menu from "./components/Menu";
 import SubMenu from "./components/SubMenu";
 import { Toaster } from "react-hot-toast";
-import WebFont from 'webfontloader';
+import { loadGoogleFont } from "@/utils/googleFonts";
+import { useFileStore } from "./lib/fileStore";
 
 const Notepad: React.FC = () => {
     const {
@@ -23,19 +23,14 @@ const Notepad: React.FC = () => {
         setFileText(e.target.value);
     };
 
-    // Lazy-load the selected Google font whenever fontFamily in store changes
     useEffect(() => {
-        if (fontFamily && fontFamily !== 'monospace') {
-            WebFont.load({
-                google: { families: [fontFamily] }
-            });
-        }
+        loadGoogleFont(fontFamily || '');
     }, [fontFamily]);
 
     return (
         <div className={`${styles.notepad}`}>
             <Toaster />
-            <div className="bg-secondary border-b border-slate-300 border-solid">
+            <div className="bg-white dark:bg-slate-900 m-1 border border-slate-300 dark:border-slate-700">
                 <div className="px-3">
                     <Menu />
                 </div>
@@ -46,11 +41,10 @@ const Notepad: React.FC = () => {
                     <Textarea
                         wrap="off"
                         placeholder="Start typing..."
-                        className="border-solid px-5 py-4 border border-slate-300"
+                        className="bg-white dark:bg-slate-800 text-black dark:text-white border-slate-300 dark:border-slate-700"
                         value={fileText}
                         onChange={handleChange}
                         ref={setEditorElement}
-                        // apply selected font with monospace fallback
                         style={{ fontFamily: `${fontFamily || 'monospace'}, monospace` }}
                     />
                 </div>

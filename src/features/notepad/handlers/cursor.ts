@@ -1,4 +1,4 @@
-import useFileStore from "@/lib/fileStore";
+import useFileStore from "@/features/notepad/lib/fileStore";
 
 export const saveCursor = () => {
     const { editorElement, setCursorPos } = useFileStore.getState();

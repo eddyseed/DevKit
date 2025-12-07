@@ -1,7 +1,6 @@
-import { ToolProvider } from "@/context/ToolContext";
 import "@/styles/globals.css";
+import { ToolProvider } from "@/context/ToolContext";
 import type { Metadata } from "next";
-
 
 export const metadata: Metadata = {
   title: "DevKit - Powered by Nextjs",
@@ -10,15 +9,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body className="bg-slate-50">
-        <ToolProvider>
-          {children}
-        </ToolProvider>
+      <body>
+        <ToolProvider>{children}</ToolProvider>
       </body>
     </html>
   );

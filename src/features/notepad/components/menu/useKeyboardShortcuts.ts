@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import useFileStore from "@/lib/fileStore";
+import useFileStore from "@/features/notepad/lib/fileStore";
 import { handleCopy } from "@/features/notepad/handlers/copy";
 import { handleCut } from "@/features/notepad/handlers/cut";
 import { handleFileOpen } from "@/features/notepad/handlers/fileOpen";

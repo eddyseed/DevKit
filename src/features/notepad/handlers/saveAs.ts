@@ -1,5 +1,5 @@
 import { db } from "@/firebase/firestore";
-import useFileStore from "@/lib/fileStore";
+import useFileStore from "@/features/notepad/lib/fileStore";
 import { doc, getDoc, setDoc, deleteDoc, updateDoc } from "firebase/firestore";
 export const handleFileSaveAs = async (currentText: string): Promise<void> => {
     const { currentFileName, fileText, setCurrentFile, setSavedStatus } = useFileStore.getState();

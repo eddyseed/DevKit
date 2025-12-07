@@ -14,7 +14,6 @@ import {
     MenubarTrigger,
 } from "@/components/ui/menubar"
 import { ArrowUpFromLine, Save, RotateCcw, Printer, EyeClosed, CrossIcon, X, Undo, Redo, CopyIcon, ClipboardIcon, ScissorsIcon, ArrowUp, ArrowDown, Search, Globe, HeadsetIcon, DollarSignIcon, Code2Icon, EyeIcon, ChevronRightIcon, ChevronLeftIcon, ExpandIcon } from 'lucide-react';
-import useFileStore from '@/lib/fileStore';
 import { GOOGLE_FONTS, loadGoogleFont } from "@/utils/googleFonts";
 import { useCallback, useEffect } from "react";
 import { handleCopy } from "../handlers/copy";
@@ -27,6 +26,7 @@ import { handlePaste } from "../handlers/paste";
 import { handleFileSave } from "../handlers/save";
 import { handleFileSaveAs } from "../handlers/saveAs";
 import { handleSearchSelection } from "../handlers/search";
+import { useFileStore } from "../lib/fileStore";
 const Menu: React.FC = () => {
     const { fileText } = useFileStore();
     const setFontFamily = useFileStore((s) => s.setFontFamily);

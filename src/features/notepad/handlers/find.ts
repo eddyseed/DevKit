@@ -1,4 +1,4 @@
-import useFileStore from "@/lib/fileStore";
+import useFileStore from "@/features/notepad/lib/fileStore";
 
 export const handleFind = (): void => {
     const { editorElement, fileText } = useFileStore.getState();

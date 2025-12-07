@@ -1,4 +1,4 @@
-import useFileStore from "@/lib/fileStore";
+import useFileStore from "@/features/notepad/lib/fileStore";
 import toast from "react-hot-toast";
 
 export const handleNewFile = async (currentText: string) => {

@@ -1,4 +1,4 @@
-import useFileStore from "@/lib/fileStore";
+import useFileStore from "@/features/notepad/lib/fileStore";
 
 export const handleCut = async (): Promise<void> => {
     const { editorElement, fileText, setFileText } = useFileStore.getState();

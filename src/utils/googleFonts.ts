@@ -1,5 +1,3 @@
-import WebFont from "webfontloader";
-
 export const GOOGLE_FONTS = [
     "Roboto",
     "Open Sans",
@@ -18,9 +16,9 @@ export const GOOGLE_FONTS = [
     "Merriweather"
 ];
 
-export function loadGoogleFont(font: string) {
+export const loadGoogleFont = async (font: string) => {
     if (!font || font === "monospace") return;
-
+    const WebFont = (await import("webfontloader")).default;
     WebFont.load({
         google: { families: [font] }
     });

@@ -30,27 +30,25 @@ const Notepad: React.FC = () => {
     return (
         <div className={`${styles.notepad}`}>
             <Toaster />
-            <div className="bg-white dark:bg-slate-900 m-1 border border-slate-300 dark:border-slate-700">
-                <div className="px-3">
-                    <Menu />
-                </div>
+            <div>
+                <Menu />
             </div>
 
             <div>
-                <div>
+                <section>
                     <Textarea
                         wrap="off"
                         placeholder="Start typing..."
-                        className="bg-white dark:bg-slate-800 text-black dark:text-white border-slate-300 dark:border-slate-700"
+                        className=""
                         value={fileText}
                         onChange={handleChange}
                         ref={setEditorElement}
                         style={{ fontFamily: `${fontFamily || 'monospace'}, monospace` }}
                     />
-                </div>
+                </section>
 
-                <div className="bg-slate-100 m-1 border border-slate-300">
-                    <div className="flex items-end justify-center">
+                <section>
+                    <div>
                         <SubMenu />
                     </div>
 
@@ -61,7 +59,7 @@ const Notepad: React.FC = () => {
                         <br />
                         <span>{isSaved ? "All changes saved" : "Unsaved changes"}</span>
                     </div>
-                </div>
+                </section>
             </div>
         </div>
     );

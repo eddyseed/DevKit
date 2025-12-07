@@ -33,15 +33,11 @@ const Menu: React.FC = () => {
     const currentFont = useFileStore((s) => s.fontFamily);
     const SYSTEM_FONTS = ["Arial", "Courier New", "Times New Roman", "Verdana"];
     const applyFont = (font: string) => {
-        // 1) persist in store
         setFontFamily(font);
 
-        // 2) lazy-load Google font if it's in our list
         if (GOOGLE_FONTS.includes(font)) {
             loadGoogleFont(font);
         }
-
-        // (No need to directly touch DOM — Notepad listens to store.fontFamily and updates the textarea style)
     };
     const handleKeyDown = useCallback((e: KeyboardEvent) => {
         const key = e.key.toLowerCase();
@@ -136,13 +132,12 @@ const Menu: React.FC = () => {
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, [handleKeyDown]);
 
-    // prevent menu clicks from stealing focus (preserves selection)
     const preventBlur = (e: React.MouseEvent) => {
         e.preventDefault();
     };
 
     return (
-        <Menubar className="preset-1 border-none w-min" onMouseDown={preventBlur}>
+        <Menubar onMouseDown={preventBlur}>
             <MenubarMenu>
                 <MenubarTrigger>File</MenubarTrigger>
                 <MenubarContent>

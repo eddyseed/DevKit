@@ -1,16 +1,35 @@
-.navigation_bar{
+main.navigation_bar {
+    height: 10vh;
     display: grid;
     grid-template-columns: 7fr 1fr;
-    height: 12vh;
-    &>div{
-        &:first-child{
-            display: flex;
-            align-items: center;
+    background-color: #EBD2BE;
+
+    &>div {
+        display: flex;
+        align-items: center;
+
+        &:first-child {
+            button {
+                background-color: #FFE8D4;
+                cursor: pointer;
+            }
+
+            button:hover {
+                background-color: #FFD8B4;
+            }
         }
-        &:last-child{
-            display: flex;
+
+        &:last-child {
             justify-content: space-evenly;
-            align-items: center;
+
+            button {
+                color: #FFD8B4;
+                cursor: pointer;
+                background-color: #220C10;
+            }
+            button:hover {
+                background-color: #440C10;
+            }
         }
     }
 }

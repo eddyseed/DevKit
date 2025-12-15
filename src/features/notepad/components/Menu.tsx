@@ -27,6 +27,7 @@ import { handleFileSave } from "../handlers/save";
 import { handleFileSaveAs } from "../handlers/saveAs";
 import { handleSearchSelection } from "../handlers/search";
 import { useFileStore } from "../lib/fileStore";
+import styles from '@/styles/tools/notepad.module.css';
 const Menu: React.FC = () => {
     const { fileText } = useFileStore();
     const setFontFamily = useFileStore((s) => s.setFontFamily);
@@ -140,10 +141,10 @@ const Menu: React.FC = () => {
         <Menubar onMouseDown={preventBlur}>
             <MenubarMenu>
                 <MenubarTrigger>File</MenubarTrigger>
-                <MenubarContent>
-                    <MenubarItem onClick={() => handleNewFile(fileText)}>
+                <MenubarContent className={`${styles.menubar_item}`}>
+                    <MenubarItem onClick={() => handleNewFile(fileText)} >
                         <span className="flex items-center">
-                            <i className="mr-2">
+                            <i className="mr-2"> 
                                 <CrossIcon />
                             </i>
                             New File
@@ -238,7 +239,7 @@ const Menu: React.FC = () => {
 
             <MenubarMenu>
                 <MenubarTrigger>Edit</MenubarTrigger>
-                <MenubarContent>
+                <MenubarContent className={`${styles.menubar_item}`}>
                     <MenubarItem onClick={() => document.execCommand("undo")}>
                         <span className="flex items-center">
                             <i className="mr-2">
@@ -292,7 +293,7 @@ const Menu: React.FC = () => {
 
             <MenubarMenu>
                 <MenubarTrigger onMouseDown={(e) => e.preventDefault()}>Find</MenubarTrigger>
-                <MenubarContent>
+                <MenubarContent className={`${styles.menubar_item}`}>
                     <MenubarItem onClick={() => handleSearchSelection()}>
                         <span className="flex items-center">
                             <i className="mr-2">
@@ -335,7 +336,7 @@ const Menu: React.FC = () => {
 
             <MenubarMenu>
                 <MenubarTrigger>View</MenubarTrigger>
-                <MenubarContent>
+                <MenubarContent className={`${styles.menubar_item}`}>
                     <MenubarSub>
                         <MenubarSubTrigger>
                             Select Font
@@ -422,7 +423,7 @@ const Menu: React.FC = () => {
             </MenubarMenu>
             <MenubarMenu>
                 <MenubarTrigger>Document</MenubarTrigger>
-                <MenubarContent>
+                <MenubarContent className={`${styles.menubar_item}`}>
                     <MenubarCheckboxItem checked>
                         <span className="flex items-center">
                             Word Wrap
@@ -517,7 +518,7 @@ const Menu: React.FC = () => {
             </MenubarMenu>
             <MenubarMenu>
                 <MenubarTrigger>Help</MenubarTrigger>
-                <MenubarContent>
+                <MenubarContent className={`${styles.menubar_item}`}>
                     <MenubarItem>
                         <span className="flex items-center">
                             <i className="mr-2">

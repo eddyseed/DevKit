@@ -1,4 +1,4 @@
-import useFileStore from "@/features/notepad/lib/fileStore";
+import { useFileStore } from "../lib/fileStore";
 
 export const handlePaste = async (): Promise<void> => {
     const { editorElement, fileText, setFileText } = useFileStore.getState();

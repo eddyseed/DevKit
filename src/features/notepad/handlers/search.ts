@@ -1,4 +1,4 @@
-import useFileStore from "@/features/notepad/lib/fileStore";
+import { useFileStore } from "../lib/fileStore";
 
 export const handleSearchSelection = async (): Promise<void> => {
     const { editorElement, fileText } = useFileStore.getState();

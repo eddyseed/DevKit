@@ -3,7 +3,7 @@ import ToolTray from "@/components/ToolTray";
 
 const Home: React.FC = () => {
   return (
-    <div className="">
+    <div>
       <Navbar/>
       <ToolTray/>
     </div>

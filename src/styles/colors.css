@@ -1,0 +1,70 @@
+:root {
+    --color-primary: #4f46e5;
+    --color-primary-hover: #4338ca;
+    --color-accent: #22c55e;
+
+    --color-bg: var(--surface-app);
+
+    --nav-btn-secondary-bg: rgba(255, 248, 230, 0.8);
+    --nav-btn-secondary-bg-hover: #fff4d6;
+    --nav-btn-secondary-bg-active: #f2e1b8;
+
+    --nav-btn-primary-bg: linear-gradient(180deg,
+            #f4d27a,
+            #e6b85c);
+
+    --nav-btn-primary-bg-hover: linear-gradient(180deg,
+            #f7dc8c,
+            #edc66b);
+
+    --surface-nav: linear-gradient(180deg,
+            #f7f1e3,
+            #efe4cc);
+
+    --color-text-main: #6b4f2a;
+    /* --color-text-secondary: #4b320f; */
+
+    --nav-btn-secondary-hover: #3f2f1d;
+
+    --border-nav: 1px solid rgba(120, 90, 40, 0.25);
+
+    --shadow-nav: 0 4px 12px rgba(120, 90, 40, 0.12);
+    --shadow-nav-btn-primary:
+        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+        0 3px 6px rgba(120, 90, 40, 0.25);
+
+    --shadow-nav-btn-primary-active:
+        inset 0 2px 6px rgba(120, 90, 40, 0.35);
+
+    /* For Notepad module */
+
+    /* -------- TEXT -------- */
+    --text-editor-primary: #4b3b2a;
+    --text-editor-muted: #6b5a44;
+    --text-editor-soft: #9a8b75;
+    --text-editor-accent: #3f2f1d;
+    --text-editor-warm: #6b4f2a;
+
+    /* -------- SURFACES -------- */
+    --surface-app: #f7f1e3;
+    --surface-toolbar: #efe4cc;
+    --surface-editor: #fff6df;
+    --surface-button: rgba(255, 248, 230, 0.85);
+    --surface-button-hover: #fff4d6;
+
+    /* -------- BORDERS -------- */
+    --border-warm-subtle: 1px solid rgba(120, 90, 40, 0.25);
+    --border-warm-strong: 1px solid rgba(120, 90, 40, 0.3);
+
+    /* -------- SHADOWS -------- */
+    --shadow-editor: 0 4px 10px rgba(120, 90, 40, 0.15);
+    --shadow-panel: 0 3px 8px rgba(120, 90, 40, 0.18);
+
+    /* -------- STATES -------- */
+    --status-saved: #7fae6a;
+    --status-dirty: #d6a23a;
+
+    /* -------- SELECTION / CARET -------- */
+    --caret-editor: #8a5a20;
+    --selection-editor: rgba(230, 180, 90, 0.35);
+}

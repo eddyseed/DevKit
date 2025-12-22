@@ -3,10 +3,10 @@ import React, { useEffect } from "react";
 import styles from "@/styles/tools/notepad.module.css";
 import { Textarea } from "@/components/ui/textarea";
 import Menu from "./components/Menu";
-import SubMenu from "./components/SubMenu";
 import { Toaster } from "react-hot-toast";
 import { loadGoogleFont } from "@/utils/googleFonts";
 import { useFileStore } from "./lib/fileStore";
+import Sidebar from "./components/Sidebar";
 
 const Notepad: React.FC = () => {
     const {
@@ -37,7 +37,7 @@ const Notepad: React.FC = () => {
             <div>
                 <section>
                     <Textarea
-                        wrap="off"
+                        wrap="hard"
                         placeholder="Start typing..."
                         className=""
                         value={fileText}
@@ -46,20 +46,10 @@ const Notepad: React.FC = () => {
                         style={{ fontFamily: `${fontFamily || 'monospace'}, monospace` }}
                     />
                 </section>
-
-                <section>
-                    <div>
-                        <SubMenu />
-                    </div>
-
-                    <div className="px-4 py-5">
-                        <span>{currentFileName ? `${currentFileName}` : "Untitled.txt"}</span>
-                        <br />
-                        <span>{fileSize ? `${fileSize} bytes` : "0 bytes"}</span>
-                        <br />
-                        <span>{isSaved ? "All changes saved" : "Unsaved changes"}</span>
-                    </div>
-                </section>
+                <Sidebar currentFileName={currentFileName}
+                    fileSize={fileSize}
+                    isSaved={isSaved}
+                    fontFamily={fontFamily} />
             </div>
         </div>
     );

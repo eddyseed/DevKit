@@ -1,0 +1,80 @@
+.root {
+    height: 100%;
+    padding: 1.25rem 1.25rem 1rem;
+    background: var(--surface-inspector);
+    border-left: var(--border-warm-subtle);
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* ---------- HEADER ---------- */
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-editor-soft);
+}
+
+/* softer, calmer indicator */
+.statusDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    opacity: 0.85;
+}
+
+.saved {
+    background: var(--status-saved);
+}
+
+.dirty {
+    background: var(--status-dirty);
+}
+
+/* ---------- PRIMARY INFO ---------- */
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.label {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-editor-soft);
+}
+
+/* file name deserves emphasis */
+.value {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-editor-primary);
+    word-break: break-word;
+}
+
+/* subtle separation between groups */
+.section+.section {
+    padding-top: 0.6rem;
+    border-top: 1px dashed rgba(120, 90, 40, 0.15);
+}
+
+/* ---------- FOOTER ---------- */
+
+.footerHint {
+    margin-top: auto;
+    font-size: 11.5px;
+    color: var(--text-editor-muted);
+    opacity: 0.85;
+}

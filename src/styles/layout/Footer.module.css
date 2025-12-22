@@ -1,0 +1,39 @@
+.root {
+    background: var(--surface-app);
+    border-top: var(--border-warm-subtle);
+}
+
+.compact {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+/* ---------- SECTIONS ---------- */
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* ---------- TYPOGRAPHY ---------- */
+
+.title {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-editor-accent);
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: 14px;
+    color: var(--text-editor-muted);
+}
+
+.muted {
+    color: var(--text-editor-soft);
+}

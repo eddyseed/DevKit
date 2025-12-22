@@ -1,11 +1,6 @@
 import "@/styles/globals.css";
 import { ToolProvider } from "@/context/ToolContext";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "DevKit - Powered by Nextjs",
-  description: "Drive kitten cars free",
-};
+import { montserrat } from "@/lib/fonts";
 
 export default function RootLayout({
   children,
@@ -13,7 +8,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={montserrat.variable}>
       <body>
         <ToolProvider>{children}</ToolProvider>
       </body>

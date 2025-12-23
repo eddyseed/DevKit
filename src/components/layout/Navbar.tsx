@@ -1,7 +1,7 @@
 'use client';
 import styles from '@/styles/layout/Navbar.module.css';
 import { Button } from "@/components/ui/button"
-import { Mail, Pen, MenuIcon } from 'lucide-react';
+import { Pen, MenuIcon, CoffeeIcon } from 'lucide-react';
 import { useTool } from '@/context/ToolContext';
 export const Navbar: React.FC = () => {
     const { setTool } = useTool();
@@ -14,7 +14,7 @@ export const Navbar: React.FC = () => {
                 <Button className={`${styles.nav_btn}`} onClick={() => setTool("tasks")}><Check /> Tasks</Button> */}
             </div>
             <div>
-                <Button className={`${styles.nav_btn}`}><Mail />Login</Button>
+                <Button className={`${styles.nav_btn}`}><CoffeeIcon />Buy Me a Coffee</Button>
                 <Button className={`${styles.nav_btn}`}><MenuIcon /></Button>
             </div>
         </main>

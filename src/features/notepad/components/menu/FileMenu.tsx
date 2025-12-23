@@ -4,45 +4,87 @@ import {
     MenubarSeparator, MenubarShortcut, MenubarSub, MenubarSubTrigger,
     MenubarSubContent
 } from "@/components/ui/menubar";
-import { ArrowUpFromLine, Save, RotateCcw, Printer, X, CrossIcon } from "lucide-react";
-import { handleFileOpen } from "@/features/notepad/handlers/fileOpen";
+import { ArrowUpFromLine, Save, RotateCcw, Printer, CrossIcon } from "lucide-react";
 import { handleFileSave } from "@/features/notepad/handlers/save";
-import { handleFileSaveAs } from "@/features/notepad/handlers/saveAs";
-import { handleNewFile } from "@/features/notepad/handlers/newFile";
-import useFileStore from "@/features/notepad/lib/fileStore";
-
+import { useFileStore } from "../../lib/fileStore";
+import { useDialog } from "@/hooks/useDialog";
+import styles from '@/styles/tools/notepad.module.css';
 const FileMenu: React.FC = () => {
     const fileText = useFileStore((s) => s.fileText);
-
+    const { openDialog } = useDialog();
     return (
         <MenubarMenu>
             <MenubarTrigger>File</MenubarTrigger>
-            <MenubarContent>
-                <MenubarItem onClick={() => handleNewFile(fileText)}>
-                    <span className="flex items-center"><CrossIcon className="mr-2" /> New File</span>
+            <MenubarContent className={`${styles.menubar_item}`}>
+                <MenubarItem onClick={() => openDialog("new-file")} >
+                    <span className="flex items-center">
+                        <i className="mr-2">
+                            <CrossIcon />
+                        </i>
+                        New File
+                    </span>
                     <MenubarShortcut>Alt + N</MenubarShortcut>
                 </MenubarItem>
                 <MenubarSeparator />
-                <MenubarItem onClick={() => handleFileOpen()}>
-                    <span className="flex items-center"><ArrowUpFromLine className="mr-2" /> Open...</span>
+                <MenubarItem onClick={() => openDialog("open-file")}>
+                    <span className="flex items-center">
+                        <i className="mr-2">
+                            <ArrowUpFromLine />
+                        </i>
+                        Open...
+                    </span>
                     <MenubarShortcut>Alt + O</MenubarShortcut>
+                </MenubarItem>
+                <MenubarItem>
+                    <span className="flex items-center">
+                        <i className="mr-2"></i>
+                        Open Recent
+                    </span>
                 </MenubarItem>
                 <MenubarSeparator />
                 <MenubarItem onClick={() => handleFileSave(fileText)}>
-                    <span className="flex items-center"><Save className="mr-2" /> Save</span>
+                    <span className="flex items-center">
+                        <i className="mr-2">
+                            <Save />
+                        </i>
+                        Save
+                    </span>
                     <MenubarShortcut>Alt + S</MenubarShortcut>
                 </MenubarItem>
-                <MenubarItem onClick={() => handleFileSaveAs(fileText)}>Save As</MenubarItem>
+                <MenubarItem onClick={() => openDialog("save-as")}>
+                    <span className="flex items-center">
+                        <i className="mr-2"></i>
+                        Save As
+                    </span>
+                </MenubarItem>
+                <MenubarItem>
+                    <span className="flex items-center">
+                        <i className="mr-2"></i>
+                        Save All
+                    </span>
+                </MenubarItem>
                 <MenubarItem onClick={() => window.location.reload()}>
-                    <span className="flex items-center"><RotateCcw className="mr-2" /> Reload</span>
+                    <span className="flex items-center">
+                        <i className="mr-2">
+                            <RotateCcw />
+                        </i>
+                        Reload
+                    </span>
                     <MenubarShortcut>Alt + R</MenubarShortcut>
                 </MenubarItem>
                 <MenubarSeparator />
                 <MenubarItem onClick={() => window.print()}>
-                    <span className="flex items-center"><Printer className="mr-2" /> Print...</span>
+                    <span className="flex items-center">
+                        <i className="mr-2">
+                            <Printer />
+                        </i>
+                        Print...
+                    </span>
                 </MenubarItem>
                 <MenubarSub>
-                    <MenubarSubTrigger>Download</MenubarSubTrigger>
+                    <MenubarSubTrigger>
+                        <span className="flex items-center">Download</span>
+                    </MenubarSubTrigger>
                     <MenubarSubContent>
                         <MenubarItem>Download as PDF</MenubarItem>
                         <MenubarItem>Download as DOCX</MenubarItem>
@@ -50,7 +92,6 @@ const FileMenu: React.FC = () => {
                     </MenubarSubContent>
                 </MenubarSub>
                 <MenubarSeparator />
-                <MenubarItem><span className="flex items-center"><X className="mr-2" /> Close Tab</span></MenubarItem>
             </MenubarContent>
         </MenubarMenu>
     );

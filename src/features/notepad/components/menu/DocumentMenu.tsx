@@ -5,54 +5,85 @@ import {
     MenubarContent,
     MenubarItem,
     MenubarSeparator,
-    MenubarCheckboxItem,
     MenubarSub,
     MenubarSubTrigger,
     MenubarSubContent,
-    MenubarRadioGroup,
-    MenubarRadioItem,
+    MenubarShortcut,
 } from "@/components/ui/menubar";
-import { EyeIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-
+import { ExpandIcon } from "lucide-react";
+import styles from '@/styles/tools/notepad.module.css';
+import { GOOGLE_FONTS, loadGoogleFont } from "@/utils/googleFonts";
+import { useFileStore } from "../../lib/fileStore";
 const DocumentMenu: React.FC = () => {
+
+    const SYSTEM_FONTS = ["Arial", "Courier New", "Times New Roman", "Verdana"];
+    const setFontFamily = useFileStore((s) => s.setFontFamily);
+    const currentFont = useFileStore((s) => s.fontFamily);
+    const applyFont = (font: string) => {
+        setFontFamily(font);
+
+        if (GOOGLE_FONTS.includes(font)) {
+            loadGoogleFont(font);
+        }
+    };
     return (
         <MenubarMenu>
-            <MenubarTrigger>Document</MenubarTrigger>
-            <MenubarContent>
-                <MenubarCheckboxItem checked><span>Word Wrap</span></MenubarCheckboxItem>
-                <MenubarCheckboxItem><span>Auto Indent</span></MenubarCheckboxItem>
-
+            <MenubarTrigger>View</MenubarTrigger>
+            <MenubarContent className={`${styles.menubar_item}`}>
                 <MenubarSub>
-                    <MenubarSubTrigger>Tab Size</MenubarSubTrigger>
+                    <MenubarSubTrigger>
+                        Select Font
+                    </MenubarSubTrigger>
                     <MenubarSubContent>
-                        <MenubarRadioGroup value="2">
-                            <MenubarRadioItem value="2">2</MenubarRadioItem>
-                            <MenubarRadioItem value="4">4</MenubarRadioItem>
-                            <MenubarRadioItem value="6">6</MenubarRadioItem>
-                            <MenubarRadioItem value="8">8</MenubarRadioItem>
-                        </MenubarRadioGroup>
+                        {/* system fonts first */}
+                        {SYSTEM_FONTS.map((f) => (
+                            <MenubarItem
+                                key={f}
+                                onSelect={() => applyFont(f)}
+                            // or onClick depending on your menubar API
+                            >
+                                {f} {currentFont === f ? "✓" : null}
+                            </MenubarItem>
+                        ))}
+
+                        <MenubarItem disabled>──────────</MenubarItem>
+
+                        {/* quick Google fonts subset (you can show all or categorize) */}
+                        {["Inter", "Poppins", "Fira Code", "JetBrains Mono"].map((f) => (
+                            <MenubarItem key={f} onSelect={() => applyFont(f)}>
+                                {f} {currentFont === f ? "✓" : null}
+                            </MenubarItem>
+                        ))}
+
+                        {/* optional: show full google list in a scrollable group */}
+                        <MenubarItem disabled>More Google Fonts</MenubarItem>
+                        <div style={{ maxHeight: 220, overflow: "auto" }}>
+                            {GOOGLE_FONTS.map((f) => (
+                                <MenubarItem key={f} onSelect={() => applyFont(f)}>
+                                    {f} {currentFont === f ? "✓" : null}
+                                </MenubarItem>
+                            ))}
+                        </div>
                     </MenubarSubContent>
                 </MenubarSub>
-
                 <MenubarSeparator />
-
-                <MenubarSub>
-                    <MenubarSubTrigger>Line Ending</MenubarSubTrigger>
-                    <MenubarSubContent>
-                        <MenubarItem>Unix</MenubarItem>
-                        <MenubarItem>Mac</MenubarItem>
-                        <MenubarItem>Dos</MenubarItem>
-                    </MenubarSubContent>
-                </MenubarSub>
-
-                <MenubarSeparator />
-
-                <MenubarItem><span className="flex items-center"><EyeIcon className="mr-2" />Viewer Mode</span></MenubarItem>
-
-                <MenubarSeparator />
-
-                <MenubarItem><span className="flex items-center"><ChevronLeftIcon className="mr-2" />Previous Tab</span></MenubarItem>
-                <MenubarItem><span className="flex items-center"><ChevronRightIcon className="mr-2" />Next Tab</span></MenubarItem>
+                <MenubarItem onClick={() => {
+                    if (!document.fullscreenElement) {
+                        // Enter fullscreen
+                        document.documentElement.requestFullscreen();
+                    } else {
+                        // Exit fullscreen
+                        document.exitFullscreen();
+                    }
+                }}>
+                    <span className="flex items-center">
+                        <i className="mr-2">
+                            <ExpandIcon />
+                        </i>
+                        Fullscreen
+                    </span>
+                    <MenubarShortcut>F11</MenubarShortcut>
+                </MenubarItem>
             </MenubarContent>
         </MenubarMenu>
     );

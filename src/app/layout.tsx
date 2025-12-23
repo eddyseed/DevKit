@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import { ToolProvider } from "@/context/ToolContext";
 import { montserrat } from "@/lib/fonts";
+import { DialogProvider } from "@/components/dialog";
 
 export default function RootLayout({
   children,
@@ -10,7 +11,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={montserrat.variable}>
       <body>
-        <ToolProvider>{children}</ToolProvider>
+        <ToolProvider>
+          <DialogProvider>
+            {children}
+          </DialogProvider>
+        </ToolProvider>
       </body>
     </html>
   );

@@ -46,10 +46,12 @@ const Notepad: React.FC = () => {
                         style={{ fontFamily: `${fontFamily || 'monospace'}, monospace` }}
                     />
                 </section>
-                <Sidebar currentFileName={currentFileName}
-                    fileSize={fileSize}
-                    isSaved={isSaved}
-                    fontFamily={fontFamily} />
+                <section>
+                    <Sidebar currentFileName={currentFileName}
+                        fileSize={fileSize}
+                        isSaved={isSaved}
+                        fontFamily={fontFamily} />
+                </section>
             </div>
         </div>
     );

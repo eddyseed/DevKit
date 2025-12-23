@@ -79,6 +79,12 @@
             }
         }
 
+        &>section:last-child {
+            background: var(--surface-inspector);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
     }
 }

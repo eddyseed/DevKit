@@ -14,7 +14,7 @@ export default function Sidebar({
     return (
         <aside className={styles.root}>
             <div className={styles.header}>
-                <span className={styles.title}>File</span>
+                <span className={styles.title}>File Details</span>
                 <span
                     className={`${styles.statusDot} ${isSaved ? styles.saved : styles.dirty
                         }`}

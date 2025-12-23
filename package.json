@@ -10,6 +10,7 @@
     "totp:test": "TS_NODE_TRANSPILE_ONLY=1 node -r ts-node/register totp-test.ts"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-menubar": "^1.1.14",
     "@radix-ui/react-navigation-menu": "^1.2.12",
     "@radix-ui/react-slot": "^1.2.2",

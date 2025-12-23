@@ -1,6 +1,7 @@
 import { db } from "@/firebase/firestore";
 import { useFileStore } from "../lib/fileStore";
 import { doc, getDoc, updateDoc, setDoc } from "firebase/firestore";
+import toast from "react-hot-toast";
 
 export const handleFileSave = async (currentText: string): Promise<void> => {
     const { currentFileName, setSavedStatus, setCurrentFile } = useFileStore.getState();
@@ -17,7 +18,7 @@ export const handleFileSave = async (currentText: string): Promise<void> => {
             text: currentText,
             lastModified: new Date(),
         });
-
+        toast.success("File saved successfully.");
         console.log(`🔁 Updated existing file: ${currentFileName}`);
     }
     // If it does not exist -> create it
@@ -27,7 +28,7 @@ export const handleFileSave = async (currentText: string): Promise<void> => {
             filename: currentFileName,
             createdAt: new Date(),
         });
-
+        toast.success("File created and saved successfully.");
         console.log(`🆕 Created new file: ${currentFileName}`);
     }
 

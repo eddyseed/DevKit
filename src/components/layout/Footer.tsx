@@ -6,6 +6,7 @@ type FooterProps = {
 };
 
 export default function Footer({ variant = "default" }: FooterProps) {
+    const year = new Date().getFullYear();
     return (
         <footer
             className={clsx(
@@ -21,15 +22,15 @@ export default function Footer({ variant = "default" }: FooterProps) {
                         <ul className={styles.list}>
                             <li>Editor</li>
                             <li>Inspector</li>
-                            <li>Devkit</li>
                         </ul>
                     </div>
 
                     <div className={styles.section}>
                         <h4 className={styles.title}>Resources</h4>
                         <ul className={styles.list}>
-                            <li>Docs</li>
-                            <li>Changelog</li>
+                            <li>
+                                <a href="https://github.com/eddyseed/DevKit/blob/master/README.md" target="_blank">Docs</a>
+                            </li>
                             <li>Roadmap</li>
                         </ul>
                     </div>
@@ -37,8 +38,6 @@ export default function Footer({ variant = "default" }: FooterProps) {
                     <div className={styles.section}>
                         <h4 className={styles.title}>About</h4>
                         <ul className={styles.list}>
-                            <li>Philosophy</li>
-                            <li>Privacy</li>
                             <li>Contact</li>
                         </ul>
                     </div>
@@ -47,7 +46,7 @@ export default function Footer({ variant = "default" }: FooterProps) {
 
                 <div className="mt-10 flex flex-col items-center gap-3 text-sm md:flex-row md:justify-between">
                     <span className={styles.muted}>
-                        © 2025 Your Product
+                        © {year} DevKit. All rights reserved.
                     </span>
                     <span className={styles.muted}>
                         Calm tools for focused minds

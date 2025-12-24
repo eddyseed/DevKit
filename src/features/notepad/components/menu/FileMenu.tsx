@@ -4,14 +4,71 @@ import {
     MenubarSeparator, MenubarShortcut, MenubarSub, MenubarSubTrigger,
     MenubarSubContent
 } from "@/components/ui/menubar";
-import { ArrowUpFromLine, Save, RotateCcw, Printer, CrossIcon } from "lucide-react";
+import { ArrowUpFromLine, Save, RotateCcw, Printer, CrossIcon, Trash2Icon } from "lucide-react";
 import { handleFileSave } from "@/features/notepad/handlers/save";
 import { useFileStore } from "../../lib/fileStore";
 import { useDialog } from "@/hooks/useDialog";
 import styles from '@/styles/tools/notepad.module.css';
+import { deleteCurrentFile } from "../../handlers/fileDelete";
+import { toast } from "react-hot-toast";
 const FileMenu: React.FC = () => {
     const fileText = useFileStore((s) => s.fileText);
     const { openDialog } = useDialog();
+
+    const handleDelete = () => {
+        toast(
+            (t) => (
+                <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+                    <span>
+                        Delete this note? <br />
+                        <small style={{ opacity: 0.7 }}>
+                            This action cannot be undone.
+                        </small>
+                    </span>
+
+                    <button
+                        onClick={async () => {
+                            try {
+                                await deleteCurrentFile();
+                                toast.success("Note deleted successfully");
+                            } catch (err) {
+                                console.error(err);
+                                toast.error("Failed to delete note");
+                            } finally {
+                                toast.dismiss(t.id);
+                            }
+                        }}
+                        style={{
+                            background: "var(--btn-danger-bg)",
+                            color: "var(--btn-danger-text)",
+                            border: "none",
+                            borderRadius: 8,
+                            padding: "6px 12px",
+                            cursor: "pointer",
+                            fontWeight: 600,
+                        }}
+                    >
+                        Delete
+                    </button>
+
+                    <button
+                        onClick={() => toast.dismiss(t.id)}
+                        style={{
+                            background: "transparent",
+                            border: "none",
+                            cursor: "pointer",
+                            opacity: 0.7,
+                        }}
+                    >
+                        Cancel
+                    </button>
+                </div>
+            ),
+            {
+                duration: Infinity, // wait for user action
+            }
+        );
+    };
     return (
         <MenubarMenu>
             <MenubarTrigger>File</MenubarTrigger>
@@ -85,13 +142,21 @@ const FileMenu: React.FC = () => {
                     <MenubarSubTrigger>
                         <span className="flex items-center">Download</span>
                     </MenubarSubTrigger>
-                    <MenubarSubContent>
+                    <MenubarSubContent className={`${styles.menubar_item}`}>
                         <MenubarItem>Download as PDF</MenubarItem>
                         <MenubarItem>Download as DOCX</MenubarItem>
                         <MenubarItem>Download as TXT</MenubarItem>
                     </MenubarSubContent>
                 </MenubarSub>
                 <MenubarSeparator />
+                <MenubarItem onClick={() => handleDelete()}>
+                    <span className="flex items-center">
+                        <i className="mr-2">
+                            <Trash2Icon />
+                        </i>
+                        Delete Note...
+                    </span>
+                </MenubarItem>
             </MenubarContent>
         </MenubarMenu>
     );

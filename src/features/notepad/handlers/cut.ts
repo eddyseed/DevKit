@@ -48,6 +48,4 @@ export const handleCut = async (): Promise<void> => {
         editorElement.focus();
         editorElement.selectionStart = editorElement.selectionEnd = start;
     });
-
-    console.log("handleCut: cut to clipboard");
 };

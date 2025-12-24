@@ -41,8 +41,6 @@ export const handleFileSaveAs = async (
 
             setCurrentFile(finalFileName, fileText?.length || 0);
             setSavedStatus(true);
-
-            console.log(`✅ Renamed Untitled.txt → ${finalFileName}`);
         } else {
             // Untitled.txt not found → create new
             await setDoc(doc(db, collectionName, finalFileName), {
@@ -65,8 +63,6 @@ export const handleFileSaveAs = async (
 
         setCurrentFile(finalFileName, fileText?.length || 0);
         setSavedStatus(true);
-
-        console.log(`🆕 Created new file: ${finalFileName}`);
         toast.success(`File saved as "${finalFileName}" successfully.`);
     }
 };

@@ -39,20 +39,26 @@ export const useFileStore = create<FileState>()(
                 }
             },
 
-            setCurrentFile: (name: string, size: number) => {
-                const parsed = FileMetaSchema.pick({ currentFileName: true, fileSize: true }).safeParse({
+            setCurrentFile: (name: string, sizeInBytes: number) => {
+                const sizeInMB = Math.round((sizeInBytes / (1024)));
+                const parsed = FileMetaSchema.pick({
+                    currentFileName: true,
+                    fileSize: true,
+                }).safeParse({
                     currentFileName: name,
-                    fileSize: size,
+                    fileSize: sizeInMB,
                 });
-                if (parsed.success)
+
+                if (parsed.success) {
                     set({
                         currentFileName: parsed.data.currentFileName,
-                        fileSize: parsed.data.fileSize,
+                        fileSize: parsed.data.fileSize, // now in MB
                     });
-                else {
+                } else {
                     console.warn("Invalid current file data:", parsed.error);
                 }
-            },
+            }
+            ,
 
             setSavedStatus: (status: boolean) => {
                 const parsed = FileMetaSchema.pick({ isSaved: true }).safeParse({ isSaved: status });

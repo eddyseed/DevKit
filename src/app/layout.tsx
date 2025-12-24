@@ -3,6 +3,12 @@ import { ToolProvider } from "@/context/ToolContext";
 import { montserrat } from "@/lib/fonts";
 import { DialogProvider } from "@/components/dialog";
 
+export const metadata = {
+  description: 'A collection of developer tools to make your life easier.',
+  icons: {
+    icon: '/static/favicon.ico',
+  },
+};
 export default function RootLayout({
   children,
 }: {

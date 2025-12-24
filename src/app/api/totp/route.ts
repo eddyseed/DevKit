@@ -41,12 +41,7 @@ export async function POST(req: NextRequest) {
         );
     }
 
-    // Debug logs (remove in production)
-    console.log('[TOTP] Input code:', code);
-
     const isValid = authenticator.check(code, secret);
-
-    console.log('[TOTP] isValid:', isValid);
 
     if (!isValid) {
         return NextResponse.json(
@@ -55,14 +50,13 @@ export async function POST(req: NextRequest) {
         );
     }
 
-    // On success: create a response and attach cookie
     const res = NextResponse.json({ ok: true });
 
     res.cookies.set('devkit_auth', '1', {
         httpOnly: true,
         sameSite: 'lax',
         secure: process.env.NODE_ENV === 'production',
-        maxAge: 60 * 60 * 12, // 12 hours
+        maxAge: 60 * 60 * 12,
         path: '/',
     });
 

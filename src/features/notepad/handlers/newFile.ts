@@ -8,11 +8,10 @@ export const handleNewFile = async (currentText: string) => {
     }
 
     const { setFileText, setCurrentFile, setSavedStatus } = useFileStore.getState();
-
-    // Reset editor state
     setFileText("");
     setCurrentFile("", 0);
     setSavedStatus(false);
+
 
     try {
         const res = await fetch("/api/notepad", {
@@ -24,7 +23,6 @@ export const handleNewFile = async (currentText: string) => {
         if (!res.ok) throw new Error("Request failed");
 
         toast.success("New file created successfully (in Redis).");
-        console.log("✅ Saved to Redis via API route");
     } catch (error) {
         console.error("❌ Error:", error);
         toast.error("Failed to create new file.");

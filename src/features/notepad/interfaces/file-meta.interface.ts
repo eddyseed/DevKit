@@ -9,7 +9,7 @@ export const CursorPosSchema = z.object({
 export const FileMetaSchema = z.object({
     currentFileName: z.string().min(0),
     fileSize: z.number().int().nonnegative(),
-    isSaved: z.boolean(),
+    isSaved: z.boolean().default(false),
     fileText: z.string(),
     fontFamily: z.string().optional().default("monospace"),
     editorElement: z.custom<HTMLTextAreaElement | null>((v) =>

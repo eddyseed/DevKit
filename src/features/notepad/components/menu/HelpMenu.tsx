@@ -6,7 +6,7 @@ import {
     MenubarItem,
     MenubarSeparator,
 } from "@/components/ui/menubar";
-import { HeadsetIcon, DollarSignIcon, Code2Icon } from "lucide-react";
+import { HeadsetIcon, Code2Icon } from "lucide-react";
 import styles from '@/styles/tools/notepad.module.css';
 const HelpMenu: React.FC = () => {
     return (
@@ -14,28 +14,20 @@ const HelpMenu: React.FC = () => {
             <MenubarTrigger>Help</MenubarTrigger>
             <MenubarContent className={`${styles.menubar_item}`}>
                 <MenubarItem>
-                    <span className="flex items-center">
+                    <span className="flex items-center" onClick={() => window.open("https://forms.gle/aikgsj35Vw6bEpJE7", "_blank")}>
                         <i className="mr-2">
                             <HeadsetIcon />
                         </i>
                         Contact
                     </span>
                 </MenubarItem>
-                <MenubarItem>
-                    <span className="flex items-center">
-                        <i className="mr-2">
-                            <DollarSignIcon />
-                        </i>
-                        Donate
-                    </span>
-                </MenubarItem>
                 <MenubarSeparator />
                 <MenubarItem>
-                    <span className="flex items-center">
+                    <span className="flex items-center" onClick={() => window.open("https://github.com/eddyseed/DevKit/issues", "_blank")}>
                         <i className="mr-2">
                             <Code2Icon />
                         </i>
-                        Contribute
+                        Report Issue
                     </span>
                 </MenubarItem>
             </MenubarContent>

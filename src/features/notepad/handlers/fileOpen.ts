@@ -29,7 +29,5 @@ export async function openFileByName(fileName: string): Promise<void> {
     setCurrentFile(fileName, textContent.length);
     setFileText(textContent);
     setSavedStatus(true);
-
-    console.log(`📖 Successfully opened file: ${fileName}`);
     toast.success(`Opened file "${fileName}" successfully.`);
 };

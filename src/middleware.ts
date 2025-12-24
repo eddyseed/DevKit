@@ -1,20 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const PUBLIC_PATHS = ['/auth', '/api/totp', '/favicon.ico'];
+const PUBLIC_PATHS = ['/auth/login', '/api/totp', '/favicon.ico'];
 
 function isPublicPath(pathname: string) {
     if (PUBLIC_PATHS.includes(pathname)) return true;
     // Allow anything under /auth and /api/totp (e.g. nested routes, if any)
-    if (pathname.startsWith('/auth/')) return true;
+    if (pathname.startsWith('/auth/login')) return true;
     if (pathname.startsWith('/api/totp')) return true;
     return false;
 }
 
 export function middleware(req: NextRequest) {
     const { pathname } = req.nextUrl;
-
-    // Debug: confirm middleware is running
-    console.log('[middleware] hit:', pathname);
 
     // 1) Allow Next internals and static assets
     if (
@@ -36,16 +33,11 @@ export function middleware(req: NextRequest) {
 
     if (!authCookie) {
         const loginUrl = req.nextUrl.clone();
-        loginUrl.pathname = '/auth';
+        loginUrl.pathname = '/auth/login/';
         loginUrl.searchParams.set('from', pathname || '/');
-
-        console.log('[middleware] redirecting to /auth from', pathname);
 
         return NextResponse.redirect(loginUrl);
     }
-
-    // 4) Cookie present → allow request
-    console.log('[middleware] allowed with cookie, path:', pathname);
 
     return NextResponse.next();
 }

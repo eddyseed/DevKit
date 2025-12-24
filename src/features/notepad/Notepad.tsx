@@ -26,6 +26,10 @@ const Notepad: React.FC = () => {
     useEffect(() => {
         loadGoogleFont(fontFamily || '');
     }, [fontFamily]);
+    useEffect(() => {
+        const name = currentFileName || "Untitled";
+        document.title = `${name} - Devkit${isSaved ? "" : " • Unsaved"}`;
+    }, [currentFileName, isSaved]);
 
     return (
         <div className={`${styles.notepad}`}>

@@ -1,14 +1,12 @@
 .root {
-    height: 95%;
-    width: 95%;
     padding: 1.25rem 1.25rem 1rem;
     background: var(--surface-editor);
     border: var(--border-warm-subtle);
-
     border-radius: 14px;
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
+    margin: 0.75rem;
 }
 
 /* ---------- HEADER ---------- */

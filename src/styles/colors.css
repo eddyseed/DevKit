@@ -79,5 +79,7 @@
   --color-primary-soft: #f4c76a;
   --color-on-primary: #111;
 
-  --color-danger: #c0392b;
+
+  --btn-danger-bg: #D64933;
+  --btn-danger-text: #fff;
 }

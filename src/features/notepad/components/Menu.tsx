@@ -14,9 +14,9 @@ import { useDialog } from "@/hooks/useDialog";
 import FileMenu from "./menu/FileMenu";
 import EditMenu from "./menu/EditMenu";
 import FindMenu from "./menu/FindMenu";
-import DocumentMenu from "./menu/DocumentMenu";
 import HelpMenu from "./menu/HelpMenu";
 import { handleGlobalKeyDown } from "@/lib/keyboard";
+import ViewMenu from "./menu/ViewMenu";
 const Menu: React.FC = () => {
     const { fileText } = useFileStore();
     const { openDialog } = useDialog();
@@ -78,7 +78,7 @@ const Menu: React.FC = () => {
             <FileMenu />
             <EditMenu />
             <FindMenu />
-            <DocumentMenu />
+            <ViewMenu />
             <HelpMenu />
         </Menubar>
     );

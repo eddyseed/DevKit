@@ -6,7 +6,7 @@ import { DialogProvider } from "@/components/dialog";
 export const metadata = {
   description: 'A collection of developer tools to make your life easier.',
   icons: {
-    icon: '/static/favicon.ico',
+    icon: '/favicon.ico',
   },
 };
 export default function RootLayout({

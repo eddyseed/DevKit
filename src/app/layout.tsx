@@ -1,23 +1,26 @@
-import { ToolProvider } from "@/context/ToolContext";
 import "@/styles/globals.css";
-import type { Metadata } from "next";
+import { ToolProvider } from "@/context/ToolContext";
+import { montserrat } from "@/lib/fonts";
+import { DialogProvider } from "@/components/dialog";
 
-
-export const metadata: Metadata = {
-  title: "DevKit - Powered by Nextjs",
-  description: "Drive kitten cars free",
+export const metadata = {
+  description: 'A collection of developer tools to make your life easier.',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
-
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body className="bg-slate-50">
+    <html lang="en" className={montserrat.variable}>
+      <body>
         <ToolProvider>
-          {children}
+          <DialogProvider>
+            {children}
+          </DialogProvider>
         </ToolProvider>
       </body>
     </html>

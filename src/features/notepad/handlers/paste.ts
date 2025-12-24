@@ -1,4 +1,4 @@
-import useFileStore from "@/lib/fileStore";
+import { useFileStore } from "../lib/fileStore";
 
 export const handlePaste = async (): Promise<void> => {
     const { editorElement, fileText, setFileText } = useFileStore.getState();
@@ -35,8 +35,6 @@ export const handlePaste = async (): Promise<void> => {
             editorElement.selectionStart = caretPos;
             editorElement.selectionEnd = caretPos;
         });
-
-        console.log("✅ Pasted from clipboard");
     } catch (err) {
         console.error("❌ Failed to read clipboard:", err);
         alert("Unable to access clipboard. Please allow clipboard permissions or use Ctrl + V.");

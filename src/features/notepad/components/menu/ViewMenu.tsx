@@ -8,14 +8,13 @@ import {
     MenubarSubTrigger,
     MenubarSubContent,
     MenubarSeparator,
-    MenubarCheckboxItem,
     MenubarShortcut,
 } from "@/components/ui/menubar";
-import { ExpandIcon } from "lucide-react";
-import useFileStore from "@/lib/fileStore";
+import { CheckIcon, ExpandIcon } from "lucide-react";
+import {useFileStore} from "@/features/notepad/lib/fileStore";
 import { SYSTEM_FONTS } from "../../../../utils/constants";
 import { GOOGLE_FONTS, loadGoogleFont } from "@/utils/googleFonts";
-
+import styles from '@/styles/tools/notepad.module.css';
 const ViewMenu: React.FC = () => {
     const currentFont = useFileStore((s) => s.fontFamily);
     const setFontFamily = useFileStore((s) => s.setFontFamily);
@@ -36,13 +35,13 @@ const ViewMenu: React.FC = () => {
     return (
         <MenubarMenu>
             <MenubarTrigger>View</MenubarTrigger>
-            <MenubarContent>
+            <MenubarContent className={styles.menubar_item}>
                 <MenubarSub>
                     <MenubarSubTrigger>Select Font</MenubarSubTrigger>
-                    <MenubarSubContent>
+                    <MenubarSubContent className={styles.menubar_item}>
                         {SYSTEM_FONTS.map((f) => (
                             <MenubarItem key={f} onSelect={() => applyFont(f)}>
-                                {f} {currentFont === f ? "✓" : null}
+                                {f} {currentFont === f ? <CheckIcon /> : null}
                             </MenubarItem>
                         ))}
 
@@ -50,7 +49,7 @@ const ViewMenu: React.FC = () => {
 
                         {["Inter", "Poppins", "Fira Code", "JetBrains Mono"].map((f) => (
                             <MenubarItem key={f} onSelect={() => applyFont(f)}>
-                                {f} {currentFont === f ? "✓" : null}
+                                {f} {currentFont === f ? <CheckIcon /> : null}
                             </MenubarItem>
                         ))}
 
@@ -58,31 +57,12 @@ const ViewMenu: React.FC = () => {
                         <div style={{ maxHeight: 220, overflow: "auto" }}>
                             {GOOGLE_FONTS.map((f) => (
                                 <MenubarItem key={f} onSelect={() => applyFont(f)}>
-                                    {f} {currentFont === f ? "✓" : null}
+                                    {f} {currentFont === f ? <CheckIcon /> : null}
                                 </MenubarItem>
                             ))}
                         </div>
                     </MenubarSubContent>
                 </MenubarSub>
-
-                <MenubarSub>
-                    <MenubarSubTrigger>Select Theme</MenubarSubTrigger>
-                    <MenubarSubContent>
-                        <MenubarItem>System Default</MenubarItem>
-                        <MenubarItem>Light</MenubarItem>
-                        <MenubarItem>Dark</MenubarItem>
-                    </MenubarSubContent>
-                </MenubarSub>
-
-                <MenubarSeparator />
-
-                <MenubarCheckboxItem checked>
-                    <span className="flex items-center">Menubar</span>
-                </MenubarCheckboxItem>
-
-                <MenubarCheckboxItem checked>
-                    <span className="flex items-center">Toolbar</span>
-                </MenubarCheckboxItem>
 
                 <MenubarSeparator />
 

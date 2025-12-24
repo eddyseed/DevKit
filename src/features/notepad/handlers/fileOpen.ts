@@ -1,14 +1,12 @@
 import { db } from "@/firebase/firestore";
-import useFileStore from "@/lib/fileStore";
+import { useFileStore } from "../lib/fileStore";
 import { doc, getDoc } from "firebase/firestore";
-
-export const handleFileOpen = async (): Promise<void> => {
+import toast from "react-hot-toast";
+export async function openFileByName(fileName: string): Promise<void> {
     const { setCurrentFile, setFileText, setSavedStatus } = useFileStore.getState();
 
-
-    const fileName = prompt("Enter file name to open:")?.trim();
     if (!fileName) {
-        console.warn("⚠️ No file name entered. Cancelled.");
+        toast.error("Please provide a valid file name to open.");
         return;
     }
 
@@ -20,7 +18,7 @@ export const handleFileOpen = async (): Promise<void> => {
 
     if (!fileSnap.exists()) {
         console.warn("⚠️ File not found:", fileName);
-        alert(`File "${fileName}" not found!`);
+        toast.error(`File "${fileName}" does not exist.`);
         return;
     }
 
@@ -31,6 +29,5 @@ export const handleFileOpen = async (): Promise<void> => {
     setCurrentFile(fileName, textContent.length);
     setFileText(textContent);
     setSavedStatus(true);
-
-    console.log(`📖 Successfully opened file: ${fileName}`);
+    toast.success(`Opened file "${fileName}" successfully.`);
 };

@@ -1,10 +1,18 @@
 import { db } from "@/firebase/firestore";
-import useFileStore from "@/lib/fileStore";
+import { useFileStore } from "../lib/fileStore";
 import { doc, getDoc, setDoc, deleteDoc, updateDoc } from "firebase/firestore";
-export const handleFileSaveAs = async (currentText: string): Promise<void> => {
-    const { currentFileName, fileText, setCurrentFile, setSavedStatus } = useFileStore.getState();
+import toast from "react-hot-toast";
+export const handleFileSaveAs = async (
+    currentText: string,
+    baseFileName: string,
+    format: string
+): Promise<void> => {
+    const { currentFileName, fileText, setCurrentFile, setSavedStatus } =
+        useFileStore.getState();
 
-    const finalFileName = prompt("Enter your file name:")?.trim() || "Untitled.txt";
+    const safeName = baseFileName.trim() || "Untitled";
+    const finalFileName = `${safeName}.${format}`;
+
     const today = new Date().toISOString().split("T")[0];
     const collectionName = `notes-${today}`;
 
@@ -14,9 +22,9 @@ export const handleFileSaveAs = async (currentText: string): Promise<void> => {
         const oldSnap = await getDoc(oldRef);
 
         if (oldSnap.exists()) {
-            // ✅ Rename by creating new doc with same content and deleting old one
             const oldData = oldSnap.data();
 
+            // ✅ Create new doc with same content
             await setDoc(doc(db, collectionName, finalFileName), {
                 ...oldData,
                 text: currentText,
@@ -28,26 +36,24 @@ export const handleFileSaveAs = async (currentText: string): Promise<void> => {
                 renamedFrom: "Untitled.txt",
             });
 
-            // Delete the old Untitled.txt document
+            // Delete old Untitled.txt
             await deleteDoc(oldRef);
 
-            // Update Zustand
             setCurrentFile(finalFileName, fileText?.length || 0);
             setSavedStatus(true);
-
-            console.log(`✅ Renamed Untitled.txt → ${finalFileName}`);
         } else {
-            // Untitled.txt not found, creating new file instead...
+            // Untitled.txt not found → create new
             await setDoc(doc(db, collectionName, finalFileName), {
                 text: currentText,
                 filename: finalFileName,
                 createdAt: new Date(),
             });
+
             setCurrentFile(finalFileName, fileText?.length || 0);
             setSavedStatus(true);
         }
     }
-    // If the current file already has a custom name → perform regular "Save As"
+    // Regular Save As
     else {
         await setDoc(doc(db, collectionName, finalFileName), {
             text: currentText,
@@ -57,7 +63,6 @@ export const handleFileSaveAs = async (currentText: string): Promise<void> => {
 
         setCurrentFile(finalFileName, fileText?.length || 0);
         setSavedStatus(true);
-
-        console.log(`🆕 Created new file: ${finalFileName}`);
+        toast.success(`File saved as "${finalFileName}" successfully.`);
     }
 };

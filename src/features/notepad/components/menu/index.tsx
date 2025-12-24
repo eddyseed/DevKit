@@ -4,7 +4,6 @@ import FileMenu from "./FileMenu";
 import EditMenu from "./EditMenu";
 import FindMenu from "./FindMenu";
 import ViewMenu from "./ViewMenu";
-import DocumentMenu from "./DocumentMenu";
 import HelpMenu from "./HelpMenu";
 import { useKeyboardShortcuts } from "./useKeyboardShortcuts";
 
@@ -16,7 +15,6 @@ const Menu: React.FC = () => {
             <EditMenu />
             <FindMenu />
             <ViewMenu />
-            <DocumentMenu />
             <HelpMenu />
         </MenuRoot>
     );

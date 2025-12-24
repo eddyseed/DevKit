@@ -47,8 +47,12 @@ export function NewFileDialog({ onClose }: NewFileDialogProps) {
             setSavedStatus(true);
 
             onClose();
-        } catch (err: any) {
-            setError(err.message || "Failed to create file");
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setError(err.message || "Failed to create file");
+            } else {
+                setError("Failed to create file");
+            }
         } finally {
             setLoading(false);
         }

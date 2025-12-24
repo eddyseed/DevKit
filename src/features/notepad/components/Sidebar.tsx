@@ -1,7 +1,4 @@
 import styles from "@/styles/layout/Sidebar.module.css";
-import toast from "react-hot-toast";
-import { deleteCurrentFile } from "../handlers/fileDelete";
-import { TrashIcon } from "lucide-react";
 
 type FileStatusProps = {
     currentFileName: string;
@@ -13,7 +10,6 @@ type FileStatusProps = {
 export default function Sidebar({
     currentFileName,
     fileSize,
-    isSaved,
     fontFamily,
 }: FileStatusProps) {
 

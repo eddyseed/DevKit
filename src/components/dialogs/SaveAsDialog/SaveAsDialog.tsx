@@ -36,8 +36,12 @@ export function SaveAsDialog({ onClose }: SaveAsDialogProps) {
             setError(null);
             await handleFileSaveAs(fileText ?? "", name.trim(), format);
             onClose();
-        } catch (err: any) {
-            setError(err.message || "Failed to save file");
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError("Failed to save file");
+            }
         } finally {
             setLoading(false);
         }

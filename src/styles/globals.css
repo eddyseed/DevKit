@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@import "./colors.css";
+
+:root {
+  --font-primary: var(--font-montserrat);
+}
+
+body {
+  font-family: var(--font-primary), system-ui, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text-main);
+}

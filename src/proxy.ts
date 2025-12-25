@@ -10,7 +10,7 @@ function isPublicPath(pathname: string) {
     return false;
 }
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
     const { pathname } = req.nextUrl;
 
     // 1) Allow Next internals and static assets

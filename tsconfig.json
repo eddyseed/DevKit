@@ -15,7 +15,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "plugins": [
       {
@@ -33,8 +33,10 @@
     "**/*.tsx",
     "next-env.d.ts",
     "src/components/.next/types/**/*.ts",
-    ".next/types/**/*.ts"
-, "totp-test.js"  ],
+    ".next/types/**/*.ts",
+    "totp-test.js",
+    ".next/dev/types/**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

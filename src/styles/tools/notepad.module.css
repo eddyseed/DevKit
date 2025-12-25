@@ -90,6 +90,15 @@
     }
 }
 
+@media only screen and (max-width: 768px) {
+    .notepad {
+        &>div:last-child {
+            grid-template-columns: none;
+            grid-template-rows: 3fr 1fr
+        }
+    }
+}
+
 .menubar_item {
     background: var(--surface-button);
     border: var(--border-warm-subtle);

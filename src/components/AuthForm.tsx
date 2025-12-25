@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import toast from 'react-hot-toast';
 import styles from '@/styles/auth/totp_win.module.css';
@@ -12,7 +12,9 @@ export default function AuthForm() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const redirectTo = searchParams.get('from') || '/';
-    document.title = "Login - DevKit";
+    useEffect(() => {
+        document.title = "Login - DevKit";
+    }, []);
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!/^\d{6}$/.test(code)) {

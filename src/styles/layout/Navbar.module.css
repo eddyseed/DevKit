@@ -64,3 +64,17 @@
 
     border: var(--border-nav);
 }
+
+
+@media only screen and (max-width:768px){
+    .navigation_bar {
+        grid-template-columns: 1fr 1fr;
+
+        &>div:last-child {
+            padding-right: 0.75rem;
+
+        }
+
+    }
+
+}

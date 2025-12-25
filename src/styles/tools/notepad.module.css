@@ -94,7 +94,7 @@
     .notepad {
         &>div:last-child {
             grid-template-columns: none;
-            grid-template-rows: 3fr 1fr
+            grid-template-rows: 1fr 1fr
         }
     }
 }

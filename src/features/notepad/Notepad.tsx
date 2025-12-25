@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 import { loadGoogleFont } from "@/utils/googleFonts";
 import { useFileStore } from "./lib/fileStore";
 import Sidebar from "./components/Sidebar";
+import Panel from "./components/Panel";
 
 const Notepad: React.FC = () => {
     const {
@@ -37,7 +38,6 @@ const Notepad: React.FC = () => {
             <div>
                 <Menu />
             </div>
-
             <div>
                 <section>
                     <Textarea
@@ -51,6 +51,7 @@ const Notepad: React.FC = () => {
                     />
                 </section>
                 <section>
+                    <Panel/>
                     <Sidebar currentFileName={currentFileName}
                         fileSize={fileSize}
                         isSaved={isSaved}

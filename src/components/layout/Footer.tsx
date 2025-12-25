@@ -26,7 +26,9 @@ export default function Footer({ variant = "default" }: FooterProps) {
                     </div>
 
                     <div className={styles.section}>
-                        <h4 className={styles.title}>Resources</h4>
+                        <h4 className={styles.title}>
+                            <a href="https://github.com/eddyseed/DevKit/blob/master/README.md" target="_blank">Resources</a>
+                        </h4>
                         <ul className={styles.list}>
                             <li>
                                 <a href="https://github.com/eddyseed/DevKit/blob/master/README.md" target="_blank">Docs</a>
@@ -38,7 +40,9 @@ export default function Footer({ variant = "default" }: FooterProps) {
                     <div className={styles.section}>
                         <h4 className={styles.title}>About</h4>
                         <ul className={styles.list}>
-                            <li>Contact</li>
+                            <li>
+                                <a href="https://forms.gle/aikgsj35Vw6bEpJE7" target="_blank">Contact</a>
+                            </li>
                         </ul>
                     </div>
 

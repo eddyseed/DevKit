@@ -37,7 +37,6 @@ const Notepad: React.FC = () => {
             <div>
                 <Menu />
             </div>
-
             <div>
                 <section>
                     <Textarea

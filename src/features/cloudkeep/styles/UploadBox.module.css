@@ -1,0 +1,130 @@
+.container {
+    margin-bottom: 24px;
+}
+
+.uploadBox {
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.uploadBox:hover {
+    border-color: #667eea;
+    background: #f8f9ff;
+}
+
+.uploadBox.dragging {
+    border-color: #667eea;
+    background: #eef2ff;
+    transform: scale(1.02);
+}
+
+.fileInput {
+    display: none;
+}
+
+.uploadContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.uploadIcon {
+    font-size: 48px;
+}
+
+.uploadText {
+    font-size: 16px;
+    font-weight: 500;
+    color: #374151;
+}
+
+.uploadPath {
+    font-size: 13px;
+    color: #6b7280;
+    font-family: monospace;
+}
+
+.progressContainer {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.progressItem {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 12px 16px;
+}
+
+.progressHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.fileName {
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.status {
+    font-size: 16px;
+    margin-left: 8px;
+}
+
+.status.uploading {
+    animation: pulse 1.5s infinite;
+}
+
+.status.complete {
+    color: #10b981;
+}
+
+.status.error {
+    color: #ef4444;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.progressBar {
+    height: 4px;
+    background: #f3f4f6;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    transition: width 0.3s ease;
+}
+
+.error {
+    font-size: 12px;
+    color: #ef4444;
+    margin-top: 4px;
+}

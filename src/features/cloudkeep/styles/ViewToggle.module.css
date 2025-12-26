@@ -1,0 +1,33 @@
+.viewToggle {
+    display: flex;
+    background: #f3f4f6;
+    border-radius: 8px;
+    padding: 4px;
+    gap: 4px;
+}
+
+.button {
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: #6b7280;
+    font-size: 18px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button:hover {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.button.active {
+    background: white;
+    color: #667eea;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+    display: block;
+}

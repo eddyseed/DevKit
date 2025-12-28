@@ -170,16 +170,30 @@ export function useCloudKeep() {
             try {
                 const signedUrl = await getSignedUrl(file.path);
 
-                // Create a temporary link and trigger download
+                // Fetch file as blob to force download
+                const response = await fetch(signedUrl);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch file');
+                }
+
+                const blob = await response.blob();
+
+                // Create local object URL
+                const blobUrl = URL.createObjectURL(blob);
+
+                // Create temporary link and force download
                 const link = document.createElement('a');
-                link.href = signedUrl;
+                link.href = blobUrl;
                 link.download = file.name;
+
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
+
+                // Cleanup
+                URL.revokeObjectURL(blobUrl);
             } catch (err) {
                 console.error('Error downloading file:', err);
-                throw err;
             }
         },
         [getSignedUrl]

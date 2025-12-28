@@ -13,7 +13,7 @@ import styles from './styles/CloudKeep.module.css';
 
 export default function CloudKeep() {
     const router = useRouter();
-    const [viewMode, setViewMode] = useState<ViewMode>('grid');
+    const [viewMode, setViewMode] = useState<ViewMode>('list');
     const [searchQuery, setSearchQuery] = useState('');
     const [currentFolder, setCurrentFolder] = useState('');
     const [selectedFile, setSelectedFile] = useState<CloudKeepFile | null>(null);
@@ -91,10 +91,10 @@ export default function CloudKeep() {
         }
     };
 
-    const handleLogout = () => {
-        localStorage.removeItem('cloudkeep_auth');
-        router.push('/');
-    };
+    // const handleLogout = () => {
+    //     localStorage.removeItem('cloudkeep_auth');
+    //     router.push('/');
+    // };
 
     if (loading && files.length === 0) {
         return (
@@ -110,9 +110,6 @@ export default function CloudKeep() {
             <aside className={styles.sidebar}>
                 <div className={styles.sidebarHeader}>
                     <h1 className={styles.logo}>🔐 CloudKeep</h1>
-                    <button onClick={handleLogout} className={styles.logoutButton}>
-                        Logout
-                    </button>
                 </div>
 
                 <FolderTree

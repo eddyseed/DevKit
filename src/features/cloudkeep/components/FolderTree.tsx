@@ -1,3 +1,4 @@
+'use client';
 import React, { useMemo } from 'react';
 import { CloudKeepFile } from '../types/file';
 import styles from '../styles/FolderTree.module.css';

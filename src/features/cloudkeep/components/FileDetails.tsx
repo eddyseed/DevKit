@@ -1,3 +1,4 @@
+'use client';
 import { useState, useEffect } from 'react';;
 import { CloudKeepFile } from '../types/file';
 import { getFileIcon, isImageFile, isPdfFile } from '../utils/fileIcons';

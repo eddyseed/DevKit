@@ -1,3 +1,4 @@
+'use client';
 import { ViewMode } from '../types/file';
 import styles from '../styles/ViewToggle.module.css';
 

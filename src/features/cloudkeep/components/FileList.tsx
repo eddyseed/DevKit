@@ -1,3 +1,4 @@
+'use client';
 import { CloudKeepFile } from '../types/file';
 import { getFileIcon, isPreviewable } from '../utils/fileIcons';
 import { formatFileSize, formatDate } from '../utils/formatters';

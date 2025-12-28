@@ -1,7 +1,7 @@
 'use client';
 import styles from '@/styles/layout/Navbar.module.css';
 import { Button } from "@/components/ui/button"
-import { Pen, MenuIcon, LockIcon } from 'lucide-react';
+import { Pen, MenuIcon, LockIcon, CloudUploadIcon } from 'lucide-react';
 import { useTool } from '@/context/ToolContext';
 import { logoutUser } from '@/features/notepad/handlers/logout';
 import { useRouter } from 'next/navigation';
@@ -16,6 +16,7 @@ export const Navbar: React.FC = () => {
                 {/* <Button className={`${styles.nav_btn}`} onClick={() => setTool("vault")}><Vault /> Vault</Button>
                 <Button className={`${styles.nav_btn}`} onClick={() => setTool("music")}><Music /> Music Visualizer</Button>
                 <Button className={`${styles.nav_btn}`} onClick={() => setTool("tasks")}><Check /> Tasks</Button> */}
+                <Button className={`${styles.nav_btn}`} onClick={() => setTool("cloudkeep")}><CloudUploadIcon /> Cloud Keep</Button>
             </div>
             <div>
                 {/* Make a lock button that logs out from current session */}

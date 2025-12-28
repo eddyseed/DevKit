@@ -1,0 +1,130 @@
+.list {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.header {
+    display: flex;
+    padding: 16px 20px;
+    background: #f9fafb;
+    border-bottom: 2px solid #e5e7eb;
+    font-size: 13px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.headerCell {
+    display: flex;
+    align-items: center;
+}
+
+.rows {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f3f4f6;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.row:last-child {
+    border-bottom: none;
+}
+
+.row:hover {
+    background: #f9fafb;
+}
+
+.row.selected {
+    background: #eef2ff;
+}
+
+.cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #374151;
+    overflow: hidden;
+}
+
+.icon {
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.fileName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.previewBadge {
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.deleteButton {
+    padding: 6px 10px;
+    background: #fef2f2;
+    color: #dc2626;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: all 0.2s;
+}
+
+.deleteButton:hover {
+    background: #fee2e2;
+    transform: scale(1.1);
+}
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.emptyIcon {
+    font-size: 64px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.emptyText {
+    font-size: 18px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+}
+
+.emptySubtext {
+    font-size: 14px;
+    color: #9ca3af;
+}
+
+@media (max-width: 768px) {
+    .header {
+        display: none;
+    }
+
+    .row {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .cell {
+        width: 100%;
+    }
+}

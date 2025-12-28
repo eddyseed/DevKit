@@ -1,3 +1,4 @@
+'use client';
 import React, { useRef, useState } from 'react';
 import { UploadProgress } from '../types/file';
 import styles from '../styles/UploadBox.module.css';

@@ -1,3 +1,4 @@
+'use client';
 import { useState, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ViewMode, CloudKeepFile } from './types/file';

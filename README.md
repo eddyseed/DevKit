@@ -27,7 +27,9 @@ NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=<your-firebase-storage-bucket>
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=<your-firebase-messaging-sender-id>
 NEXT_PUBLIC_FIREBASE_APP_ID=<your-firebase-app-id>
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=<your-firebase-measurement-id>
-
+GROQ_API_KEY=<your_groq_api_key_here>
+NEXT_PUBLIC_SUPABASE_URL=<your_supabase_url_here>
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<your_supabase_anon_key_here>
 
 TOTP_SECRET=<your-totp-secret>
 ```
@@ -139,5 +141,6 @@ or submit a pull request for any improvements or bug fixes.
 For further assistance, you can reach out via the [Google Form](https://forms.gle/aikgsj35Vw6bEpJE7)
 
 - You can buy me a coffee here: [Buy Me a Coffee](https://buymeacoffee.com/rishabhjn1o)
+
 
 ## Thank you for using Devkit! Happy coding!

@@ -36,7 +36,8 @@ TOTP_SECRET=<your-totp-secret>
 
 - To get your Firebase configuration values, go to the [Firebase Console](https://console.firebase.google.com/), select your project, and navigate to Project Settings > General > Your apps > Firebase SDK snippet > Config.
 - For TOTP_SECRET, you can generate a secret using a TOTP generator or library of your choice.
-
+- For GROQ_API_KEY, you can obtain it from your GROQ service account.
+- For Supabase credentials, sign up at [Supabase](https://supabase.com/), create a new project, and find the URL and anon key in the project settings under API.
 Finally, start the development server:
 
 ```bash
@@ -52,6 +53,9 @@ Take a look at some screenshots of the Devkit application:
 ![Devkit Screenshot 1](public/screenshots/1.jpeg)
 2. Main Dashboard
 ![Devkit Screenshot 2](public/screenshots/2.jpeg)
+3. Cloud Keep Vault
+![Devkit Screenshot 3](public/screenshots/3.jpeg)
+
 Project Structure
 ---
 The project follows a feature-driven, scalable Next.js App Router architecture, keeping UI, logic, and styles well separated.
@@ -94,6 +98,7 @@ The project follows a feature-driven, scalable Next.js App Router architecture, 
 │   │   ├── todo/
 │   │   ├── vault/
 │   │   └── visualiser/
+|   |   └── cloudkeep/       # Cloud Keep feature
 │
 │   ├── styles/                # Global & modular CSS
 │   │   ├── globals.css

@@ -1,35 +1,39 @@
+import toast from "react-hot-toast";
 import { db } from "@/firebase/firestore";
 import { useFileStore } from "../lib/fileStore";
-import { doc, getDoc, updateDoc, setDoc } from "firebase/firestore";
-import toast from "react-hot-toast";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 
 export const handleFileSave = async (currentText: string): Promise<void> => {
-    const { currentFileName, setSavedStatus, setCurrentFile } = useFileStore.getState();
-
-    const today = new Date().toISOString().split("T")[0];
-    const collectionName = `notes-${today}`;
-    const fileRef = doc(db, collectionName, currentFileName);
+    const { fileLocation, currentFileName, setSavedStatus, setCurrentFile, setLastModified } = useFileStore.getState();
+    if (!currentFileName) {
+        toast.error("No file open. Create or open a file to continue.");
+        return;
+    }
+    const collectionName = fileLocation?.collection;
+    const fileName = currentFileName?.trim() || "Untitled";
+    const fileRef = doc(db, collectionName!, fileName);
 
     const existingSnap = await getDoc(fileRef);
 
-    // If file already exists -> update it
+    if (process.env.NODE_ENV === 'development') {
+        console.groupCollapsed('Save Handler Triggered');
+        console.table({
+            fileName: currentFileName,
+            textLength: currentText.length,
+            collection: collectionName,
+            path: fileRef.path,
+            savedAt: new Date().toLocaleTimeString(),
+        });
+        console.groupEnd();
+    }
     if (existingSnap.exists()) {
         await updateDoc(fileRef, {
             text: currentText,
             lastModified: new Date(),
         });
-        toast.success("File saved successfully.");
+        setLastModified(new Date());
+        setSavedStatus(true);
+        setCurrentFile(currentFileName, currentText.length);
+        toast.success("Your work is safely saved.");
     }
-    // If it does not exist -> create it
-    else {
-        await setDoc(fileRef, {
-            text: currentText,
-            filename: currentFileName,
-            createdAt: new Date(),
-        });
-        toast.success("File created and saved successfully.");
-    }
-
-    setSavedStatus(true);
-    setCurrentFile(currentFileName, currentText.length);
 };

@@ -1,68 +1,48 @@
+import toast from "react-hot-toast";
 import { db } from "@/firebase/firestore";
 import { useFileStore } from "../lib/fileStore";
-import { doc, getDoc, setDoc, deleteDoc, updateDoc } from "firebase/firestore";
-import toast from "react-hot-toast";
+import { doc, setDoc } from "firebase/firestore";
+const currentDate = new Date();
+const today = currentDate.toISOString().split("T")[0];
 export const handleFileSaveAs = async (
     currentText: string,
-    baseFileName: string,
-    format: string
+    fileName: string,
+    fileFormat: string
 ): Promise<void> => {
-    const { currentFileName, fileText, setCurrentFile, setSavedStatus } =
+    const { setFileText, setCurrentFile, setSavedStatus, setFileLocation, setCreatedAt, setLastModified } =
         useFileStore.getState();
 
-    const safeName = baseFileName.trim() || "Untitled";
-    const finalFileName = `${safeName}.${format}`;
-
-    const today = new Date().toISOString().split("T")[0];
     const collectionName = `notes-${today}`;
+    const finalFileName = `${fileName.trim()}.${fileFormat}`;
 
-    // If the current file is Untitled.txt → rename that same document
-    if (currentFileName === "Untitled.txt") {
-        const oldRef = doc(db, collectionName, currentFileName);
-        const oldSnap = await getDoc(oldRef);
-
-        if (oldSnap.exists()) {
-            const oldData = oldSnap.data();
-
-            // ✅ Create new doc with same content
-            await setDoc(doc(db, collectionName, finalFileName), {
-                ...oldData,
-                text: currentText,
-                filename: finalFileName,
-                lastModified: new Date(),
-            });
-
-            await updateDoc(doc(db, collectionName, finalFileName), {
-                renamedFrom: "Untitled.txt",
-            });
-
-            // Delete old Untitled.txt
-            await deleteDoc(oldRef);
-
-            setCurrentFile(finalFileName, fileText?.length || 0);
-            setSavedStatus(true);
-        } else {
-            // Untitled.txt not found → create new
-            await setDoc(doc(db, collectionName, finalFileName), {
-                text: currentText,
-                filename: finalFileName,
-                createdAt: new Date(),
-            });
-
-            setCurrentFile(finalFileName, fileText?.length || 0);
-            setSavedStatus(true);
-        }
-    }
-    // Regular Save As
-    else {
-        await setDoc(doc(db, collectionName, finalFileName), {
-            text: currentText,
-            filename: finalFileName,
-            createdAt: new Date(),
+    if (process.env.NODE_ENV === 'development') {
+        console.groupCollapsed('Save As Handler Triggered');
+        console.table({
+            fileName: finalFileName,
+            textLength: currentText.length,
+            collection: collectionName,
+            createdAt: today.toString(),
         });
-
-        setCurrentFile(finalFileName, fileText?.length || 0);
-        setSavedStatus(true);
-        toast.success(`File saved as "${finalFileName}" successfully.`);
+        console.groupEnd();
     }
+    await setDoc(doc(db, collectionName, finalFileName), {
+        text: currentText,
+        filename: finalFileName,
+        createdAt: new Date(),
+        lastModified: new Date(),
+    });
+    setSavedStatus(true);
+    setFileText(currentText)
+    setFileLocation({
+        collection: collectionName,
+        fileName: finalFileName
+    })
+    setCreatedAt(currentDate);
+    setLastModified(currentDate);
+
+    // Redundant Now
+    setCurrentFile(finalFileName, currentText?.length || 0);
+
+    console.log(`File saved as "${finalFileName}" successfully.`)
+    toast.success(`File saved as "${finalFileName}" successfully.`);
 };

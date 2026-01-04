@@ -10,3 +10,9 @@ body {
   background: var(--color-bg);
   color: var(--color-text-main);
 }
+.m{
+  border: 2px solid red !important;
+}
+.r{
+  border: 2px solid blue !important;
+}

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import styles from "./NewFileDialog.module.css";
 import { handleFileSaveAs } from "@/features/notepad/handlers/saveAs";
-import { useFileStore } from "@/features/notepad/lib/fileStore";
 
 const FILE_FORMATS = [
     { label: "Text File (.txt)", value: "txt" },
@@ -24,7 +23,6 @@ export function NewFileDialog({ onClose }: NewFileDialogProps) {
     const [format, setFormat] = useState("txt");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const { setCurrentFile, setFileText, setSavedStatus } = useFileStore();
 
     const handleCreate = async () => {
         if (!name.trim()) {
@@ -40,12 +38,6 @@ export function NewFileDialog({ onClose }: NewFileDialogProps) {
             const initialText = "";
 
             await handleFileSaveAs(initialText, name.trim(), format);
-
-            // Update Zustand for editor
-            setFileText(initialText);
-            setCurrentFile(`${name.trim()}.${format}`, 0);
-            setSavedStatus(true);
-
             onClose();
         } catch (err: unknown) {
             if (err instanceof Error) {
@@ -69,7 +61,7 @@ export function NewFileDialog({ onClose }: NewFileDialogProps) {
                     value={name}
                     className={styles.input}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="untitled"
+                    placeholder="untitled" 
                     onKeyDown={(e) => e.key === "Enter" && handleCreate()}
                     disabled={loading}
                 />

@@ -1,10 +1,10 @@
 'use client'
 import React, { useEffect } from "react";
-import styles from "@/styles/tools/notepad.module.css";
+import styles from "./styles/notepad.module.css";
 import { Textarea } from "@/components/ui/textarea";
 import Menu from "./components/Menu";
 import { Toaster } from "react-hot-toast";
-import { loadGoogleFont } from "@/utils/googleFonts";
+import { loadGoogleFont } from "@/features/notepad/utils/googleFonts";
 import { useFileStore } from "./lib/fileStore";
 import Sidebar from "./components/Sidebar";
 import Panel from "./components/Panel";

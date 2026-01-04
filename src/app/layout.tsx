@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import { ToolProvider } from "@/context/ToolContext";
-import { montserrat } from "@/lib/fonts";
+import { montserrat } from "@/features/notepad/lib/fonts";
 import { DialogProvider } from "@/components/dialog";
 
 export const metadata = {

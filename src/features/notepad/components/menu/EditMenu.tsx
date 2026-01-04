@@ -11,7 +11,7 @@ import { Undo, Redo, ScissorsIcon, CopyIcon, ClipboardIcon } from "lucide-react"
 import { handleCopy } from "@/features/notepad/handlers/copy";
 import { handleCut } from "@/features/notepad/handlers/cut";
 import { handlePaste } from "@/features/notepad/handlers/paste";
-import styles from '@/styles/tools/notepad.module.css';
+import styles from '../../styles/notepad.module.css';
 const EditMenu: React.FC = () => {
     return (
         <MenubarMenu>

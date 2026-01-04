@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
-import styles from "@/styles/layout/Panel.module.css";
-import { handleGenerate } from '../handlers/generateResponse';
 import toast from 'react-hot-toast';
+import { handleGenerate } from '../handlers/generateResponse';
 import { AIModel } from '../interfaces/model.types';
+import styles from "../styles/Panel.module.css";
 const Panel: React.FC = () => {
     const minRef = useRef<HTMLInputElement>(null);
     const modelRef = useRef<HTMLSelectElement>(null);

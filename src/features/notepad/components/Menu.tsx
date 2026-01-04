@@ -15,10 +15,10 @@ import FileMenu from "./menu/FileMenu";
 import EditMenu from "./menu/EditMenu";
 import FindMenu from "./menu/FindMenu";
 import HelpMenu from "./menu/HelpMenu";
-import { handleGlobalKeyDown } from "@/lib/keyboard";
+import { handleGlobalKeyDown } from "@/features/notepad/lib/keyboard";
 import ViewMenu from "./menu/ViewMenu";
 import { ClipboardIcon, CopyIcon, RedoIcon, ScissorsIcon, SearchIcon, UndoIcon } from "lucide-react";
-import styles from '@/styles/tools/notepad.module.css';
+import styles from '../styles/notepad.module.css';
 const Menu: React.FC = () => {
     const { fileText } = useFileStore();
     const { openDialog } = useDialog();

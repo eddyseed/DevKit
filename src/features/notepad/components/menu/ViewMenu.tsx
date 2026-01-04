@@ -12,9 +12,9 @@ import {
 } from "@/components/ui/menubar";
 import { CheckIcon, ExpandIcon } from "lucide-react";
 import {useFileStore} from "@/features/notepad/lib/fileStore";
-import { SYSTEM_FONTS } from "../../../../utils/constants";
-import { GOOGLE_FONTS, loadGoogleFont } from "@/utils/googleFonts";
-import styles from '@/styles/tools/notepad.module.css';
+import { SYSTEM_FONTS } from "../../utils/constants";
+import { GOOGLE_FONTS, loadGoogleFont } from "@/features/notepad/utils/googleFonts";
+import styles from '../../styles/notepad.module.css';
 const ViewMenu: React.FC = () => {
     const currentFont = useFileStore((s) => s.fontFamily);
     const setFontFamily = useFileStore((s) => s.setFontFamily);

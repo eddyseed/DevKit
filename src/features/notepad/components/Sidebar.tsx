@@ -1,4 +1,4 @@
-import styles from "@/styles/layout/Sidebar.module.css";
+import styles from "../styles/Sidebar.module.css";
 interface FileLoc {
     collection: string;
     fileName: string;

@@ -8,12 +8,12 @@ import { ArrowUpFromLine, Save, RotateCcw, CrossIcon, Trash2Icon, HardDriveDownl
 import { handleFileSave } from "@/features/notepad/handlers/save";
 import { useFileStore } from "../../lib/fileStore";
 import { useDialog } from "@/hooks/useDialog";
-import styles from '@/styles/tools/notepad.module.css';
 import { deleteCurrentFile } from "../../handlers/fileDelete";
 import { toast } from "react-hot-toast";
 import { downloadPDF } from "../../handlers/downloadAsPDF";
 import { downloadDocx } from "../../handlers/downloadAsDOCX";
 import { saveLocalCopy } from "../../handlers/getLocalCopy";
+import styles from '../../styles/notepad.module.css';
 const FileMenu: React.FC = () => {
     const fileText = useFileStore((s) => s.fileText);
     const { openDialog } = useDialog();

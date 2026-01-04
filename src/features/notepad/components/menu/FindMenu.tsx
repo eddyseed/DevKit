@@ -11,7 +11,7 @@ import { Search, ArrowDown, ArrowUp, Globe } from "lucide-react";
 import { handleFind } from "@/features/notepad/handlers/find";
 import { handleFindNext } from "@/features/notepad/handlers/findNext";
 import { handleSearchSelection } from "@/features/notepad/handlers/search";
-import styles from '@/styles/tools/notepad.module.css';
+import styles from '../../styles/notepad.module.css';
 const FindMenu: React.FC = () => {
     return (
         <MenubarMenu>

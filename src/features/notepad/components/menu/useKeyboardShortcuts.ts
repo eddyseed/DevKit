@@ -2,10 +2,8 @@ import { useCallback, useEffect } from "react";
 import { useFileStore } from "@/features/notepad/lib/fileStore";
 import { handleCopy } from "@/features/notepad/handlers/copy";
 import { handleCut } from "@/features/notepad/handlers/cut";
-import { openFileByName } from "@/features/notepad/handlers/fileOpen";
 import { handleFind } from "@/features/notepad/handlers/find";
 import { handleFindNext } from "@/features/notepad/handlers/findNext";
-import { handleNewFile } from "@/features/notepad/handlers/newFile";
 import { handlePaste } from "@/features/notepad/handlers/paste";
 import { handleFileSave } from "@/features/notepad/handlers/save";
 import { handleSearchSelection } from "@/features/notepad/handlers/search";
@@ -18,8 +16,6 @@ export const useKeyboardShortcuts = () => {
 
         if (e.altKey) {
             switch (key) {
-                case "n": e.preventDefault(); handleNewFile(fileText); return;
-                case "o": e.preventDefault(); openFileByName(fileName); return;
                 case "s": e.preventDefault(); handleFileSave(fileText); return;
                 case "r": e.preventDefault(); window.location.reload(); return;
             }

@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
-import { askAI } from "@/lib/askAI";
-import { GenerateParamsSchema } from "@/features/notepad/interfaces/response.interface";
 import z from "zod";
+import { NextResponse } from "next/server";
+import { askAI } from "@/features/notepad/lib/askAI";
+import { GenerateParamsSchema } from "@/features/notepad/interfaces/response.interface";
 
 export async function POST(req: Request) {
   try {

@@ -2,6 +2,7 @@ import toast from "react-hot-toast";
 import { db } from "@/firebase/firestore";
 import { useFileStore } from "../lib/fileStore";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { isDev } from "@/lib/dotenv/env";
 
 export const handleFileSave = async (currentText: string): Promise<void> => {
     const { fileLocation, currentFileName, setSavedStatus, setCurrentFile, setLastModified } = useFileStore.getState();
@@ -15,7 +16,7 @@ export const handleFileSave = async (currentText: string): Promise<void> => {
 
     const existingSnap = await getDoc(fileRef);
 
-    if (process.env.NODE_ENV === 'development') {
+    if (isDev) {
         console.groupCollapsed('Save Handler Triggered');
         console.table({
             fileName: currentFileName,

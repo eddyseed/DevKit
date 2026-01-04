@@ -1,3 +1,4 @@
+import { isProd } from "@/lib/dotenv/env";
 import { NextResponse } from "next/server";
 
 export async function POST() {
@@ -6,7 +7,7 @@ export async function POST() {
     res.cookies.set("devkit_auth", "", {
         httpOnly: true,
         sameSite: "lax",
-        secure: process.env.NODE_ENV === "production",
+        secure: isProd,
         expires: new Date(0),
         path: "/",
     });

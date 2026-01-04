@@ -7,7 +7,7 @@ import {
     MenubarSeparator,
 } from "@/components/ui/menubar";
 import { HeadsetIcon, Code2Icon, CoffeeIcon } from "lucide-react";
-import styles from '@/styles/tools/notepad.module.css';
+import styles from '../../styles/notepad.module.css';
 const HelpMenu: React.FC = () => {
     return (
         <MenubarMenu>

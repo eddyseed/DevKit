@@ -11,10 +11,15 @@ import Panel from "./components/Panel";
 
 const Notepad: React.FC = () => {
     const {
-        currentFileName,
-        fileSize,
         isSaved,
+        currentFileName,
         fontFamily,
+        fileSize,
+        fileLocation,
+        createdAt,
+        lastModified,
+
+
         fileText,
         setFileText,
         setEditorElement
@@ -51,11 +56,18 @@ const Notepad: React.FC = () => {
                     />
                 </section>
                 <section>
-                    <Panel/>
-                    <Sidebar currentFileName={currentFileName}
+                    <Panel />
+                    <Sidebar
+                        currentFileName={currentFileName}
                         fileSize={fileSize}
                         isSaved={isSaved}
-                        fontFamily={fontFamily} />
+                        fontFamily={fontFamily}
+                        fileLocation={fileLocation}
+                        wordCount={fileText.split(' ').length}
+                        lineCount={fileText.split('\n').length}
+                        createdAt={createdAt}
+                        modifiedAt={lastModified}
+                    />
                 </section>
             </div>
         </div>

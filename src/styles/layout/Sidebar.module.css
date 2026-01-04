@@ -1,12 +1,13 @@
 .root {
-    padding: 1.25rem 1.25rem 1rem;
+    padding: 1.5rem;
     background: var(--surface-editor);
     border: var(--border-warm-subtle);
-    border-radius: 14px;
+    border-radius: 16px;
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1.5rem;
     margin: 0.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 /* ---------- HEADER ---------- */
@@ -15,22 +16,35 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(120, 90, 40, 0.12);
 }
 
 .title {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--text-editor-soft);
 }
 
-/* softer, calmer indicator */
+.statusBadge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.75rem;
+    background: rgba(120, 90, 40, 0.06);
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
 .statusDot {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    opacity: 0.85;
 }
 
 .saved {
@@ -41,40 +55,70 @@
     background: var(--status-dirty);
 }
 
+.statusText {
+    color: var(--text-editor-soft);
+}
+
 /* ---------- PRIMARY INFO ---------- */
 
 .section {
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
+    gap: 0.4rem;
+    padding: 0.75rem;
+    background: rgba(120, 90, 40, 0.03);
+    border-radius: 10px;
+    transition: background 0.2s ease;
+}
+
+.section:hover {
+    background: rgba(120, 90, 40, 0.06);
 }
 
 .label {
-    font-size: 10.5px;
+    font-size: 9.5px;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
+    font-weight: 600;
     color: var(--text-editor-soft);
+    opacity: 0.8;
 }
 
-/* file name deserves emphasis */
 .value {
-    font-size: 14px;
+    font-size: 13.5px;
     font-weight: 500;
     color: var(--text-editor-primary);
     word-break: break-word;
+    line-height: 1.4;
 }
 
-/* subtle separation between groups */
-.section+.section {
-    padding-top: 0.6rem;
-    border-top: 1px dashed rgba(120, 90, 40, 0.15);
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.collectionBadge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.6rem;
+    background: rgba(120, 90, 40, 0.1);
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-editor-soft);
+    margin-top: 0.25rem;
 }
 
 /* ---------- FOOTER ---------- */
 
 .footerHint {
     margin-top: auto;
-    font-size: 11.5px;
+    padding-top: 1rem;
+    border-top: 2px solid rgba(120, 90, 40, 0.12);
+    font-size: 11px;
+    font-weight: 500;
+    text-align: center;
     color: var(--text-editor-muted);
-    opacity: 0.85;
+    opacity: 0.75;
 }

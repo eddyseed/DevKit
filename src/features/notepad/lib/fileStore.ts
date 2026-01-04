@@ -15,6 +15,11 @@ export type FileState = FileMeta & {
     setEditorElement: (el: HTMLTextAreaElement | null) => void;
     setCursorPos: (pos: { start: number; end: number }) => void;
     setFontFamily: (font: string) => void;
+    setFileLocation: (location: { collection: string; fileName: string } | null) => void;
+
+    setCreatedAt: (date: Date) => void;
+    setLastModified: (date: Date) => void;
+
 };
 
 export const useFileStore = create<FileState>()(
@@ -22,6 +27,7 @@ export const useFileStore = create<FileState>()(
         (set) => ({
             // defaults must match schema shape
             currentFileName: "",
+            fileLocation: null,
             fileSize: 0,
             isSaved: true,
             fileText: "",
@@ -29,6 +35,8 @@ export const useFileStore = create<FileState>()(
             editorElement: null,
             cursorPos: { start: 0, end: 0 },
             lastFindQuery: null,
+            createdAt: new Date(),
+            lastModified: new Date(),
 
             // setters using pick() from FileMetaSchema
             setLastFindQuery: (q: string | null) => {
@@ -59,6 +67,17 @@ export const useFileStore = create<FileState>()(
                 }
             }
             ,
+            setFileLocation: (location) => {
+                const parsed = FileMetaSchema.pick({ fileLocation: true }).safeParse({
+                    fileLocation: location,
+                });
+
+                if (parsed.success) {
+                    set({ fileLocation: parsed.data.fileLocation });
+                } else {
+                    console.warn("Invalid fileLocation:", parsed.error);
+                }
+            },
 
             setSavedStatus: (status: boolean) => {
                 const parsed = FileMetaSchema.pick({ isSaved: true }).safeParse({ isSaved: status });
@@ -91,6 +110,29 @@ export const useFileStore = create<FileState>()(
                 const parsed = FileMetaSchema.pick({ fontFamily: true }).safeParse({ fontFamily: font });
                 if (parsed.success) set({ fontFamily: parsed.data.fontFamily });
                 else console.warn("Invalid fontFamily:", parsed.error);
+            },
+
+            setCreatedAt: (date: Date) => {
+                const parsed = FileMetaSchema.pick({ createdAt: true }).safeParse({
+                    createdAt: date,
+                });
+
+                if (parsed.success) {
+                    set({ createdAt: parsed.data.createdAt });
+                } else {
+                    console.warn("Invalid createdAt:", parsed.error);
+                }
+            },
+            setLastModified: (date: Date) => {
+                const parsed = FileMetaSchema.pick({ lastModified: true }).safeParse({
+                    lastModified: date,
+                });
+
+                if (parsed.success) {
+                    set({ lastModified: parsed.data.lastModified });
+                } else {
+                    console.warn("Invalid lastModified:", parsed.error);
+                }
             },
         }),
         {

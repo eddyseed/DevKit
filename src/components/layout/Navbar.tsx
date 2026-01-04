@@ -1,10 +1,11 @@
 'use client';
 import styles from '@/styles/layout/Navbar.module.css';
 import { Button } from "@/components/ui/button"
-import { Pen, MenuIcon, LockIcon, CloudUploadIcon } from 'lucide-react';
+import { Pen, LockIcon, CloudUploadIcon, BrushCleaningIcon, Settings2Icon, MoonIcon } from 'lucide-react';
 import { useTool } from '@/context/ToolContext';
-import { logoutUser } from '@/features/notepad/handlers/logout';
+import { logoutUser } from '@/utils/lockApp';
 import { useRouter } from 'next/navigation';
+import { clearCache } from '@/utils/clearCache';
 
 export const Navbar: React.FC = () => {
     const router = useRouter();
@@ -19,10 +20,13 @@ export const Navbar: React.FC = () => {
                 <Button className={`${styles.nav_btn}`} onClick={() => setTool("cloudkeep")}><CloudUploadIcon /> Cloud Keep</Button>
             </div>
             <div>
+                <Button className={`${styles.nav_btn}`} onClick={() => clearCache()} title="Clear Cache"><BrushCleaningIcon /></Button>
                 {/* Make a lock button that logs out from current session */}
                 <Button className={`${styles.nav_btn}`} onClick={() => logoutUser(router)} title="Lock my app"><LockIcon /></Button>
                 {/* <Button className={`${styles.nav_btn}`}><CoffeeIcon />Buy Me a Coffee</Button> */}
-                <Button className={`${styles.nav_btn}`}><MenuIcon /></Button>
+                <Button className={`${styles.nav_btn}`}><Settings2Icon /></Button>
+                <Button className={`${styles.nav_btn}`}><MoonIcon /></Button>
+
             </div>
         </main>
     );

@@ -17,6 +17,8 @@ import FindMenu from "./menu/FindMenu";
 import HelpMenu from "./menu/HelpMenu";
 import { handleGlobalKeyDown } from "@/lib/keyboard";
 import ViewMenu from "./menu/ViewMenu";
+import { ClipboardIcon, CopyIcon, RedoIcon, ScissorsIcon, SearchIcon, UndoIcon } from "lucide-react";
+import styles from '@/styles/tools/notepad.module.css';
 const Menu: React.FC = () => {
     const { fileText } = useFileStore();
     const { openDialog } = useDialog();
@@ -49,7 +51,7 @@ const Menu: React.FC = () => {
         (e: KeyboardEvent) => {
             const target = e.target as HTMLElement;
 
-            // 🚫 Ignore shortcuts when typing
+            // Ignore shortcuts when typing
             if (
                 target instanceof HTMLInputElement ||
                 target instanceof HTMLTextAreaElement ||
@@ -63,7 +65,7 @@ const Menu: React.FC = () => {
         [keyboardActions]
     );
 
-    // attach listener
+    // Attach listener
     useEffect(() => {
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
@@ -75,11 +77,63 @@ const Menu: React.FC = () => {
 
     return (
         <Menubar onMouseDown={preventBlur}>
-            <FileMenu />
-            <EditMenu />
-            <FindMenu />
-            <ViewMenu />
-            <HelpMenu />
+            <div>
+                <FileMenu />
+                <EditMenu />
+                <FindMenu />
+                <ViewMenu />
+                <HelpMenu />
+            </div>
+            <div>
+                <div
+                    className={styles.menubar_item}
+                    title="Cut Selection (Ctrl+X)"
+                    onClick={() => handleCut()}
+                >
+                    <ScissorsIcon />
+                </div>
+
+                <div
+                    className={styles.menubar_item}
+                    title="Copy Selection (Ctrl+C)"
+                    onClick={() => handleCopy()}
+                >
+                    <CopyIcon />
+                </div>
+
+                <div
+                    className={styles.menubar_item}
+                    title="Paste from Clipboard (Ctrl+V)"
+                    onClick={() => handlePaste()}
+                >
+                    <ClipboardIcon />
+                </div>
+
+                <div
+                    className={styles.menubar_item}
+                    title="Search in Note (Ctrl+F)"
+                    onClick={() => handleFind()}
+                >
+                    <SearchIcon />
+                </div>
+
+                <div
+                    className={`${styles.menubar_item}`}
+                    title="Undo (Ctrl+Z)"
+                    onClick={() => document.execCommand("undo")}
+                >
+                    <UndoIcon />
+                </div>
+
+                <div
+                    className={`${styles.menubar_item}`}
+                    title="Redo (Ctrl+Y)"
+                    onClick={() => document.execCommand("redo")}
+                >
+                    <RedoIcon />
+                </div>
+
+            </div>
         </Menubar>
     );
 };

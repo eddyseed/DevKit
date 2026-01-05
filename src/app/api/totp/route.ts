@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { authenticator } from 'otplib';
 import { totpRequestSchema, TotpRequest } from '@/lib/validation/totp';
-import { isProd, serverEnv } from '@/lib/dotenv/env';
+
 
 authenticator.options = {
     window: 2,
@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
 
     const { code } = parsed.data as TotpRequest;
 
-    const secret = serverEnv.totpSecret;
+    const secret = process.env.TOTP_SECRET;
     if (!secret) {
         return NextResponse.json(
             { ok: false, error: 'Server misconfigured: TOTP_SECRET missing' },
@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
     res.cookies.set('devkit_auth', '1', {
         httpOnly: true,
         sameSite: 'lax',
-        secure: isProd,
+        secure: process.env.NODE_ENV === 'production',
         maxAge: 60 * 60 * 12,
         path: '/',
     });

@@ -2,7 +2,6 @@ import toast from "react-hot-toast";
 import { db } from "@/firebase/firestore";
 import { useFileStore } from "../lib/fileStore";
 import { doc, setDoc } from "firebase/firestore";
-import { isDev } from "@/lib/dotenv/env";
 const currentDate = new Date();
 const today = currentDate.toISOString().split("T")[0];
 export const handleFileSaveAs = async (
@@ -16,7 +15,7 @@ export const handleFileSaveAs = async (
     const collectionName = `notes-${today}`;
     const finalFileName = `${fileName.trim()}.${fileFormat}`;
 
-    if (isDev) {
+    if (process.env.NODE_ENV === 'development') {
         console.groupCollapsed('Save As Handler Triggered');
         console.table({
             fileName: finalFileName,

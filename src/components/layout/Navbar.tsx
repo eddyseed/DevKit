@@ -7,7 +7,7 @@ import { logoutUser } from '@/utils/lockApp';
 import { useRouter } from 'next/navigation';
 import { clearCache } from '@/utils/clearCache';
 import { useSettingsDialogContext } from '@/features/settings/context/ToolContext';
-import { toast, Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import { toggleFullscreen } from '@/utils/toggleFS';
 export const Navbar: React.FC = () => {
     const router = useRouter();

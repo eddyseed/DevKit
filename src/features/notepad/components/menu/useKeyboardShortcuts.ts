@@ -1,5 +1,4 @@
 import { useCallback, useEffect } from "react";
-import { useFileStore } from "@/features/notepad/lib/fileStore";
 import { handleCopy } from "@/features/notepad/handlers/copy";
 import { handleCut } from "@/features/notepad/handlers/cut";
 import { handleFind } from "@/features/notepad/handlers/find";
@@ -9,14 +8,12 @@ import { handleFileSave } from "@/features/notepad/handlers/save";
 import { handleSearchSelection } from "@/features/notepad/handlers/search";
 
 export const useKeyboardShortcuts = () => {
-    const fileText = useFileStore((s) => s.fileText);
-    const fileName = useFileStore((s) => s.currentFileName);
     const handler = useCallback((e: KeyboardEvent) => {
         const key = e.key.toLowerCase();
 
         if (e.altKey) {
             switch (key) {
-                case "s": e.preventDefault(); handleFileSave(fileText); return;
+                case "s": e.preventDefault(); handleFileSave(); return;
                 case "r": e.preventDefault(); window.location.reload(); return;
             }
         }
@@ -34,7 +31,7 @@ export const useKeyboardShortcuts = () => {
         }
 
         if (key === "f3") { e.preventDefault(); handleFindNext(); return; }
-    }, [fileName, fileText]);
+    }, []);
 
     useEffect(() => {
         window.addEventListener("keydown", handler);

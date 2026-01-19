@@ -3,37 +3,57 @@ import { db } from "@/firebase/firestore";
 import { useFileStore } from "../lib/fileStore";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 
-export const handleFileSave = async (currentText: string): Promise<void> => {
-    const { fileLocation, currentFileName, setSavedStatus, setCurrentFile, setLastModified } = useFileStore.getState();
+export const handleFileSave = async (): Promise<void> => {
+    const {
+        fileLocation,
+        fileText,
+        currentFileName,
+        setSavedStatus,
+        setCurrentFile,
+        setLastModified,
+    } = useFileStore.getState();
+
     if (!currentFileName) {
         toast.error("No file open. Create or open a file to continue.");
         return;
     }
+
     const collectionName = fileLocation?.collection;
-    const fileName = currentFileName?.trim() || "Untitled";
+    const fileName = currentFileName.trim();
     const fileRef = doc(db, collectionName!, fileName);
 
-    const existingSnap = await getDoc(fileRef);
-
-    if (process.env.NODE_ENV === 'development') {
-        console.groupCollapsed('Save Handler Triggered');
+    if (process.env.NODE_ENV === "development") {
+        console.groupCollapsed("Save Handler Triggered");
         console.table({
-            fileName: currentFileName,
-            textLength: currentText.length,
+            fileName,
+            textLength: fileText.length,
             collection: collectionName,
             path: fileRef.path,
             savedAt: new Date().toLocaleTimeString(),
         });
         console.groupEnd();
     }
-    if (existingSnap.exists()) {
+
+    const savePromise = (async () => {
+        const existingSnap = await getDoc(fileRef);
+
+        if (!existingSnap.exists()) {
+            throw new Error("File does not exist");
+        }
+
         await updateDoc(fileRef, {
-            text: currentText,
+            text: fileText,
             lastModified: new Date(),
         });
-        setLastModified(new Date());
-        setSavedStatus(true);
-        setCurrentFile(currentFileName, currentText.length);
-        toast.success("Your work is safely saved.");
-    }
+    })();
+
+    await toast.promise(savePromise, {
+        loading: "Saving changes...",
+        success: "Your work is safely saved.",
+        error: "Failed to save changes. Please try again.",
+    });
+
+    setLastModified(new Date());
+    setSavedStatus(true);
+    setCurrentFile(currentFileName, fileText.length);
 };

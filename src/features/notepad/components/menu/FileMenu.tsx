@@ -6,7 +6,6 @@ import {
 } from "@/components/ui/menubar";
 import { ArrowUpFromLine, Save, RotateCcw, CrossIcon, Trash2Icon, HardDriveDownload } from "lucide-react";
 import { handleFileSave } from "@/features/notepad/handlers/save";
-import { useFileStore } from "../../lib/fileStore";
 import { useDialog } from "@/hooks/useDialog";
 import { deleteCurrentFile } from "../../handlers/fileDelete";
 import { toast } from "react-hot-toast";
@@ -14,10 +13,10 @@ import { downloadPDF } from "../../handlers/downloadAsPDF";
 import { downloadDocx } from "../../handlers/downloadAsDOCX";
 import { saveLocalCopy } from "../../handlers/getLocalCopy";
 import styles from '../../styles/notepad.module.css';
+import { useSettings } from "@/features/settings/hooks/useSettings";
 const FileMenu: React.FC = () => {
-    const fileText = useFileStore((s) => s.fileText);
     const { openDialog } = useDialog();
-
+    const { editor } = useSettings();
     const handleDelete = () => {
         toast(
             (t) => (
@@ -102,7 +101,7 @@ const FileMenu: React.FC = () => {
                     </span>
                 </MenubarItem>
                 <MenubarSeparator />
-                <MenubarItem onClick={() => handleFileSave(fileText)}>
+                <MenubarItem onClick={() => handleFileSave()}>
                     <span className="flex items-center">
                         <i className="mr-2">
                             <Save />
@@ -140,7 +139,7 @@ const FileMenu: React.FC = () => {
                         <span className="flex items-center">Download</span>
                     </MenubarSubTrigger>
                     <MenubarSubContent className={`${styles.menubar_item}`}>
-                        <MenubarItem onClick={() => downloadPDF()}>Download as PDF</MenubarItem>
+                        <MenubarItem onClick={() => downloadPDF(editor.fontFamily)}>Download as PDF</MenubarItem>
                         <MenubarItem onClick={() => downloadDocx()}>Download as DOCX</MenubarItem>
                     </MenubarSubContent>
                 </MenubarSub>

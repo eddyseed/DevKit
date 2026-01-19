@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "./colors.css";
+@import "./colors-dark.css";
 
 :root {
   --font-primary: var(--font-montserrat);

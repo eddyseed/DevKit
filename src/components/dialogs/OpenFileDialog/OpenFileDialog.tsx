@@ -61,28 +61,29 @@ export function OpenFileDialog({ onClose }: OpenFileDialogProps) {
             return;
         }
 
-        setLoading(true);
         setError(null);
+        setLoading(true);
 
-        try {
+        const openPromise = (async () => {
             const collectionName = `notes-${selectedDate}`;
             const fileRef = doc(db, collectionName, selectedFile);
             const fileSnap = await getDoc(fileRef);
 
             if (!fileSnap.exists()) {
-                toast.error(`File "${selectedFile}" does not exist.`);
-                return;
+                throw new Error(`File "${selectedFile}" does not exist.`);
             }
 
             const fileData = fileSnap.data();
             const textContent = fileData?.text || "";
+
             setSavedStatus(true);
             setCurrentFile(selectedFile, textContent.length);
             setFileText(textContent);
             setFileLocation({
-                collection: `notes-${selectedDate}`,
-                fileName: selectedFile!,
+                collection: collectionName,
+                fileName: selectedFile,
             });
+
             const createdAt =
                 fileData?.createdAt instanceof Date
                     ? fileData.createdAt
@@ -99,16 +100,22 @@ export function OpenFileDialog({ onClose }: OpenFileDialogProps) {
 
             setCreatedAt(createdAt);
             setLastModified(lastModified);
+        })();
 
-            toast.success(`Opened file "${selectedFile}" successfully.`);
+        try {
+            await toast.promise(openPromise, {
+                loading: `Opening "${selectedFile}"...`,
+                success: `Opened file "${selectedFile}" successfully.`,
+                error: (err) =>
+                    err instanceof Error ? err.message : "Failed to open file.",
+            });
+
             onClose();
-        } catch (err) {
-            console.error(err);
-            setError("Failed to open file.");
         } finally {
             setLoading(false);
         }
     };
+
 
     return (
         <div className={styles.root}>

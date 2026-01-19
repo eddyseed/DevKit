@@ -9,23 +9,20 @@ import { handleFindNext } from "../handlers/findNext";
 import { handlePaste } from "../handlers/paste";
 import { handleFileSave } from "../handlers/save";
 import { handleSearchSelection } from "../handlers/search";
-import { useFileStore } from "../lib/fileStore";
-import { useDialog } from "@/hooks/useDialog";
 import FileMenu from "./menu/FileMenu";
 import EditMenu from "./menu/EditMenu";
 import FindMenu from "./menu/FindMenu";
 import HelpMenu from "./menu/HelpMenu";
 import { handleGlobalKeyDown } from "@/features/notepad/lib/keyboard";
-import ViewMenu from "./menu/ViewMenu";
 import { ClipboardIcon, CopyIcon, RedoIcon, ScissorsIcon, SearchIcon, UndoIcon } from "lucide-react";
 import styles from '../styles/notepad.module.css';
+import { useDialog } from "@/hooks/useDialog";
 const Menu: React.FC = () => {
-    const { fileText } = useFileStore();
     const { openDialog } = useDialog();
     const keyboardActions = useMemo(() => ({
         newFile: () => openDialog("new-file"),
         openFile: () => openDialog("open-file"),
-        saveFile: () => handleFileSave(fileText),
+        saveFile: () => handleFileSave(),
         reload: () => window.location.reload(),
 
         print: () => window.print(),
@@ -45,7 +42,7 @@ const Menu: React.FC = () => {
         searchSelection: handleSearchSelection,
         find: handleFind,
         findNext: handleFindNext,
-    }), [fileText, openDialog]);
+    }), [openDialog]);
 
     const handleKeyDown = useCallback(
         (e: KeyboardEvent) => {
@@ -81,7 +78,6 @@ const Menu: React.FC = () => {
                 <FileMenu />
                 <EditMenu />
                 <FindMenu />
-                <ViewMenu />
                 <HelpMenu />
             </div>
             <div>

@@ -1,0 +1,78 @@
+:root {
+  /* Navigation & UI */
+  --color-primary: #3b82f6;
+  --color-primary-hover: #60a5fa;
+  --color-accent: #10b981;
+  --color-bg: var(--surface-app);
+  --nav-btn-secondary-bg: rgba(30, 30, 30, 0.9);
+  --nav-btn-secondary-bg-hover: #404040;
+  --nav-btn-secondary-bg-active: #505050;
+  --nav-btn-primary-bg: linear-gradient(180deg, #3b82f6, #2563eb);
+  --nav-btn-primary-bg-hover: linear-gradient(180deg, #60a5fa, #3b82f6);
+  --surface-nav: linear-gradient(180deg, #0a0a0a, #000000);
+  --color-text-main: #ffffff;
+  /* --color-text-secondary: #d4d4d4; */
+  --nav-btn-secondary-hover: #f5f5f5;
+  --border-nav: 1px solid rgba(255, 255, 255, 0.1);
+  --shadow-nav: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-nav-btn-primary: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 3px 6px rgba(0, 0, 0, 0.5);
+  --shadow-nav-btn-primary-active: inset 0 2px 6px rgba(0, 0, 0, 0.6);
+  
+  /* For Notepad module */
+  /* -------- TEXT -------- */
+  --text-editor-primary: #ffffff;
+  --text-editor-muted: #a3a3a3;
+  --text-editor-soft: #737373;
+  --text-editor-accent: #f5f5f5;
+  --text-editor-warm: #d4d4d4;
+  
+  /* -------- SURFACES -------- */
+  --surface-app: #000000;
+  --surface-toolbar: #0a0a0a;
+  --surface-editor: #111111;
+  --surface-button: rgba(30, 30, 30, 0.95);
+  --surface-button-hover: #404040;
+  
+  /* -------- BORDERS -------- */
+  --border-warm-subtle: 1px solid rgba(255, 255, 255, 0.1);
+  --border-warm-strong: 1px solid rgba(255, 255, 255, 0.15);
+  
+  /* -------- SHADOWS -------- */
+  --shadow-editor: 0 4px 10px rgba(0, 0, 0, 0.5);
+  --shadow-panel: 0 3px 8px rgba(0, 0, 0, 0.6);
+  
+  /* -------- STATES -------- */
+  --status-saved: #10b981;
+  --status-dirty: #f59e0b;
+  
+  /* -------- SELECTION / CARET -------- */
+  --caret-editor: #3b82f6;
+  --selection-editor: rgba(59, 130, 246, 0.3);
+  
+  /* Common variables */
+  --color-text: #ffffff;
+  --color-surface: #0a0a0a;
+  --color-border: rgba(255, 255, 255, 0.12);
+  
+  --color-primary-soft: rgba(59, 130, 246, 0.15);
+  --color-on-primary: #ffffff;
+  
+  --btn-danger-bg: #dc2626;
+  --btn-danger-text: #ffffff;
+  
+  /* Spacing and sizing (unchanged) */
+  --space-xs: 6px;
+  --space-sm: 10px;
+  --space-md: 14px;
+  --font-sm: 13px;
+  --font-base: 14px;
+  --font-lg: 18px;
+  --font-semibold: 600;
+  --opacity-muted: 0.75;
+  --radius-md: 10px;
+  --input-padding-y: 10px;
+  --input-padding-x: 12px;
+  --btn-padding-y: 8px;
+  --btn-padding-x: 16px;
+}

@@ -21,5 +21,5 @@ export async function downloadDocx() {
     });
 
     const blob = await Packer.toBlob(doc);
-    saveAs(blob, currentFileName);
+    saveAs(blob, currentFileName.split('.')[0] + ".docx");
 }

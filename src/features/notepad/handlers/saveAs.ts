@@ -2,21 +2,29 @@ import toast from "react-hot-toast";
 import { db } from "@/firebase/firestore";
 import { useFileStore } from "../lib/fileStore";
 import { doc, setDoc } from "firebase/firestore";
+
 const currentDate = new Date();
 const today = currentDate.toISOString().split("T")[0];
+
 export const handleFileSaveAs = async (
     currentText: string,
     fileName: string,
     fileFormat: string
 ): Promise<void> => {
-    const { setFileText, setCurrentFile, setSavedStatus, setFileLocation, setCreatedAt, setLastModified } =
-        useFileStore.getState();
+    const {
+        setFileText,
+        setCurrentFile,
+        setSavedStatus,
+        setFileLocation,
+        setCreatedAt,
+        setLastModified,
+    } = useFileStore.getState();
 
     const collectionName = `notes-${today}`;
     const finalFileName = `${fileName.trim()}.${fileFormat}`;
 
-    if (process.env.NODE_ENV === 'development') {
-        console.groupCollapsed('Save As Handler Triggered');
+    if (process.env.NODE_ENV === "development") {
+        console.groupCollapsed("Save As Handler Triggered");
         console.table({
             fileName: finalFileName,
             textLength: currentText.length,
@@ -25,24 +33,31 @@ export const handleFileSaveAs = async (
         });
         console.groupEnd();
     }
-    await setDoc(doc(db, collectionName, finalFileName), {
+
+    const savePromise = setDoc(doc(db, collectionName, finalFileName), {
         text: currentText,
         filename: finalFileName,
         createdAt: new Date(),
         lastModified: new Date(),
     });
+
+    await toast.promise(savePromise, {
+        loading: `Saving "${finalFileName}"...`,
+        success: `File saved as "${finalFileName}" successfully.`,
+        error: "Failed to save file. Please try again.",
+    });
+
     setSavedStatus(true);
-    setFileText(currentText)
+    setFileText(currentText);
     setFileLocation({
         collection: collectionName,
-        fileName: finalFileName
-    })
+        fileName: finalFileName,
+    });
     setCreatedAt(currentDate);
     setLastModified(currentDate);
 
-    // Redundant Now
+    // Redundant now
     setCurrentFile(finalFileName, currentText?.length || 0);
 
-    console.log(`File saved as "${finalFileName}" successfully.`)
-    toast.success(`File saved as "${finalFileName}" successfully.`);
+    console.log(`File saved as "${finalFileName}" successfully.`);
 };

@@ -11,7 +11,7 @@ import {
     MenubarShortcut,
 } from "@/components/ui/menubar";
 import { CheckIcon, ExpandIcon } from "lucide-react";
-import {useFileStore} from "@/features/notepad/lib/fileStore";
+import { useFileStore } from "@/features/notepad/lib/fileStore";
 import { SYSTEM_FONTS } from "../../utils/constants";
 import { GOOGLE_FONTS, loadGoogleFont } from "@/features/notepad/utils/googleFonts";
 import styles from '../../styles/notepad.module.css';

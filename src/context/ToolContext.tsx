@@ -1,6 +1,6 @@
 'use client'
 import { createContext, useContext, useState } from "react";
-type ToolType = "notepad" | "vault" | "music" | "tasks" | "cloudkeep";
+type ToolType = "notepad" | "cloudkeep";
 
 const ToolContext = createContext<{
   tool: ToolType;

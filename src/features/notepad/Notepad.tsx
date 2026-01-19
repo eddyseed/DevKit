@@ -1,37 +1,73 @@
-'use client'
-import React, { useEffect } from "react";
-import styles from "./styles/notepad.module.css";
+"use client";
 import { Textarea } from "@/components/ui/textarea";
-import Menu from "./components/Menu";
-import { Toaster } from "react-hot-toast";
 import { loadGoogleFont } from "@/features/notepad/utils/googleFonts";
-import { useFileStore } from "./lib/fileStore";
-import Sidebar from "./components/Sidebar";
+import React, { useEffect, useRef } from "react";
+import { Toaster } from "react-hot-toast";
+import { useSettings } from "../settings/hooks/useSettings";
+import Menu from "./components/Menu";
 import Panel from "./components/Panel";
+import StatusBar from "./components/StatusBar";
+import { handleFileSave } from "./handlers/save";
+import { useFileStore } from "./lib/fileStore";
+import styles from "./styles/notepad.module.css";
 
 const Notepad: React.FC = () => {
     const {
         isSaved,
         currentFileName,
-        fontFamily,
         fileSize,
         fileLocation,
         createdAt,
         lastModified,
 
-
         fileText,
         setFileText,
-        setEditorElement
+        setEditorElement,
     } = useFileStore();
-
-    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { general } = useSettings();
+    const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setFileText(e.target.value);
     };
+    const { editor, appearance } = useSettings();
+    const isFirstRender = useRef(true);
+    useEffect(() => {
+        if (isFirstRender.current) {
+            if (process.env.NODE_ENV === "development") {
+                console.log("[Autosave] Skipped on first render");
+            }
+            isFirstRender.current = false;
+            return;
+        }
+
+        if (!general.autoSave) {
+            if (process.env.NODE_ENV === "development") {
+                console.log("[Autosave] Disabled — skipping save");
+            }
+            return;
+        }
+
+        if (process.env.NODE_ENV === "development") {
+            console.log("[Autosave] Scheduled");
+        }
+
+        const timeout = setTimeout(() => {
+            if (process.env.NODE_ENV === "development") {
+                console.log("[Autosave] Triggered");
+            }
+            handleFileSave();
+        }, general.autoSaveInterval * 1000);
+
+        return () => {
+            if (process.env.NODE_ENV === "development") {
+                console.log("[Autosave] Cleared (new change detected)");
+            }
+            clearTimeout(timeout);
+        };
+    }, [fileText, general.autoSave, general.autoSaveInterval]);
 
     useEffect(() => {
-        loadGoogleFont(fontFamily || '');
-    }, [fontFamily]);
+        loadGoogleFont(editor.fontFamily || "");
+    }, [editor.fontFamily]);
     useEffect(() => {
         const name = currentFileName || "Untitled";
         document.title = `${name} - Devkit${isSaved ? "" : " • Unsaved"}`;
@@ -46,28 +82,33 @@ const Notepad: React.FC = () => {
             <div>
                 <section>
                     <Textarea
-                        wrap="hard"
+                        wrap={editor.wordWrap ? "soft" : "off"}
                         placeholder="Start typing..."
                         className=""
                         value={fileText}
-                        onChange={handleChange}
+                        onChange={handleTextChange}
                         ref={setEditorElement}
-                        style={{ fontFamily: `${fontFamily || 'monospace'}, monospace` }}
+                        style={{
+                            fontFamily: `${editor.fontFamily || "monospace"}, monospace`,
+                            fontSize: editor.fontSize,
+                            lineHeight: editor.lineHeight,
+                            opacity: appearance.editorBgOpacity + "%"
+                        }}
                     />
                 </section>
                 <section>
                     <Panel />
-                    <Sidebar
+                    {appearance.showStatusBar && <StatusBar
                         currentFileName={currentFileName}
                         fileSize={fileSize}
                         isSaved={isSaved}
-                        fontFamily={fontFamily}
+                        fontFamily={editor.fontFamily}
                         fileLocation={fileLocation}
-                        wordCount={fileText.split(' ').length}
-                        lineCount={fileText.split('\n').length}
+                        wordCount={fileText.split(" ").length}
+                        lineCount={fileText.split("\n").length}
                         createdAt={createdAt}
                         modifiedAt={lastModified}
-                    />
+                    />}
                 </section>
             </div>
         </div>

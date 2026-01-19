@@ -15,7 +15,7 @@ type FileStatusProps = {
     modifiedAt: Date | string | null | undefined;
 };
 
-export default function Sidebar({
+export default function StatusBar({
     currentFileName,
     fileSize,
     fontFamily,

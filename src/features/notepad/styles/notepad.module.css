@@ -83,8 +83,6 @@
                 border-radius: inherit;
                 overflow: auto;
 
-                font-size: 16px;
-                line-height: 1.8;
                 padding: 1.25rem;
                 background-color: var(--surface-editor);
                 color: var(--text-editor-primary);
@@ -137,12 +135,9 @@
     transition: background 0.25s ease;
 }
 
-.menubar_item:hover {
-    background: var(--surface-button-hover);
-}
 
 .menubar_item>div:hover {
-    background: rgba(230, 180, 90, 0.2);
+    background: var(--nav-btn-secondary-bg-hover);
     border-radius: 8px;
 }
 

@@ -4,17 +4,19 @@ import {
     MenubarSeparator, MenubarShortcut, MenubarSub, MenubarSubTrigger,
     MenubarSubContent
 } from "@/components/ui/menubar";
-import { ArrowUpFromLine, Save, RotateCcw, Printer, CrossIcon, Trash2Icon } from "lucide-react";
+import { ArrowUpFromLine, Save, RotateCcw, CrossIcon, Trash2Icon, HardDriveDownload } from "lucide-react";
 import { handleFileSave } from "@/features/notepad/handlers/save";
-import { useFileStore } from "../../lib/fileStore";
 import { useDialog } from "@/hooks/useDialog";
-import styles from '@/styles/tools/notepad.module.css';
 import { deleteCurrentFile } from "../../handlers/fileDelete";
 import { toast } from "react-hot-toast";
+import { downloadPDF } from "../../handlers/downloadAsPDF";
+import { downloadDocx } from "../../handlers/downloadAsDOCX";
+import { saveLocalCopy } from "../../handlers/getLocalCopy";
+import styles from '../../styles/notepad.module.css';
+import { useSettings } from "@/features/settings/hooks/useSettings";
 const FileMenu: React.FC = () => {
-    const fileText = useFileStore((s) => s.fileText);
     const { openDialog } = useDialog();
-
+    const { editor } = useSettings();
     const handleDelete = () => {
         toast(
             (t) => (
@@ -99,7 +101,7 @@ const FileMenu: React.FC = () => {
                     </span>
                 </MenubarItem>
                 <MenubarSeparator />
-                <MenubarItem onClick={() => handleFileSave(fileText)}>
+                <MenubarItem onClick={() => handleFileSave()}>
                     <span className="flex items-center">
                         <i className="mr-2">
                             <Save />
@@ -114,12 +116,6 @@ const FileMenu: React.FC = () => {
                         Save As
                     </span>
                 </MenubarItem>
-                <MenubarItem>
-                    <span className="flex items-center">
-                        <i className="mr-2"></i>
-                        Save All
-                    </span>
-                </MenubarItem>
                 <MenubarItem onClick={() => window.location.reload()}>
                     <span className="flex items-center">
                         <i className="mr-2">
@@ -130,12 +126,12 @@ const FileMenu: React.FC = () => {
                     <MenubarShortcut>Alt + R</MenubarShortcut>
                 </MenubarItem>
                 <MenubarSeparator />
-                <MenubarItem onClick={() => window.print()}>
+                <MenubarItem onClick={() => saveLocalCopy()}>
                     <span className="flex items-center">
                         <i className="mr-2">
-                            <Printer />
+                            <HardDriveDownload />
                         </i>
-                        Print...
+                        Save a Copy...
                     </span>
                 </MenubarItem>
                 <MenubarSub>
@@ -143,9 +139,8 @@ const FileMenu: React.FC = () => {
                         <span className="flex items-center">Download</span>
                     </MenubarSubTrigger>
                     <MenubarSubContent className={`${styles.menubar_item}`}>
-                        <MenubarItem>Download as PDF</MenubarItem>
-                        <MenubarItem>Download as DOCX</MenubarItem>
-                        <MenubarItem>Download as TXT</MenubarItem>
+                        <MenubarItem onClick={() => downloadPDF(editor.fontFamily)}>Download as PDF</MenubarItem>
+                        <MenubarItem onClick={() => downloadDocx()}>Download as DOCX</MenubarItem>
                     </MenubarSubContent>
                 </MenubarSub>
                 <MenubarSeparator />

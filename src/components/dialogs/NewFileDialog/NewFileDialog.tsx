@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./NewFileDialog.module.css";
 import { handleFileSaveAs } from "@/features/notepad/handlers/saveAs";
+import { useSettings } from "@/features/settings/hooks/useSettings";
+import { generateAIResponse } from "@/features/notepad/utils/generateResponse";
 import { useFileStore } from "@/features/notepad/lib/fileStore";
 
 const FILE_FORMATS = [
@@ -20,14 +22,37 @@ interface NewFileDialogProps {
 }
 
 export function NewFileDialog({ onClose }: NewFileDialogProps) {
-    const [name, setName] = useState("");
+    const { general } = useSettings();
+    const { fileText, setFileText } = useFileStore();
+    const [fileName, setFileName] = useState("");
     const [format, setFormat] = useState("txt");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const { setCurrentFile, setFileText, setSavedStatus } = useFileStore();
+
+    useEffect(() => {
+        async function generateFileName() {
+            const prompt = fileText + `\n\nI want to save this as a file and I will manage the file format myself. Your task is strictly limited to suggesting an appropriate filename. The output must contain only the filename and nothing else. The filename should be one or two words only, written entirely in lowercase, formatted in snake_case, with no spaces and no special characters. Do not include any explanations, comments, or additional text.`;
+            const recieved_file_name = await generateAIResponse(
+                prompt,
+                process.env.PRIMARY_AI_MODEL ?? "llama-3.1-8b-instant"
+            );
+            if (recieved_file_name) {
+                setFileName(recieved_file_name);
+            } else {
+                setFileName(general.defaultFileName!)
+            }
+            setFileText(fileText);
+        }
+
+        generateFileName();
+    }, [fileText, general.defaultFileName, setFileText]);
+
+    useEffect(() => {
+        setFormat(general.defaultSaveFormat)
+    }, [general.defaultSaveFormat])
 
     const handleCreate = async () => {
-        if (!name.trim()) {
+        if (!general.defaultFileName?.trim()) {
             setError("File name is required");
             return;
         }
@@ -36,16 +61,7 @@ export function NewFileDialog({ onClose }: NewFileDialogProps) {
             setLoading(true);
             setError(null);
 
-            // Create empty content for new file
-            const initialText = "";
-
-            await handleFileSaveAs(initialText, name.trim(), format);
-
-            // Update Zustand for editor
-            setFileText(initialText);
-            setCurrentFile(`${name.trim()}.${format}`, 0);
-            setSavedStatus(true);
-
+            await handleFileSaveAs(fileText, fileName.trim(), format);
             onClose();
         } catch (err: unknown) {
             if (err instanceof Error) {
@@ -66,10 +82,10 @@ export function NewFileDialog({ onClose }: NewFileDialogProps) {
                 <label>File name</label>
                 <input
                     autoFocus
-                    value={name}
+                    value={fileName}
                     className={styles.input}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="untitled"
+                    placeholder="Untitled"
+                    onChange={(e) => setFileName(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleCreate()}
                     disabled={loading}
                 />

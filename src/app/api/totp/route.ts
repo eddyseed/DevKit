@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { authenticator } from 'otplib';
 import { totpRequestSchema, TotpRequest } from '@/lib/validation/totp';
 
+
 authenticator.options = {
     window: 2,
 };

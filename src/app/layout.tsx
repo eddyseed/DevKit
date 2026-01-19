@@ -1,7 +1,8 @@
 import "@/styles/globals.css";
 import { ToolProvider } from "@/context/ToolContext";
-import { montserrat } from "@/lib/fonts";
+import { montserrat } from "@/features/notepad/lib/fonts";
 import { DialogProvider } from "@/components/dialog";
+import { SettingsDialogProvider } from "@/features/settings/context/ToolContext";
 
 export const metadata = {
   description: 'A collection of developer tools to make your life easier.',
@@ -18,9 +19,11 @@ export default function RootLayout({
     <html lang="en" className={montserrat.variable}>
       <body>
         <ToolProvider>
-          <DialogProvider>
-            {children}
-          </DialogProvider>
+          <SettingsDialogProvider>
+            <DialogProvider>
+              {children}
+            </DialogProvider>
+          </SettingsDialogProvider>
         </ToolProvider>
       </body>
     </html>

@@ -9,21 +9,20 @@ import { handleFindNext } from "../handlers/findNext";
 import { handlePaste } from "../handlers/paste";
 import { handleFileSave } from "../handlers/save";
 import { handleSearchSelection } from "../handlers/search";
-import { useFileStore } from "../lib/fileStore";
-import { useDialog } from "@/hooks/useDialog";
 import FileMenu from "./menu/FileMenu";
 import EditMenu from "./menu/EditMenu";
 import FindMenu from "./menu/FindMenu";
 import HelpMenu from "./menu/HelpMenu";
-import { handleGlobalKeyDown } from "@/lib/keyboard";
-import ViewMenu from "./menu/ViewMenu";
+import { handleGlobalKeyDown } from "@/features/notepad/lib/keyboard";
+import { ClipboardIcon, CopyIcon, RedoIcon, ScissorsIcon, SearchIcon, UndoIcon } from "lucide-react";
+import styles from '../styles/notepad.module.css';
+import { useDialog } from "@/hooks/useDialog";
 const Menu: React.FC = () => {
-    const { fileText } = useFileStore();
     const { openDialog } = useDialog();
     const keyboardActions = useMemo(() => ({
         newFile: () => openDialog("new-file"),
         openFile: () => openDialog("open-file"),
-        saveFile: () => handleFileSave(fileText),
+        saveFile: () => handleFileSave(),
         reload: () => window.location.reload(),
 
         print: () => window.print(),
@@ -43,13 +42,13 @@ const Menu: React.FC = () => {
         searchSelection: handleSearchSelection,
         find: handleFind,
         findNext: handleFindNext,
-    }), [fileText, openDialog]);
+    }), [openDialog]);
 
     const handleKeyDown = useCallback(
         (e: KeyboardEvent) => {
             const target = e.target as HTMLElement;
 
-            // 🚫 Ignore shortcuts when typing
+            // Ignore shortcuts when typing
             if (
                 target instanceof HTMLInputElement ||
                 target instanceof HTMLTextAreaElement ||
@@ -63,7 +62,7 @@ const Menu: React.FC = () => {
         [keyboardActions]
     );
 
-    // attach listener
+    // Attach listener
     useEffect(() => {
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
@@ -75,11 +74,62 @@ const Menu: React.FC = () => {
 
     return (
         <Menubar onMouseDown={preventBlur}>
-            <FileMenu />
-            <EditMenu />
-            <FindMenu />
-            <ViewMenu />
-            <HelpMenu />
+            <div>
+                <FileMenu />
+                <EditMenu />
+                <FindMenu />
+                <HelpMenu />
+            </div>
+            <div>
+                <div
+                    className={styles.menubar_item}
+                    title="Cut Selection (Ctrl+X)"
+                    onClick={() => handleCut()}
+                >
+                    <ScissorsIcon />
+                </div>
+
+                <div
+                    className={styles.menubar_item}
+                    title="Copy Selection (Ctrl+C)"
+                    onClick={() => handleCopy()}
+                >
+                    <CopyIcon />
+                </div>
+
+                <div
+                    className={styles.menubar_item}
+                    title="Paste from Clipboard (Ctrl+V)"
+                    onClick={() => handlePaste()}
+                >
+                    <ClipboardIcon />
+                </div>
+
+                <div
+                    className={styles.menubar_item}
+                    title="Search in Note (Ctrl+F)"
+                    onClick={() => handleFind()}
+                >
+                    <SearchIcon />
+                </div>
+
+                <div
+                    className={`${styles.menubar_item}`}
+                    title="Undo (Ctrl+Z)"
+                    onClick={() => document.execCommand("undo")}
+                >
+                    <UndoIcon />
+                </div>
+
+                <div
+                    className={`${styles.menubar_item}`}
+                    title="Redo (Ctrl+Y)"
+                    onClick={() => document.execCommand("redo")}
+                >
+                    <RedoIcon />
+                </div>
+
+            </div>
         </Menubar>
     );
 };

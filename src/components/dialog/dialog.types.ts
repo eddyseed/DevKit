@@ -3,6 +3,7 @@ export type DialogType =
     | "open-file"
     | "save-as"
     | "print"
+    | "settings"
     | null;
 
 export interface DialogState {

@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "./colors.css";
+@import "./colors-dark.css";
 
 :root {
   --font-primary: var(--font-montserrat);
@@ -9,4 +9,10 @@ body {
   font-family: var(--font-primary), system-ui, sans-serif;
   background: var(--color-bg);
   color: var(--color-text-main);
+}
+.m{
+  border: 2px solid red !important;
+}
+.r{
+  border: 2px solid blue !important;
 }

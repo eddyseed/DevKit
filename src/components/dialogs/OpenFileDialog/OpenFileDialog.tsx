@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import styles from "./OpenFileDialog.module.css";
+import toast from "react-hot-toast";
 import { db } from "@/firebase/firestore";
+import { useState, useEffect } from "react";
 import { useFileStore } from "@/features/notepad/lib/fileStore";
 import { collection, getDocs, doc, getDoc } from "firebase/firestore";
-import toast from "react-hot-toast";
+
+import styles from "./OpenFileDialog.module.css";
 
 interface OpenFileDialogProps {
     onClose: () => void;
@@ -20,9 +21,8 @@ export function OpenFileDialog({ onClose }: OpenFileDialogProps) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const { setCurrentFile, setFileText, setSavedStatus } = useFileStore.getState();
+    const { setCurrentFile, setFileText, setSavedStatus, setFileLocation, setCreatedAt, setLastModified } = useFileStore.getState();
 
-    // Fetch files when date changes
     useEffect(() => {
         const fetchFiles = async () => {
             setLoading(true);
@@ -61,35 +61,61 @@ export function OpenFileDialog({ onClose }: OpenFileDialogProps) {
             return;
         }
 
-        setLoading(true);
         setError(null);
+        setLoading(true);
 
-        try {
+        const openPromise = (async () => {
             const collectionName = `notes-${selectedDate}`;
             const fileRef = doc(db, collectionName, selectedFile);
             const fileSnap = await getDoc(fileRef);
 
             if (!fileSnap.exists()) {
-                toast.error(`File "${selectedFile}" does not exist.`);
-                return;
+                throw new Error(`File "${selectedFile}" does not exist.`);
             }
 
             const fileData = fileSnap.data();
             const textContent = fileData?.text || "";
 
+            setSavedStatus(true);
             setCurrentFile(selectedFile, textContent.length);
             setFileText(textContent);
-            setSavedStatus(true);
+            setFileLocation({
+                collection: collectionName,
+                fileName: selectedFile,
+            });
 
-            toast.success(`Opened file "${selectedFile}" successfully.`);
+            const createdAt =
+                fileData?.createdAt instanceof Date
+                    ? fileData.createdAt
+                    : fileData?.createdAt?.toDate?.()
+                        ? fileData.createdAt.toDate()
+                        : new Date();
+
+            const lastModified =
+                fileData?.lastModified instanceof Date
+                    ? fileData.lastModified
+                    : fileData?.lastModified?.toDate?.()
+                        ? fileData.lastModified.toDate()
+                        : new Date();
+
+            setCreatedAt(createdAt);
+            setLastModified(lastModified);
+        })();
+
+        try {
+            await toast.promise(openPromise, {
+                loading: `Opening "${selectedFile}"...`,
+                success: `Opened file "${selectedFile}" successfully.`,
+                error: (err) =>
+                    err instanceof Error ? err.message : "Failed to open file.",
+            });
+
             onClose();
-        } catch (err) {
-            console.error(err);
-            setError("Failed to open file.");
         } finally {
             setLoading(false);
         }
     };
+
 
     return (
         <div className={styles.root}>

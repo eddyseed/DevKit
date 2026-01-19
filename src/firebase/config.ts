@@ -1,11 +1,11 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyCF8ISiDG6WwPHIMOsNhFloqyLvnx0jt7M",
-    authDomain: "notepaddatabase-618be.firebaseapp.com",
-    projectId: "notepaddatabase-618be",
-    storageBucket: "notepaddatabase-618be.firebasestorage.app",
-    messagingSenderId: "22415355181",
-    appId: "1:22415355181:web:184500e67b9e64fae177a4",
-    measurementId: "G-M57J88P16F"
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+    measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 export default firebaseConfig;

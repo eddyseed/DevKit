@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
-import { supabase, BUCKET_NAME } from '@/lib/supabase/supabaseClient';
+import { supabase, BUCKET_NAME } from '@/lib/supabase/client';
 import { CloudKeepFile, UploadProgress } from '../types/file';
 
 export function useCloudKeep() {

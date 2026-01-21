@@ -1,7 +1,7 @@
 'use client';
 import styles from '@/styles/layout/Navbar.module.css';
 import { Button } from "@/components/ui/button"
-import { Pen, LockIcon, CloudUploadIcon, BrushCleaningIcon, Settings2Icon, MoonIcon, ExpandIcon } from 'lucide-react';
+import { Pen, LockIcon, CloudUploadIcon, BrushCleaningIcon, Settings2Icon, ExpandIcon } from 'lucide-react';
 import { useTool } from '@/context/ToolContext';
 import { logoutUser } from '@/utils/lockApp';
 import { useRouter } from 'next/navigation';

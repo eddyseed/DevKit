@@ -1,5 +1,5 @@
 import Notepad from "@/features/notepad/Notepad";
 
-export default function NotepadPage() {
+export const Scriptorium = () => {
     return <Notepad />;
 }

@@ -1,7 +1,7 @@
 'use client'
 import { useTool } from "@/context/ToolContext";
 
-import NotepadPage from "@/app/tools/notepad/page";
+import { Scriptorium } from "@/app/tools/notepad/page";
 import CloudKeepPage from "@/app/tools/cloudkeep/page";
 
 export const ToolTray = () => {
@@ -9,7 +9,7 @@ export const ToolTray = () => {
 
   switch (tool) {
     case "scriptorium":
-      return <NotepadPage />;
+      return <Scriptorium />;
     case "sanctum":
       return <CloudKeepPage />;
     default:

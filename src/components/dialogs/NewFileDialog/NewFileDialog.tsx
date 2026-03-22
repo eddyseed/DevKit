@@ -68,7 +68,7 @@ export function NewFileDialog({ onClose }: NewFileDialogProps) {
             <h2 className={styles.title}>New File</h2>
 
             <div className={styles.field}>
-                <label>File name</label>
+                <label className={styles.label}>File name</label>
                 <input
                     autoFocus
                     value={fileName}

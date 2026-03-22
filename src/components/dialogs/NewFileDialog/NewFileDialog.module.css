@@ -1,74 +1,107 @@
 .root {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
 }
 
 .title {
-    font-size: 18px;
+    font-size: 13px;
     font-weight: 600;
-    color: var(--text-editor-accent);
+    letter-spacing: -0.01em;
+    color: var(--text-editor-warm);
 }
 
 .field {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
 }
 
 .label {
-    font-size: 13px;
-    color: var(--text-editor-muted);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text-editor-soft);
+    opacity: 0.55;
 }
 
 .input,
 .select {
-    padding: 10px 12px;
-    border-radius: 10px;
-
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 6px 10px;
+    border-radius: 7px;
     background: var(--surface-editor);
     border: var(--border-warm-subtle);
-
     font-family: inherit;
-    font-size: 14px;
-    color: var(--text-editor-primary);
-
+    font-size: 12px;
+    color: var(--text-editor-warm);
+    box-shadow: var(--shadow-panel);
     outline: none;
+    transition: border-color 0.13s ease, box-shadow 0.13s ease;
 }
 
 .input::placeholder {
     color: var(--text-editor-soft);
+    opacity: 0.35;
 }
 
 .input:focus,
 .select:focus {
-    border: var(--border-warm-strong);
-    box-shadow: 0 0 0 2px var(--selection-editor);
+    border-color: var(--text-editor-soft);
+    box-shadow: 0 0 0 3px var(--surface-button);
 }
 
 .error {
-    font-size: 13px;
+    font-size: 11px;
     color: var(--status-dirty);
+    opacity: 0.8;
 }
 
 .footer {
     display: flex;
     justify-content: flex-end;
-    gap: 10px;
-    margin-top: 6px;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.secondary {
+    padding: 6px 12px;
+    background: var(--surface-button);
+    border: var(--border-warm-subtle);
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-editor-soft);
+    box-shadow: var(--shadow-panel);
+    cursor: pointer;
+    transition: background 0.13s ease;
+}
+
+.secondary:hover {
+    background: var(--nav-btn-secondary-bg-hover);
+    color: var(--text-editor-warm);
+}
+
+.secondary:active {
+    transform: scale(0.98);
+    opacity: 0.75;
 }
 
 .primary {
+    padding: 6px 12px;
     background: var(--nav-btn-primary-bg);
-    border-radius: 10px;
-    padding: 8px 16px;
-
+    border: none;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 12px;
     font-weight: 600;
     color: var(--text-editor-accent);
-
     box-shadow: var(--shadow-nav-btn-primary);
-    border: none;
     cursor: pointer;
+    transition: background 0.13s ease, box-shadow 0.13s ease;
 }
 
 .primary:hover {
@@ -77,4 +110,5 @@
 
 .primary:active {
     box-shadow: var(--shadow-nav-btn-primary-active);
+    transform: scale(0.98);
 }

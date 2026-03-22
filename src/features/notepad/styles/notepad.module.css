@@ -7,7 +7,7 @@
 
     color: var(--text-editor-primary);
     background: var(--surface-app);
-
+    width: 100%;
 
     &>div:last-child {
         display: grid;
@@ -48,7 +48,6 @@
                 color: var(--text-editor-primary);
                 caret-color: var(--text-editor-warm);
 
-                font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
                 font-size: 13.5px;
                 line-height: var(--line-h);
                 letter-spacing: 0.015em;

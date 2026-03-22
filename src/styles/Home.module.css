@@ -1,0 +1,11 @@
+.mainContainer {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-editor);
+    font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+    position: relative;
+    overflow: hidden;
+}

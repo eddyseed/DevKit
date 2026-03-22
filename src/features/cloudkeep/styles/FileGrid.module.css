@@ -1,49 +1,50 @@
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
 }
 
 .card {
     position: relative;
-    background: white;
-    border: 2px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 20px;
+    background: var(--surface-panel);
+    border: var(--border-warm-subtle);
+    border-radius: 10px;
+    padding: 16px 14px 12px;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: background 0.13s ease, box-shadow 0.13s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
+    box-shadow: var(--shadow-panel);
 }
 
 .card:hover {
-    border-color: #cbd5e1;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    transform: translateY(-2px);
+    background: var(--nav-btn-secondary-bg-hover);
 }
 
 .card.selected {
-    border-color: #667eea;
-    background: #f8f9ff;
+    border-color: var(--text-editor-soft);
+    background: var(--nav-btn-secondary-bg-hover);
 }
 
 .deleteButton {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 28px;
-    height: 28px;
+    top: 7px;
+    right: 7px;
+    width: 22px;
+    height: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #fef2f2;
-    color: #dc2626;
+    background: var(--surface-button);
+    border: var(--border-warm-subtle);
+    color: var(--text-editor-soft);
     border-radius: 6px;
-    font-size: 14px;
+    font-size: 12px;
     opacity: 0;
-    transition: all 0.2s;
+    cursor: pointer;
+    transition: opacity 0.13s ease, background 0.13s ease;
 }
 
 .card:hover .deleteButton {
@@ -51,37 +52,40 @@
 }
 
 .deleteButton:hover {
-    background: #fee2e2;
-    transform: scale(1.1);
+    background: var(--nav-btn-secondary-bg-hover);
+    color: var(--text-editor-warm);
 }
 
 .iconContainer {
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 56px;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f9fafb;
-    border-radius: 12px;
+    background: var(--surface-button);
+    border: var(--border-warm-subtle);
+    border-radius: 10px;
 }
 
 .icon {
-    font-size: 48px;
+    font-size: 32px;
 }
 
 .previewBadge {
     position: absolute;
     bottom: -4px;
     right: -4px;
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #667eea;
+    background: var(--surface-panel);
+    border: var(--border-warm-subtle);
     border-radius: 50%;
-    font-size: 12px;
+    font-size: 10px;
+    box-shadow: var(--shadow-panel);
 }
 
 .content {
@@ -90,21 +94,22 @@
 }
 
 .fileName {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
-    color: #1f2937;
+    color: var(--text-editor-warm);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }
 
 .meta {
     display: flex;
-    justify-content: space-between;
-    gap: 8px;
-    font-size: 12px;
-    color: #6b7280;
+    justify-content: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-editor-soft);
+    opacity: 0.55;
 }
 
 .size,
@@ -121,29 +126,26 @@
     justify-content: center;
     padding: 80px 20px;
     text-align: center;
+    gap: 8px;
 }
 
 .emptyIcon {
-    font-size: 64px;
-    margin-bottom: 16px;
-    opacity: 0.5;
+    font-size: 48px;
+    opacity: 0.2;
 }
 
 .emptyText {
-    font-size: 18px;
+    font-size: 13px;
     font-weight: 600;
-    color: #374151;
-    margin-bottom: 8px;
+    color: var(--text-editor-warm);
 }
-    
+
 .emptySubtext {
-    font-size: 14px;
-    color: #9ca3af;
+    font-size: 12px;
+    color: var(--text-editor-soft);
+    opacity: 0.5;
 }
 
 @media (max-width: 768px) {
-    .grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 12px;
-    }
+    .grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; }
 }

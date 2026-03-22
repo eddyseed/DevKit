@@ -1,59 +1,67 @@
 .searchBar {
     position: relative;
-    width: 300px;
+    width: 220px;
 }
 
 .icon {
     position: absolute;
-    left: 12px;
+    left: 10px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 16px;
-    color: #9ca3af;
+    font-size: 12px;
+    color: var(--text-editor-soft);
+    opacity: 0.45;
+    pointer-events: none;
 }
 
 .input {
     width: 100%;
-    padding: 10px 36px 10px 40px;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    font-size: 14px;
-    transition: all 0.2s;
+    box-sizing: border-box;
+    padding: 6px 30px 6px 30px;
+    background: var(--surface-button);
+    border: var(--border-warm-subtle);
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 12px;
+    color: var(--text-editor-warm);
+    box-shadow: var(--shadow-panel);
+    transition: border-color 0.13s ease, box-shadow 0.13s ease;
 }
 
 .input:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: var(--text-editor-soft);
+    box-shadow: 0 0 0 3px var(--surface-button);
 }
 
 .input::placeholder {
-    color: #9ca3af;
+    color: var(--text-editor-soft);
+    opacity: 0.35;
 }
 
 .clearButton {
     position: absolute;
-    right: 8px;
+    right: 6px;
     top: 50%;
     transform: translateY(-50%);
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #9ca3af;
+    color: var(--text-editor-soft);
     border-radius: 4px;
-    font-size: 14px;
-    transition: all 0.2s;
+    font-size: 11px;
+    cursor: pointer;
+    opacity: 0.4;
+    transition: background 0.13s ease, opacity 0.13s ease;
 }
 
 .clearButton:hover {
-    background: #f3f4f6;
-    color: #6b7280;
+    background: var(--nav-btn-secondary-bg-hover);
+    opacity: 1;
 }
 
 @media (max-width: 768px) {
-    .searchBar {
-        width: 100%;
-    }
+    .searchBar { width: 100%; }
 }

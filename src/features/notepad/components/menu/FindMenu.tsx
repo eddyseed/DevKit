@@ -11,49 +11,63 @@ import { Search, ArrowDown, ArrowUp, Globe } from "lucide-react";
 import { handleFind } from "@/features/notepad/handlers/find";
 import { handleFindNext } from "@/features/notepad/handlers/findNext";
 import { handleSearchSelection } from "@/features/notepad/handlers/search";
-import styles from '../../styles/notepad.module.css';
+import styles from '../../styles/Menubar.module.css';
+
 const FindMenu: React.FC = () => {
     return (
         <MenubarMenu>
-            <MenubarTrigger onMouseDown={(e) => e.preventDefault()}>Find</MenubarTrigger>
-            <MenubarContent className={`${styles.menubar_item}`}>
-                <MenubarItem onClick={() => handleSearchSelection()}>
-                    <span className="flex items-center">
-                        <i className="mr-2">
-                            <Globe />
-                        </i>
-                        Search the Web
+            <MenubarTrigger
+                className={styles.menubar_item}
+                onMouseDown={(e) => e.preventDefault()}
+            >
+                Find
+            </MenubarTrigger>
+
+            <MenubarContent className={styles.menubar_content}>
+
+                <MenubarItem
+                    className={styles.menubar_content_item}
+                    onClick={() => handleSearchSelection()}
+                >
+                    <span className={styles.menubar_content_item_left}>
+                        <i className={styles.menubar_content_item_icon}><Globe size={13} strokeWidth={1.75} /></i>
+                        <span className={styles.menubar_content_item_label}>Search the Web</span>
                     </span>
-                    <MenubarShortcut>Ctrl + E</MenubarShortcut>
+                    <MenubarShortcut className={styles.menubar_content_shortcut}>⌘E</MenubarShortcut>
                 </MenubarItem>
-                <MenubarSeparator />
-                <MenubarItem onClick={() => handleFind()}>
-                    <span className="flex items-center">
-                        <i className="mr-2">
-                            <Search />
-                        </i>
-                        Find...
+
+                <MenubarSeparator className={styles.menubar_content_separator} />
+
+                <MenubarItem
+                    className={styles.menubar_content_item}
+                    onClick={() => handleFind()}
+                >
+                    <span className={styles.menubar_content_item_left}>
+                        <i className={styles.menubar_content_item_icon}><Search size={13} strokeWidth={1.75} /></i>
+                        <span className={styles.menubar_content_item_label}>Find…</span>
                     </span>
-                    <MenubarShortcut>Ctrl + F</MenubarShortcut>
+                    <MenubarShortcut className={styles.menubar_content_shortcut}>⌘F</MenubarShortcut>
                 </MenubarItem>
-                <MenubarItem onClick={() => handleFindNext()}>
-                    <span className="flex items-center">
-                        <i className="mr-2">
-                            <ArrowDown />
-                        </i>
-                        Find Next
+
+                <MenubarItem
+                    className={styles.menubar_content_item}
+                    onClick={() => handleFindNext()}
+                >
+                    <span className={styles.menubar_content_item_left}>
+                        <i className={styles.menubar_content_item_icon}><ArrowDown size={13} strokeWidth={1.75} /></i>
+                        <span className={styles.menubar_content_item_label}>Find Next</span>
                     </span>
-                    <MenubarShortcut>F3</MenubarShortcut>
+                    <MenubarShortcut className={styles.menubar_content_shortcut}>F3</MenubarShortcut>
                 </MenubarItem>
-                <MenubarItem>
-                    <span className="flex items-center">
-                        <i className="mr-2">
-                            <ArrowUp />
-                        </i>
-                        Find Previous
+
+                <MenubarItem className={styles.menubar_content_item}>
+                    <span className={styles.menubar_content_item_left}>
+                        <i className={styles.menubar_content_item_icon}><ArrowUp size={13} strokeWidth={1.75} /></i>
+                        <span className={styles.menubar_content_item_label}>Find Previous</span>
                     </span>
-                    <MenubarShortcut>Shift + F3</MenubarShortcut>
+                    <MenubarShortcut className={styles.menubar_content_shortcut}>⇧F3</MenubarShortcut>
                 </MenubarItem>
+
             </MenubarContent>
         </MenubarMenu>
     );

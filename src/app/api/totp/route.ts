@@ -8,7 +8,7 @@ authenticator.options = {
 };
 
 export async function POST(req: NextRequest) {
-    let jsonBody: unknown;
+    let jsonBody: JSON;
 
     try {
         jsonBody = await req.json();

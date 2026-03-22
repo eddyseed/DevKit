@@ -1,31 +1,37 @@
 .viewToggle {
     display: flex;
-    background: #f3f4f6;
+    background: var(--surface-button);
+    border: var(--border-warm-subtle);
     border-radius: 8px;
-    padding: 4px;
-    gap: 4px;
+    padding: 3px;
+    gap: 2px;
+    box-shadow: var(--shadow-panel);
 }
 
 .button {
-    padding: 8px 12px;
+    padding: 5px 9px;
     border-radius: 6px;
-    color: #6b7280;
-    font-size: 18px;
-    transition: all 0.2s;
+    color: var(--text-editor-soft);
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0.45;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background 0.13s ease, opacity 0.13s ease;
 }
 
 .button:hover {
-    background: #e5e7eb;
-    color: #374151;
+    background: var(--nav-btn-secondary-bg-hover);
+    opacity: 0.8;
 }
 
 .button.active {
-    background: white;
-    color: #667eea;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    background: var(--surface-panel);
+    border: var(--border-warm-subtle);
+    color: var(--text-editor-warm);
+    opacity: 1;
+    box-shadow: var(--shadow-panel);
 }
 
 .icon {

@@ -4,7 +4,7 @@ import {
     MenubarSeparator, MenubarShortcut, MenubarSub, MenubarSubTrigger,
     MenubarSubContent
 } from "@/components/ui/menubar";
-import { ArrowUpFromLine, Save, RotateCcw, CrossIcon, Trash2Icon, HardDriveDownload } from "lucide-react";
+import { ArrowUpFromLine, Save, RotateCcw, CrossIcon, Trash2Icon, HardDriveDownload, ChevronRight } from "lucide-react";
 import { handleFileSave } from "@/features/notepad/handlers/save";
 import { useDialog } from "@/hooks/useDialog";
 import { deleteCurrentFile } from "../../handlers/fileDelete";
@@ -12,7 +12,7 @@ import { toast } from "react-hot-toast";
 import { downloadPDF } from "../../handlers/downloadAsPDF";
 import { downloadDocx } from "../../handlers/downloadAsDOCX";
 import { saveLocalCopy } from "../../handlers/getLocalCopy";
-import styles from '../../styles/notepad.module.css';
+import styles from '../../styles/Menubar.module.css';
 import { useSettings } from "@/features/settings/hooks/useSettings";
 const FileMenu: React.FC = () => {
     const { openDialog } = useDialog();
@@ -73,85 +73,125 @@ const FileMenu: React.FC = () => {
     };
     return (
         <MenubarMenu>
-            <MenubarTrigger>File</MenubarTrigger>
-            <MenubarContent className={`${styles.menubar_item}`}>
-                <MenubarItem onClick={() => openDialog("new-file")} >
-                    <span className="flex items-center">
-                        <i className="mr-2">
-                            <CrossIcon />
-                        </i>
-                        New File
+            <MenubarTrigger className={styles.menubar_item}>
+                File
+            </MenubarTrigger>
+
+            <MenubarContent className={styles.menubar_content}>
+
+                <MenubarItem
+                    className={styles.menubar_content_item}
+                    onClick={() => openDialog("new-file")}
+                >
+                    <span className={styles.menubar_content_item_left}>
+                        <i className={styles.menubar_content_item_icon}><CrossIcon size={13} strokeWidth={1.75} /></i>
+                        <span className={styles.menubar_content_item_label}>New File</span>
                     </span>
-                    <MenubarShortcut>Alt + N</MenubarShortcut>
+                    <MenubarShortcut className={styles.menubar_content_shortcut}>Alt N</MenubarShortcut>
                 </MenubarItem>
-                <MenubarSeparator />
-                <MenubarItem onClick={() => openDialog("open-file")}>
-                    <span className="flex items-center">
-                        <i className="mr-2">
-                            <ArrowUpFromLine />
-                        </i>
-                        Open...
+
+                <MenubarSeparator className={styles.menubar_content_separator} />
+
+                <MenubarItem
+                    className={styles.menubar_content_item}
+                    onClick={() => openDialog("open-file")}
+                >
+                    <span className={styles.menubar_content_item_left}>
+                        <i className={styles.menubar_content_item_icon}><ArrowUpFromLine size={13} strokeWidth={1.75} /></i>
+                        <span className={styles.menubar_content_item_label}>Open…</span>
                     </span>
-                    <MenubarShortcut>Alt + O</MenubarShortcut>
+                    <MenubarShortcut className={styles.menubar_content_shortcut}>Alt O</MenubarShortcut>
                 </MenubarItem>
-                <MenubarItem>
-                    <span className="flex items-center">
-                        <i className="mr-2"></i>
-                        Open Recent
-                    </span>
-                </MenubarItem>
-                <MenubarSeparator />
-                <MenubarItem onClick={() => handleFileSave()}>
-                    <span className="flex items-center">
-                        <i className="mr-2">
-                            <Save />
-                        </i>
-                        Save
-                    </span>
-                    <MenubarShortcut>Alt + S</MenubarShortcut>
-                </MenubarItem>
-                <MenubarItem onClick={() => openDialog("save-as")}>
-                    <span className="flex items-center">
-                        <i className="mr-2"></i>
-                        Save As
+
+                <MenubarItem className={styles.menubar_content_item}>
+                    <span className={styles.menubar_content_item_left}>
+                        <i className={styles.menubar_content_item_icon} />
+                        <span className={styles.menubar_content_item_label}>Open Recent</span>
                     </span>
                 </MenubarItem>
-                <MenubarItem onClick={() => window.location.reload()}>
-                    <span className="flex items-center">
-                        <i className="mr-2">
-                            <RotateCcw />
-                        </i>
-                        Reload
+
+                <MenubarSeparator className={styles.menubar_content_separator} />
+
+                <MenubarItem
+                    className={styles.menubar_content_item}
+                    onClick={() => handleFileSave()}
+                >
+                    <span className={styles.menubar_content_item_left}>
+                        <i className={styles.menubar_content_item_icon}><Save size={13} strokeWidth={1.75} /></i>
+                        <span className={styles.menubar_content_item_label}>Save</span>
                     </span>
-                    <MenubarShortcut>Alt + R</MenubarShortcut>
+                    <MenubarShortcut className={styles.menubar_content_shortcut}>Alt S</MenubarShortcut>
                 </MenubarItem>
-                <MenubarSeparator />
-                <MenubarItem onClick={() => saveLocalCopy()}>
-                    <span className="flex items-center">
-                        <i className="mr-2">
-                            <HardDriveDownload />
-                        </i>
-                        Save a Copy...
+
+                <MenubarItem
+                    className={styles.menubar_content_item}
+                    onClick={() => openDialog("save-as")}
+                >
+                    <span className={styles.menubar_content_item_left}>
+                        <i className={styles.menubar_content_item_icon} />
+                        <span className={styles.menubar_content_item_label}>Save As</span>
                     </span>
                 </MenubarItem>
+
+                <MenubarItem
+                    className={styles.menubar_content_item}
+                    onClick={() => window.location.reload()}
+                >
+                    <span className={styles.menubar_content_item_left}>
+                        <i className={styles.menubar_content_item_icon}><RotateCcw size={13} strokeWidth={1.75} /></i>
+                        <span className={styles.menubar_content_item_label}>Reload</span>
+                    </span>
+                    <MenubarShortcut className={styles.menubar_content_shortcut}>Alt R</MenubarShortcut>
+                </MenubarItem>
+
+                <MenubarSeparator className={styles.menubar_content_separator} />
+
+                <MenubarItem
+                    className={styles.menubar_content_item}
+                    onClick={() => saveLocalCopy()}
+                >
+                    <span className={styles.menubar_content_item_left}>
+                        <i className={styles.menubar_content_item_icon}><HardDriveDownload size={13} strokeWidth={1.75} /></i>
+                        <span className={styles.menubar_content_item_label}>Save a Copy…</span>
+                    </span>
+                </MenubarItem>
+
                 <MenubarSub>
-                    <MenubarSubTrigger>
-                        <span className="flex items-center">Download</span>
+                    <MenubarSubTrigger className={`${styles.menubar_content_item} ${styles.menubar_content_sub_trigger}`}>
+                        <span className={styles.menubar_content_item_left}>
+                            <i className={styles.menubar_content_item_icon} />
+                            <span className={styles.menubar_content_item_label}>Download</span>
+                        </span>
+                        <ChevronRight size={12} strokeWidth={1.75} className={styles.menubar_content_sub_trigger_arrow} />
                     </MenubarSubTrigger>
-                    <MenubarSubContent className={`${styles.menubar_item}`}>
-                        <MenubarItem onClick={() => downloadPDF(editor.fontFamily)}>Download as PDF</MenubarItem>
-                        <MenubarItem onClick={() => downloadDocx()}>Download as DOCX</MenubarItem>
+                    <MenubarSubContent className={styles.menubar_content_sub}>
+                        <MenubarItem
+                            className={styles.menubar_content_item}
+                            onClick={() => downloadPDF(editor.fontFamily)}
+                        >
+                            <span className={styles.menubar_content_item_label}>Download as PDF</span>
+                        </MenubarItem>
+                        <MenubarItem
+                            className={styles.menubar_content_item}
+                            onClick={() => downloadDocx()}
+                        >
+                            <span className={styles.menubar_content_item_label}>Download as DOCX</span>
+                        </MenubarItem>
                     </MenubarSubContent>
                 </MenubarSub>
-                <MenubarSeparator />
-                <MenubarItem onClick={() => handleDelete()}>
-                    <span className="flex items-center">
-                        <i className="mr-2">
-                            <Trash2Icon />
-                        </i>
-                        Delete Note...
+
+                <MenubarSeparator className={styles.menubar_content_separator} />
+
+                <MenubarItem
+                    className={`${styles.menubar_content_item} ${styles.menubar_content_item_destructive}`}
+                    onClick={() => handleDelete()}
+                >
+                    <span className={styles.menubar_content_item_left}>
+                        <i className={styles.menubar_content_item_icon}><Trash2Icon size={13} strokeWidth={1.75} /></i>
+                        <span className={styles.menubar_content_item_label}>Delete Note…</span>
                     </span>
                 </MenubarItem>
+
             </MenubarContent>
         </MenubarMenu>
     );

@@ -1,4 +1,4 @@
-import { db } from "@/firebase/firestore";
+import { db } from "@/lib/firebase/firestore";
 import { doc, deleteDoc } from "firebase/firestore";
 import { useFileStore } from "../lib/fileStore";
 import toast from "react-hot-toast";

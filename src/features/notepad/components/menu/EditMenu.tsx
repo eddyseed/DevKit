@@ -11,60 +11,74 @@ import { Undo, Redo, ScissorsIcon, CopyIcon, ClipboardIcon } from "lucide-react"
 import { handleCopy } from "@/features/notepad/handlers/copy";
 import { handleCut } from "@/features/notepad/handlers/cut";
 import { handlePaste } from "@/features/notepad/handlers/paste";
-import styles from '../../styles/notepad.module.css';
+import styles from '../../styles/Menubar.module.css';
+
 const EditMenu: React.FC = () => {
     return (
         <MenubarMenu>
-            <MenubarTrigger>Edit</MenubarTrigger>
-            <MenubarContent className={`${styles.menubar_item}`}>
-                <MenubarItem onClick={() => document.execCommand("undo")}>
-                    <span className="flex items-center">
-                        <i className="mr-2">
-                            <Undo />
-                        </i>
-                        Undo
+            <MenubarTrigger className={styles.menubar_item}>
+                Edit
+            </MenubarTrigger>
+
+            <MenubarContent className={styles.menubar_content}>
+
+                <MenubarItem
+                    className={styles.menubar_content_item}
+                    onClick={() => document.execCommand("undo")}
+                >
+                    <span className={styles.menubar_content_item_left}>
+                        <i className={styles.menubar_content_item_icon}><Undo size={13} strokeWidth={1.75} /></i>
+                        <span className={styles.menubar_content_item_label}>Undo</span>
                     </span>
-                    <MenubarShortcut>Ctrl + Z</MenubarShortcut>
-                </MenubarItem>
-                <MenubarItem onClick={() => document.execCommand("redo")}>
-                    <span className="flex items-center">
-                        <i className="mr-2">
-                            <Redo />
-                        </i>
-                        Redo
-                    </span>
-                    <MenubarShortcut>Ctrl + Y</MenubarShortcut>
-                </MenubarItem>
-                <MenubarSeparator />
-                <MenubarItem onClick={() => handleCut()}>
-                    <span className="flex items-center">
-                        <i className="mr-2">
-                            <ScissorsIcon />
-                        </i>
-                        Cut
-                    </span>
-                    <MenubarShortcut>Ctrl + X</MenubarShortcut>
+                    <MenubarShortcut className={styles.menubar_content_shortcut}>⌘Z</MenubarShortcut>
                 </MenubarItem>
 
-                <MenubarItem onClick={() => handleCopy()}>
-                    <span className="flex items-center">
-                        <i className="mr-2">
-                            <CopyIcon />
-                        </i>
-                        Copy
+                <MenubarItem
+                    className={styles.menubar_content_item}
+                    onClick={() => document.execCommand("redo")}
+                >
+                    <span className={styles.menubar_content_item_left}>
+                        <i className={styles.menubar_content_item_icon}><Redo size={13} strokeWidth={1.75} /></i>
+                        <span className={styles.menubar_content_item_label}>Redo</span>
                     </span>
-                    <MenubarShortcut>Ctrl + C</MenubarShortcut>
+                    <MenubarShortcut className={styles.menubar_content_shortcut}>⌘Y</MenubarShortcut>
                 </MenubarItem>
 
-                <MenubarItem onClick={() => handlePaste()}>
-                    <span className="flex items-center">
-                        <i className="mr-2">
-                            <ClipboardIcon />
-                        </i>
-                        Paste
+                <MenubarSeparator className={styles.menubar_content_separator} />
+
+                <MenubarItem
+                    className={styles.menubar_content_item}
+                    onClick={() => handleCut()}
+                >
+                    <span className={styles.menubar_content_item_left}>
+                        <i className={styles.menubar_content_item_icon}><ScissorsIcon size={13} strokeWidth={1.75} /></i>
+                        <span className={styles.menubar_content_item_label}>Cut</span>
                     </span>
-                    <MenubarShortcut>Ctrl + V</MenubarShortcut>
+                    <MenubarShortcut className={styles.menubar_content_shortcut}>⌘X</MenubarShortcut>
                 </MenubarItem>
+
+                <MenubarItem
+                    className={styles.menubar_content_item}
+                    onClick={() => handleCopy()}
+                >
+                    <span className={styles.menubar_content_item_left}>
+                        <i className={styles.menubar_content_item_icon}><CopyIcon size={13} strokeWidth={1.75} /></i>
+                        <span className={styles.menubar_content_item_label}>Copy</span>
+                    </span>
+                    <MenubarShortcut className={styles.menubar_content_shortcut}>⌘C</MenubarShortcut>
+                </MenubarItem>
+
+                <MenubarItem
+                    className={styles.menubar_content_item}
+                    onClick={() => handlePaste()}
+                >
+                    <span className={styles.menubar_content_item_left}>
+                        <i className={styles.menubar_content_item_icon}><ClipboardIcon size={13} strokeWidth={1.75} /></i>
+                        <span className={styles.menubar_content_item_label}>Paste</span>
+                    </span>
+                    <MenubarShortcut className={styles.menubar_content_shortcut}>⌘V</MenubarShortcut>
+                </MenubarItem>
+
             </MenubarContent>
         </MenubarMenu>
     );

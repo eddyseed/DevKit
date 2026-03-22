@@ -1,0 +1,1 @@
+export type ToolType = "scriptorium" | "sanctum";

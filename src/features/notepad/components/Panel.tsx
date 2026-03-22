@@ -3,6 +3,8 @@ import toast from 'react-hot-toast';
 import { handleGenerate } from '../handlers/generateResponse';
 import { AIModel } from '../interfaces/model.types';
 import styles from "../styles/Panel.module.css";
+import { Sparkles, RotateCcw, ChevronDown } from 'lucide-react';
+
 const Panel: React.FC = () => {
     const minRef = useRef<HTMLInputElement>(null);
     const modelRef = useRef<HTMLSelectElement>(null);
@@ -10,6 +12,7 @@ const Panel: React.FC = () => {
     const toneRef = useRef<HTMLSelectElement>(null);
     const creativityRef = useRef<HTMLSelectElement>(null);
     const languageRef = useRef<HTMLSelectElement>(null);
+
     const onGenerateClick = () => {
         const minWords = Number(minRef.current?.value) || 50;
         const maxWords = Number(maxRef.current?.value) || 200;
@@ -18,16 +21,9 @@ const Panel: React.FC = () => {
         const creativity = (creativityRef.current?.value as "low" | "medium" | "high") || "medium";
         const language = languageRef.current?.value || "english";
 
-        handleGenerate({
-            prompt: "",
-            model,
-            minWords,
-            maxWords,
-            tone,
-            creativity,
-            language,
-        });
+        handleGenerate({ prompt: "", model, minWords, maxWords, tone, creativity, language });
     };
+
     const onResetClick = () => {
         if (minRef.current) minRef.current.value = "50";
         if (maxRef.current) maxRef.current.value = "200";
@@ -35,59 +31,96 @@ const Panel: React.FC = () => {
         if (toneRef.current) toneRef.current.value = "neutral";
         if (creativityRef.current) creativityRef.current.value = "medium";
         if (languageRef.current) languageRef.current.value = "english";
-
-        toast.success("AI panel reset to default values!");
+        toast.success("Reset to defaults");
     };
+
     return (
-        <div className={styles.panel}>
-            <h3 className={styles.heading}>AI Controls</h3>
-            <div className={styles.section}>
-                <label htmlFor="model">Model:</label>
-                <select ref={modelRef} id="model" defaultValue={AIModel.GROQ}>
-                    {Object.values(AIModel).map((model) => (
-                        <option key={model} value={model}>
-                            {model}
-                        </option>
-                    ))}
-                </select>
+        <aside className={styles.panel}>
+            {/* Header */}
+            <div className={styles.header}>
+                <div className={styles.headerIcon}>
+                    <Sparkles size={13} strokeWidth={1.75} />
+                </div>
+                <span className={styles.heading}>AI Controls</span>
             </div>
-            <div className={styles.section}>
-                <label htmlFor="minWordCount">Min Word Count:</label>
-                <input ref={minRef} type="number" id="minWordCount" defaultValue={50} />
+
+            <div className={styles.divider} />
+
+            {/* Fields */}
+            <div className={styles.fields}>
+                <div className={styles.row}>
+                    <label htmlFor="model" className={styles.label}>Model</label>
+                    <div className={styles.selectWrap}>
+                        <select ref={modelRef} id="model" defaultValue={AIModel.GROQ} className={styles.control}>
+                            {Object.values(AIModel).map((m) => (
+                                <option key={m} value={m}>{m}</option>
+                            ))}
+                        </select>
+                        <ChevronDown size={11} className={styles.chevron} />
+                    </div>
+                </div>
+
+                <div className={styles.row}>
+                    <label htmlFor="minWordCount" className={styles.label}>Min Words</label>
+                    <input ref={minRef} type="number" id="minWordCount" defaultValue={50} className={styles.control} />
+                </div>
+
+                <div className={styles.row}>
+                    <label htmlFor="maxWordCount" className={styles.label}>Max Words</label>
+                    <input ref={maxRef} type="number" id="maxWordCount" defaultValue={200} className={styles.control} />
+                </div>
+
+                <div className={styles.divider} />
+
+                <div className={styles.row}>
+                    <label htmlFor="tone" className={styles.label}>Tone</label>
+                    <div className={styles.selectWrap}>
+                        <select ref={toneRef} id="tone" defaultValue="neutral" className={styles.control}>
+                            <option value="formal">Formal</option>
+                            <option value="informal">Informal</option>
+                            <option value="neutral">Neutral</option>
+                        </select>
+                        <ChevronDown size={11} className={styles.chevron} />
+                    </div>
+                </div>
+
+                <div className={styles.row}>
+                    <label htmlFor="creativity" className={styles.label}>Creativity</label>
+                    <div className={styles.selectWrap}>
+                        <select ref={creativityRef} id="creativity" defaultValue="medium" className={styles.control}>
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                        <ChevronDown size={11} className={styles.chevron} />
+                    </div>
+                </div>
+
+                <div className={styles.row}>
+                    <label htmlFor="language" className={styles.label}>Language</label>
+                    <div className={styles.selectWrap}>
+                        <select ref={languageRef} id="language" defaultValue="english" className={styles.control}>
+                            <option value="english">English</option>
+                            <option value="spanish">Spanish</option>
+                            <option value="french">French</option>
+                        </select>
+                        <ChevronDown size={11} className={styles.chevron} />
+                    </div>
+                </div>
             </div>
-            <div className={styles.section}>
-                <label htmlFor="maxWordCount">Max Word Count:</label>
-                <input ref={maxRef} type="number" id="maxWordCount" defaultValue={200} />
-            </div>
-            <div className={styles.section}>
-                <label htmlFor="tone">Tone:</label>
-                <select ref={toneRef} id="tone" defaultValue="neutral">
-                    <option value="formal">Formal</option>
-                    <option value="informal">Informal</option>
-                    <option value="neutral">Neutral</option>
-                </select>
-            </div>
-            <div className={styles.section}>
-                <label htmlFor="creativity">Creativity:</label>
-                <select ref={creativityRef} id="creativity" defaultValue="medium">
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                </select>
-            </div>
-            <div className={styles.section}>
-                <label htmlFor="language">Language:</label>
-                <select ref={languageRef} id="language" defaultValue="english">
-                    <option value="english">English</option>
-                    <option value="spanish">Spanish</option>
-                    <option value="french">French</option>
-                </select>
-            </div>
+
+            {/* Footer */}
             <div className={styles.footer}>
-                <button className={styles.primaryBtn} onClick={onGenerateClick}>Generate</button>
-                <button className={styles.secondaryBtn} onClick={onResetClick}>Reset</button>
+                <button className={styles.resetBtn} onClick={onResetClick} title="Reset to defaults">
+                    <RotateCcw size={12} strokeWidth={2} />
+                    Reset
+                </button>
+                <button className={styles.generateBtn} onClick={onGenerateClick}>
+                    <Sparkles size={12} strokeWidth={2} />
+                    Generate
+                </button>
             </div>
-        </div>
+        </aside>
     );
 };
 

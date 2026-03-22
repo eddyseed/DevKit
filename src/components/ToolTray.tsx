@@ -1,15 +1,16 @@
 'use client'
 import { useTool } from "@/context/ToolContext";
+
 import NotepadPage from "@/app/tools/notepad/page";
 import CloudKeepPage from "@/app/tools/cloudkeep/page";
 
-export default function ToolTray() {
+export const ToolTray = () => {
   const { tool } = useTool();
 
   switch (tool) {
-    case "notepad":
+    case "scriptorium":
       return <NotepadPage />;
-    case "cloudkeep":
+    case "sanctum":
       return <CloudKeepPage />;
     default:
       return <div>Select a tool</div>;

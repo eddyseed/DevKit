@@ -1,111 +1,193 @@
 .panel {
-    background: var(--surface-toolbar);
-    border: var(--border-warm-subtle);
-    border-radius: var(--radius-md);
-    padding: var(--space-md);
-    box-shadow: var(--shadow-panel);
-
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
-    margin: 0.75rem;
-    font-size: var(--font-base);
-    color: var(--text-editor-primary);
-}
-
-/* each row */
-.section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: var(--space-sm);
-}
-
-/* labels */
-.section label {
-    font-size: var(--font-sm);
-    color: var(--text-editor-muted);
-    font-weight: var(--font-semibold);
-}
-
-/* inputs & selects */
-.section input,
-.section select {
-    appearance: none;
-    background: var(--surface-editor);
+    gap: 0;
+    margin: 10px;
+    min-width: 220px;
+    background: var(--surface-panel);
     border: var(--border-warm-subtle);
-    border-radius: var(--radius-md);
-
-    padding: var(--input-padding-y) var(--input-padding-x);
-    font-size: var(--font-sm);
-    color: var(--text-editor-primary);
-    width: 160px;
-    justify-self: end;
-    box-shadow: inset 0 1px 2px rgba(120, 90, 40, 0.08);
-    transition: border-color 150ms ease, box-shadow 150ms ease;
+    border-radius: 12px;
+    box-shadow: var(--shadow-panel);
+    overflow: hidden;
+    font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+    color: var(--text-editor-warm);
 }
 
-/* focus state */
-.section input:focus,
-.section select:focus {
-    outline: none;
-    border-color: var(--caret-editor);
-    box-shadow: 0 0 0 2px rgba(230, 180, 90, 0.35);
+.header {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 11px 14px 10px;
 }
 
-/* number input tweak */
-.section input[type="number"] {
-    text-align: right;
-}
-
-/* select arrow (subtle) */
-.section select {
-    background-image:
-        linear-gradient(45deg, transparent 50%, var(--text-editor-soft) 50%),
-        linear-gradient(135deg, var(--text-editor-soft) 50%, transparent 50%);
-    background-position:
-        calc(100% - 18px) 55%,
-        calc(100% - 13px) 55%;
-    background-size: 5px 5px;
-    background-repeat: no-repeat;
-    padding-right: 32px;
-}
-
-/* hover (gentle) */
-.section input:hover,
-.section select:hover {
-    border-color: rgba(120, 90, 40, 0.35);
+.headerIcon {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    background: var(--surface-button);
+    border: var(--border-warm-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-editor-soft);
+    flex-shrink: 0;
 }
 
 .heading {
-    font-size: var(--font-md);
+    font-size: 12px;
     font-weight: 600;
-    color: var(--text-editor-primary);
-    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+    color: var(--text-editor-warm);
 }
-.footer {
-    font-size: var(--font-sm);
-    color: var(--text-editor-muted);
-    margin-top: auto;
-    text-align: end;
+
+.divider {
+    height: 1px;
+    background: var(--border-warm-subtle);
+    margin: 2px 0;
+    opacity: 0.5;
 }
-.secondaryBtn {
-    background: var(--surface-button-secondary);
+
+.fields {
+    display: flex;
+    flex-direction: column;
+    padding: 6px 0;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 14px;
+    gap: 8px;
+    transition: background 0.12s ease;
+}
+
+.row:hover {
+    background: var(--nav-btn-secondary-bg-hover);
+}
+
+.label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-editor-soft);
+    white-space: nowrap;
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+.selectWrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.chevron {
+    position: absolute;
+    right: 7px;
+    color: var(--text-editor-soft);
+    pointer-events: none;
+    flex-shrink: 0;
+    opacity: 0.4;
+}
+
+.control {
+    appearance: none;
+    -webkit-appearance: none;
+    background: var(--surface-button);
     border: var(--border-warm-subtle);
-    border-radius: var(--radius-sm);
-    padding: 6px 12px;
-    font-size: var(--font-sm);
-    color: var(--text-editor-primary);
+    border-radius: 7px;
+    padding: 4px 9px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-editor-warm);
+    width: 108px;
+    text-align: right;
+    transition:
+        border-color 0.13s ease,
+        box-shadow 0.13s ease,
+        background 0.13s ease;
     cursor: pointer;
-    transition: background-color 150ms ease, border-color 150ms ease;
 }
-.primaryBtn {
-    background: var(--surface-button-primary);
-    border: none;
-    border-radius: var(--radius-sm);
-    padding: 6px 12px;
-    font-size: var(--font-sm);
-    color: var(--text-editor-on-primary);
+
+.selectWrap .control {
+    padding-right: 24px;
+    text-align: left;
+}
+
+.control:hover {
+    background: var(--nav-btn-secondary-bg-hover);
+}
+
+.control:focus {
+    outline: none;
+    border-color: var(--text-editor-soft);
+    box-shadow: 0 0 0 3px var(--surface-button);
+}
+
+.control[type="number"]::-webkit-inner-spin-button,
+.control[type="number"]::-webkit-outer-spin-button {
+    opacity: 0.4;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px 12px;
+    border-top: var(--border-warm-subtle);
+    margin-top: 2px;
+}
+
+.resetBtn,
+.generateBtn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 11px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
     cursor: pointer;
-    transition: background-color 150ms ease;
+    transition:
+        background 0.13s ease,
+        box-shadow 0.13s ease,
+        opacity 0.13s ease;
+    white-space: nowrap;
+}
+
+.resetBtn {
+    flex: 0 0 auto;
+    background: var(--surface-button);
+    border: var(--border-warm-subtle);
+    color: var(--text-editor-soft);
+    box-shadow: var(--shadow-panel);
+}
+
+.resetBtn:hover {
+    background: var(--nav-btn-secondary-bg-hover);
+    color: var(--text-editor-warm);
+}
+
+.resetBtn:active {
+    opacity: 0.7;
+}
+
+.generateBtn {
+    flex: 1;
+    justify-content: center;
+    background: var(--surface-button);
+    border: var(--border-warm-subtle);
+    color: var(--text-editor-warm);
+    box-shadow: var(--shadow-panel);
+}
+
+.generateBtn:hover {
+    background: var(--nav-btn-secondary-bg-hover);
+}
+
+.generateBtn:active {
+    opacity: 0.75;
+    transform: scale(0.98);
 }

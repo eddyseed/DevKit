@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-import { db } from "@/firebase/firestore";
+import { db } from "@/lib/firebase/firestore";
 import { useFileStore } from "../lib/fileStore";
 import { doc, setDoc } from "firebase/firestore";
 

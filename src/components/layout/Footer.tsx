@@ -1,17 +1,12 @@
 import clsx from "clsx";
 import styles from "@/styles/layout/Footer.module.css";
 
-type FooterProps = {
-    variant?: "default" | "compact";
-};
-
-export default function Footer({ variant = "default" }: FooterProps) {
+export const Footer = () => {
     const year = new Date().getFullYear();
     return (
         <footer
             className={clsx(
-                styles.root,
-                variant === "compact" && styles.compact
+                styles.root
             )}
         >
             <div className="mx-auto max-w-7xl px-4 py-10">
@@ -27,11 +22,11 @@ export default function Footer({ variant = "default" }: FooterProps) {
 
                     <div className={styles.section}>
                         <h4 className={styles.title}>
-                            <a href="https://github.com/eddyseed/DevKit/blob/master/README.md" target="_blank">Resources</a>
+                            <a href="https://github.com/rishabhjn13/DevKit/blob/master/README.md" target="_blank">Resources</a>
                         </h4>
                         <ul className={styles.list}>
                             <li>
-                                <a href="https://github.com/eddyseed/DevKit/blob/master/README.md" target="_blank">Docs</a>
+                                <a href="https://github.com/rishabhjn13/DevKit/blob/master/README.md" target="_blank">Docs</a>
                             </li>
                             <li>Roadmap</li>
                         </ul>
@@ -50,10 +45,10 @@ export default function Footer({ variant = "default" }: FooterProps) {
 
                 <div className="mt-10 flex flex-col items-center gap-3 text-sm md:flex-row md:justify-between">
                     <span className={styles.muted}>
-                        © {year} DevKit. All rights reserved.
+                        {year} {process.env.NEXT_PUBLIC_APP_NAME}. No Muggles Allowed.
                     </span>
                     <span className={styles.muted}>
-                        Calm tools for focused minds
+                        Calm tools for focused developers.
                     </span>
                 </div>
             </div>

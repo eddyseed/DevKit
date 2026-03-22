@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import styles from "./NewFileDialog.module.css";
 import { handleFileSaveAs } from "@/features/notepad/handlers/saveAs";
 import { useSettings } from "@/features/settings/hooks/useSettings";
-import { generateAIResponse } from "@/features/notepad/utils/generateResponse";
 import { useFileStore } from "@/features/notepad/lib/fileStore";
 
 const FILE_FORMATS = [
@@ -31,16 +30,6 @@ export function NewFileDialog({ onClose }: NewFileDialogProps) {
 
     useEffect(() => {
         async function generateFileName() {
-            const prompt = fileText + `\n\nI want to save this as a file and I will manage the file format myself. Your task is strictly limited to suggesting an appropriate filename. The output must contain only the filename and nothing else. The filename should be one or two words only, written entirely in lowercase, formatted in snake_case, with no spaces and no special characters. Do not include any explanations, comments, or additional text.`;
-            const recieved_file_name = await generateAIResponse(
-                prompt,
-                process.env.PRIMARY_AI_MODEL ?? "llama-3.1-8b-instant"
-            );
-            if (recieved_file_name) {
-                setFileName(recieved_file_name);
-            } else {
-                setFileName(general.defaultFileName!)
-            }
             setFileText(fileText);
         }
 

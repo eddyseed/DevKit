@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "./colors-dark.css";
+@import "./theme.css";
 
 :root {
   --font-primary: var(--font-montserrat);
@@ -10,9 +10,11 @@ body {
   background: var(--color-bg);
   color: var(--color-text-main);
 }
-.m{
+
+ /* Quick note: The following CSS classes are for testing purposes only and should be removed before production.  */
+.border-red {
   border: 2px solid red !important;
 }
-.r{
+.border-blue {
   border: 2px solid blue !important;
 }

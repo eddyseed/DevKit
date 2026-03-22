@@ -1,26 +1,31 @@
 :root {
-  /* Navigation & UI */
-  --color-primary: #3b82f6;
-  --color-primary-hover: #60a5fa;
-  --color-accent: #10b981;
+  --color-primary: rgba(30, 30, 32, 0.78);
+
   --color-bg: var(--surface-app);
   --nav-btn-secondary-bg: rgba(30, 30, 30, 0.9);
+
+  --nav-app-title-dark-color: rgba(0, 0, 0, 0.82);
+  --nav-app-title-light-color: rgba(255, 255, 255, 0.88);
+
   --nav-btn-secondary-bg-hover: #404040;
   --nav-btn-secondary-bg-active: #505050;
   --nav-btn-primary-bg: linear-gradient(180deg, #3b82f6, #2563eb);
   --nav-btn-primary-bg-hover: linear-gradient(180deg, #60a5fa, #3b82f6);
   --surface-nav: linear-gradient(180deg, #0a0a0a, #000000);
-  --color-text-main: #ffffff;
-  /* --color-text-secondary: #d4d4d4; */
+
+  --traffic-light-red: #ff5f57;
+  --traffic-light-yellow: #febc2e;
+  --traffic-light-green: #28c840;
+
+
   --nav-btn-secondary-hover: #f5f5f5;
-  --border-nav: 1px solid rgba(255, 255, 255, 0.1);
+  --border-nav: rgba(255, 255, 255, 0.07);
   --shadow-nav: 0 4px 12px rgba(0, 0, 0, 0.5);
   --shadow-nav-btn-primary: inset 0 1px 0 rgba(255, 255, 255, 0.1),
     0 3px 6px rgba(0, 0, 0, 0.5);
   --shadow-nav-btn-primary-active: inset 0 2px 6px rgba(0, 0, 0, 0.6);
   
-  /* For Notepad module */
-  /* -------- TEXT -------- */
+
   --text-editor-primary: #ffffff;
   --text-editor-muted: #a3a3a3;
   --text-editor-soft: #737373;
@@ -35,7 +40,7 @@
   --surface-button-hover: #404040;
   
   /* -------- BORDERS -------- */
-  --border-warm-subtle: 1px solid rgba(255, 255, 255, 0.1);
+  --border-warm-subtle: 1px solid rgba(255, 255, 255, 0.07);
   --border-warm-strong: 1px solid rgba(255, 255, 255, 0.15);
   
   /* -------- SHADOWS -------- */

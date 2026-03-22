@@ -19,7 +19,6 @@ export default function StatusBar({
     currentFileName,
     fileSize,
     fontFamily,
-    isSaved,
     fileLocation,
     wordCount = 0,
     lineCount = 0,
@@ -52,21 +51,13 @@ export default function StatusBar({
         <aside className={styles.root}>
             <div className={styles.header}>
                 <span className={styles.title}>File Details</span>
-                <div className={styles.statusBadge}>
-                    <span
-                        className={`${styles.statusDot} ${isSaved ? styles.saved : styles.dirty}`}
-                    />
-                    <span className={styles.statusText}>
-                        {isSaved ? "Saved" : "Unsaved"}
-                    </span>
-                </div>
             </div>
+
+            <div className={styles.divider} />
 
             <div className={styles.section}>
                 <div className={styles.label}>File Name</div>
-                <div className={styles.value}>
-                    {currentFileName || "Untitled"}
-                </div>
+                <div className={styles.value}>{currentFileName || "Untitled"}</div>
             </div>
 
             {collection && (
@@ -81,7 +72,6 @@ export default function StatusBar({
                     <div className={styles.label}>Size</div>
                     <div className={styles.value}>{fileSize} KB</div>
                 </div>
-
                 <div className={styles.section}>
                     <div className={styles.label}>Words</div>
                     <div className={styles.value}>{wordCount.toLocaleString()}</div>
@@ -93,7 +83,6 @@ export default function StatusBar({
                     <div className={styles.label}>Lines</div>
                     <div className={styles.value}>{lineCount.toLocaleString()}</div>
                 </div>
-
                 <div className={styles.section}>
                     <div className={styles.label}>Font</div>
                     <div className={styles.value}>{fontFamily || "Mono"}</div>
@@ -108,10 +97,6 @@ export default function StatusBar({
             <div className={styles.section}>
                 <div className={styles.label}>Last Modified</div>
                 <div className={styles.value}>{formatDate(modifiedAt)}</div>
-            </div>
-
-            <div className={styles.footerHint}>
-                {isSaved ? "All changes saved" : "Unsaved changes"}
             </div>
         </aside>
     );

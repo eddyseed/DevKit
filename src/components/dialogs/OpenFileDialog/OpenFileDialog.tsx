@@ -1,7 +1,7 @@
 "use client";
 
 import toast from "react-hot-toast";
-import { db } from "@/firebase/firestore";
+import { db } from "@/lib/firebase/firestore";
 import { useState, useEffect } from "react";
 import { useFileStore } from "@/features/notepad/lib/fileStore";
 import { collection, getDocs, doc, getDoc } from "firebase/firestore";

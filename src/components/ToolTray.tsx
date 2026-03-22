@@ -1,7 +1,7 @@
 'use client'
 import { useTool } from "@/context/ToolContext";
 
-import { Scriptorium } from "@/app/tools/notepad/page";
+import Scriptorium from "@/app/tools/notepad/page";
 import CloudKeepPage from "@/app/tools/cloudkeep/page";
 
 export const ToolTray = () => {

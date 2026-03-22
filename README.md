@@ -1,20 +1,20 @@
 
-## Devkit - Getting Started
+## Pensieve - Getting Started
 
 First, clone the repository and install the dependencies:
 
 ```bash
-git clone git@github.com:eddyseed/DevKit.git
+git clone git@github.com:rishabhjn13/Pensieve.git
 ```
 or
 ```bash
-git clone https://github.com/eddyseed/DevKit.git
+git clone https://github.com/rishabhjn13/Pensieve.git
 ```
 
 Then, navigate to the project directory and install the dependencies:
 
 ```bash
-cd DevKit
+cd Pensieve
 yarn install
 ```
 Create a `.env` file in the root directory and add the following environment variables:
@@ -32,6 +32,9 @@ NEXT_PUBLIC_SUPABASE_URL=<your_supabase_url_here>
 NEXT_PUBLIC_SUPABASE_ANON_KEY=<your_supabase_anon_key_here>
 
 TOTP_SECRET=<your-totp-secret>
+NEXT_PUBLIC_SUPABASE_SETTINGS_USER_UUID=<your-supabase-settings-user-uuid>
+
+NEXT_PUBLIC_APP_NAME=Pensieve
 ```
 
 - To get your Firebase configuration values, go to the [Firebase Console](https://console.firebase.google.com/), select your project, and navigate to Project Settings > General > Your apps > Firebase SDK snippet > Config.
@@ -47,85 +50,14 @@ The application will be available at `http://localhost:3000`.
 
 Screenshots
 ---
-Take a look at some screenshots of the Devkit application:
+Take a look at some screenshots of the Pensieve application:
 
 1. TOTP Authentication Screen
-![Devkit Screenshot 1](public/screenshots/1.jpeg)
-2. Main Dashboard
-![Devkit Screenshot 2](public/screenshots/2.jpeg)
-3. Cloud Keep Vault
-![Devkit Screenshot 3](public/screenshots/3.jpeg)
-
-Project Structure
----
-The project follows a feature-driven, scalable Next.js App Router architecture, keeping UI, logic, and styles well separated.
-
-```
-.
-├── public/                    # Static assets (images, favicon, screenshots)
-│   └── screenshots/
-│
-├── src/
-│   ├── app/                   # Next.js App Router (routes & layouts)
-│   │   ├── page.tsx           # Home page
-│   │   ├── layout.tsx         # Root layout
-│   │   ├── auth/              # Authentication routes
-│   │   │   └── login/page.tsx
-│   │   ├── tools/             # Tool-specific routes
-│   │   │   ├── notepad/page.tsx
-│   │   │   ├── todo/page.tsx
-│   │   │   ├── vault/page.tsx
-│   │   │   └── visualiser/page.tsx
-│   │   └── api/               # API routes
-│   │       ├── totp/route.ts
-│   │       └── logout/route.ts
-│
-│   ├── components/            # Shared & reusable UI components
-│   │   ├── layout/            # Navbar, Footer, layout components
-│   │   ├── ui/                # Primitive UI components (buttons, inputs, menus)
-│   │   ├── dialogs/           # App dialogs (Open, Save As, New File, etc.)
-│   │   ├── dialog/            # Dialog system (provider, root, types)
-│   │   ├── AuthForm.tsx
-│   │   └── ToolTray.tsx
-│
-│   ├── features/              # Feature-based modules
-│   │   ├── notepad/           # Notepad feature
-│   │   │   ├── Notepad.tsx
-│   │   │   ├── components/
-│   │   │   ├── handlers/      # File & editor actions
-│   │   │   ├── interfaces/
-│   │   │   └── lib/            # Zustand store & logic
-│   │   ├── todo/
-│   │   ├── vault/
-│   │   └── visualiser/
-|   |   └── cloudkeep/       # Cloud Keep feature
-│
-│   ├── styles/                # Global & modular CSS
-│   │   ├── globals.css
-│   │   ├── colors.css
-│   │   ├── auth/
-│   │   ├── layout/
-│   │   └── tools/
-│
-│   ├── hooks/                 # Custom React hooks
-│   │   └── useDialog.ts
-│
-│   ├── context/               # React Context providers
-│   │   └── ToolContext.tsx
-│
-│   ├── utils/                 # Utility helpers & constants
-│   ├── lib/                   # Shared logic (keyboard, validation, fonts)
-│   ├── firebase/              # Firebase configuration & services
-│   ├── types/                 # Global TypeScript definitions
-│   └── proxy.ts               # App proxy / middleware logic
-│
-├── .env.local                 # Environment variables
-├── next.config.ts             # Next.js configuration
-├── tsconfig.json              # TypeScript configuration
-├── eslint.config.mjs          # ESLint rules
-├── package.json
-└── README.md
-```
+![Pensieve Screenshot 1](public/screenshots/1.png)
+2. Scriptorium Notepad
+![Pensieve Screenshot 2](public/screenshots/2.png)
+3. Sanctum Vault
+![Pensieve Screenshot 3](public/screenshots/3.png)
 
 
 
@@ -140,7 +72,7 @@ References
 
 Support
 ---
-If you encounter any issues or have questions, please open an issue on the [GitHub repository](https://github.com/eddyseed/DevKit/issues)
+If you encounter any issues or have questions, please open an issue on the [GitHub repository](https://github.com/rishabhjn13/Pensieve/issues)
 or submit a pull request for any improvements or bug fixes.
 
 For further assistance, you can reach out via the [Google Form](https://forms.gle/aikgsj35Vw6bEpJE7)
@@ -148,4 +80,4 @@ For further assistance, you can reach out via the [Google Form](https://forms.gl
 - You can buy me a coffee here: [Buy Me a Coffee](https://buymeacoffee.com/rishabhjn1o)
 
 
-## Thank you for using Devkit! Happy coding!
+## Thank you for using Pensieve! Happy coding!

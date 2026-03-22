@@ -1,6 +1,7 @@
 .root {
     background: var(--surface-app);
     border-top: var(--border-warm-subtle);
+    width: 100%;
 }
 
 .compact {
